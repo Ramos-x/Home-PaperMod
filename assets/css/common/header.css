@@ -6,6 +6,7 @@
     margin-inline-start: auto;
     margin-inline-end: auto;
     line-height: var(--header-height);
+    justify-content: space-around;
 }
 
 .nav a {
@@ -15,7 +16,7 @@
 .logo,
 #menu {
     display: flex;
-    margin: auto var(--gap);
+    margin: auto;
 }
 
 .logo {
@@ -58,7 +59,7 @@ body:not(.dark) #sun {
 }
 
 #menu li + li {
-    margin-inline-start: var(--gap);
+    margin-inline-start: 24px;
 }
 
 #menu a {
