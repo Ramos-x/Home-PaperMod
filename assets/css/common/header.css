@@ -20,7 +20,8 @@
 }
 
 .logo {
-    flex-wrap: inherit;
+    flex-wrap: wrap-reverse;
+      justify-content: space-around;
 }
 
 .logo a {

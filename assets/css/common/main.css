@@ -4,6 +4,9 @@
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
     padding: var(--gap);
+    /* padding-left: var(--gap);
+    padding-right: var(--gap);
+    padding-bottom: var(--gap); */
 }
 
 .page-header h1 {

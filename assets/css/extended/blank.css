@@ -21,8 +21,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     position: absolute;
     height: 100%;
     left: calc((var(--toc-width) + var(--gap)) * -0.9);
-    top: calc(var(--gap) * 2);
-    width: var(--toc-width);
+    width: var(--toc-width* 0.9);
 }
 
 .wide .toc {
