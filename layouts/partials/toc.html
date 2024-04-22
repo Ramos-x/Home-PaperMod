@@ -17,15 +17,6 @@
                 {{- $largest = $headerLevel -}}
                 {{- end -}}
                 {{- end -}}
-            <div class="inner">
-                {{- $largest := 6 -}}
-                {{- range $headers -}}
-                {{- $headerLevel := index (findRE "[1-6]" . 1) 0 -}}
-                {{- $headerLevel := len (seq $headerLevel) -}}
-                {{- if lt $headerLevel $largest -}}
-                {{- $largest = $headerLevel -}}
-                {{- end -}}
-                {{- end -}}
 
                 {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}}
 
