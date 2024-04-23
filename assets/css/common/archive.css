@@ -1,8 +1,14 @@
 .archive-posts {
     width: 100%;
     font-size: 16px;
+    transition: 0.6s cubic-bezier(0.03, 0.69, 0.36, 1);
 }
 
+.archive-posts:hover {
+    transform: scale(1.05);
+    background: #efefef;
+    border-radius: 18px;
+}
 .archive-year {
     margin-top: 40px;
 }
