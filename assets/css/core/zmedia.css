@@ -7,7 +7,8 @@
     /* profile-mode */
     .profile img {
         transform: scale(0.85);
-        pointer-events: none;
+        user-select: none;
+        -webkit-touch-callout: none;
         -webkit-user-drag: none;
     }
 
