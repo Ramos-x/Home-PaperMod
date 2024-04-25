@@ -145,6 +145,8 @@
     </style>
     {{- end }}
 </noscript>
+
+
 {{- /* theme-toggle is enabled */}}
 {{- if (not site.Params.disableThemeToggle) }}
 {{- /* theme is light */}}
@@ -153,7 +155,6 @@
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
     }
-
 </script>
 {{- /* theme is dark */}}
 {{- else if (eq site.Params.defaultTheme "dark") }}
@@ -161,8 +162,6 @@
     if (localStorage.getItem("pref-theme") === "light") {
         document.body.classList.remove('dark')
     }
-
-
 </script>
 {{- else }}
 {{- /* theme is auto */}}
@@ -174,7 +173,6 @@
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
     }
-
 </script>
 {{- end }}
 {{- /* theme-toggle is disabled and theme is auto */}}
@@ -183,7 +181,6 @@
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
     }
-
 </script>
 
 
