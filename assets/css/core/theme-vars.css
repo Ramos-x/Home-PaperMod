@@ -30,10 +30,10 @@
 }
 
 .list {
-    background: rgb(245, 245, 245);
+    background: var(--code-bg);
     transition: .35s cubic-bezier(0,.5,.5,1);
 }
 
 .dark.list {
-    background: rgb(29, 30, 32);
+    background: var(--theme);
 }
