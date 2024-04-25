@@ -31,6 +31,7 @@
 
 .list {
     background: var(--code-bg);
+    transition: .35s cubic-bezier(0,.5,.5,1);
 }
 
 .dark.list {
