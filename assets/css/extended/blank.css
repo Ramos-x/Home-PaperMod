@@ -2,7 +2,20 @@
 This is just a placeholder blank stylesheet so as to support adding custom styles budled with theme's default styles
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
+
 */
+
+/* ========== 正文字体：落霞孤鹜 ========== */
+body {
+    font-family: "LXGW WenKai Lite", sans-serif !important;
+}
+
+/* ========== 代码字体：JetBrains Mono ========== */
+code {
+    font-family: "JetBrains Mono", "LXGW WenKai Screen", "LXGW WenKai Lite", sans-serif;
+}
+
+
 :root {
     --nav-width: 1380px;
     --article-width: 650px;
