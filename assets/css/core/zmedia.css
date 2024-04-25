@@ -7,6 +7,8 @@
     /* profile-mode */
     .profile img {
         transform: scale(0.85);
+        pointer-events: none;
+        -webkit-user-drag: none;
     }
 
     /* post-entry */
