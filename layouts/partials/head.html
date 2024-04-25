@@ -107,13 +107,13 @@
 {{ end -}}
 
 <!-- <noscript> -->
-    <style>
+    <!-- <style>
         #theme-toggle,
         .top-link {
             display: none;
         }
+    </style> -->
 
-    </style>
     {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
     <style>
         @media (prefers-color-scheme: dark) {
