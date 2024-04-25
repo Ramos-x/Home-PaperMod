@@ -43,7 +43,7 @@
 {{- end }}
 {{- end }}
 
-<!-- {{- if not (.Param "hideCategories")}}
+{{- if not (.Param "hideCategories")}}
 {{- $taxonomies := .Site.Taxonomies.categories }}
 {{- if gt (len $taxonomies) 0 }}
 <h2 style="margin-top: 32px">{{- (.Param "categoriesTitle") | default "categories" }}</h2>
