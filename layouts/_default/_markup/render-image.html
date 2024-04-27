@@ -1,50 +1,65 @@
-<img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
+<!-- <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} /> -->
 
-<!-- <p>
-    {{ $image := .Page.Resources.GetMatch .Destination }}
-    {{ $text := .Text | default "picture" }}
-    {{ if $image }}
+{{/* 获取当前页面匹配.Destination的资源图像 */}}
+{{ $image := .Page.Resources.GetMatch .Destination }}
+<!-- {{/* 从资源中获取logo图像，透明背景图片效果最好 */}}
+{{/* 该图像需要放置在根目录的assets/images目录下 */}}
+{{ $logo := (resources.Get "images/logo.png") }} -->
+{{/* 检查图像的媒体类型是否不是gif或svg */}}
+{{ if not (in (slice "gif" "svg") $image.MediaType.SubType) }}
+    {{/* 保留原始图像的引用 */}}
     {{ $rawImage := $image }}
+    {{/* 计算图像高度的80%，并确保最小值为250 */}}
+    {{ $size := math.Round (mul $image.Height 0.80) }}
+    {{ $size := cond (ge $size 250) $size 250.0 }}
+    <!-- {{/* 调整logo的透明度为50% */}}
+    {{ $logo := $logo.Filter (images.Opacity 0.5)  }}
+    {{/* 调整logo的大小，高度为计算出的$size，保持纵横比，圆角半径为30 */}}
+    {{ $logo := $logo.Resize (printf "%.0fx png r30" $size) }} -->
+    {{/* 如果原始图像有EXIF信息 */}}
     {{ with $rawImage.Exif }}
-    {{ if eq .Tags.Orientation 1 }}
-    {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
-    {{ else if eq .Tags.Orientation 3 }}
-    {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp r180") }}
-    {{ else if eq .Tags.Orientation 6 }}
-    {{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r270") }}
-    {{ else if eq .Tags.Orientation 8 }}
-    {{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r90") }}
-      <a href="{{ $rawImage.RelPermalink}}" target="view_window">
+        {{/* 根据图像的方向调整图像的大小和旋转 */}}
+        {{ if eq .Tags.Orientation 1 }}
+            {{ $image = $image.Resize (print $image.Width "x" $image.Height " webp") }}
+        {{ else if eq .Tags.Orientation 3 }}
+            {{ $image = $image.Resize (print $image.Width "x" $image.Height " webp r180") }}
+        {{ else if eq .Tags.Orientation 6 }}
+            {{ $image = $image.Resize (print $image.Height "x" $image.Width " webp r270") }}
+        {{ else if eq .Tags.Orientation 8 }}
+            {{ $image = $image.Resize (print $image.Height "x" $image.Width " webp r90") }}
+        {{ end }}
+    {{ else }}
+        {{/* 如果没有EXIF信息，则只调整大小，不旋转 */}}
+        {{ $image = $image.Resize (print $image.Width "x" $image.Height " webp") }}
+    {{ end }}
+    <!-- {{/* 在图像上添加logo水印，位置在图像的中心 */}}
+    {{ $image = $image.Filter (images.Overlay $logo (div (sub $image.Width $logo.Width) 2) (div (sub $image.Height $logo.Height) 2)) }} -->
+    {{/* 创建符合fancybox要求的data属性的链接，展示处理后的图像 */}}
+    <a data-fancybox="gallery" data-src="{{ $image.RelPermalink }}" data-caption="{{ .Text }}">
         <picture>
             <source type="image/webp" srcset="{{ $image.RelPermalink }}">
             <img
-                src="{{ $rawImage.RelPermalink }}"
-                {{ with $text }}alt="{{ . }}"{{ end }}
+                width="{{ $rawImage.Width }}px"
+                height="{{ $rawImage.Height }}px"
+                style="width: 100%; height: 100%; max-height: 36rem;"
                 loading="lazy"
-        />
-        </picture>
-      </a>
-    {{ end }}
-    {{ else }}
-    {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
-    <a href="{{ $rawImage.RelPermalink}}" target="view_window">
-            <picture>
-                <source type="image/webp" srcset="{{ $image.RelPermalink }}">
-                <img
-                    src="{{ $rawImage.RelPermalink }}"
-                    {{ with $text }}alt="{{ . }}"{{ end }}
-                    loading="lazy"
+                src="{{ $rawImage.RelPermalink }}"
+                alt="{{ .Text }}"
+                {{ with .Title }} title="{{ . }}" {{ end }}
             />
-            </picture>
-        </a>
-    {{ end }}
-    {{ else }}
-    <a href="{{ .Destination | safeURL }}" target="view_window">
+        </picture>
+    </a>
+{{ else }}
+    {{/* 对于gif或svg图像，不进行webp压缩处理 */}}
+    <a data-fancybox="gallery" data-src="{{ $image.RelPermalink }}" data-caption="{{ .Text }}">
         <img
-            src="{{ .Destination | safeURL }}"
-            {{ with $text }}alt="{{ . }}"{{ end }}
+            width="{{ $image.Width }}px"
+            height="{{ $image.Height }}px"
+            style="width: 100%; height: 100%; max-height: 36rem;"
             loading="lazy"
+            src="{{ $image.RelPermalink }}"
+            alt="{{ .Text }}"
+            {{ with .Title }} title="{{ . }}" {{ end }}
         />
     </a>
-    {{ end }}
-  </p> -->
+{{ end }}
