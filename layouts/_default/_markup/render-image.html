@@ -1,6 +1,6 @@
-<!-- <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} /> -->
+<img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
 
-<p>
+<!-- <p>
     {{ $image := .Page.Resources.GetMatch .Destination }}
     {{ $text := .Text | default "picture" }}
     {{ if $image }}
@@ -47,4 +47,4 @@
         />
     </a>
     {{ end }}
-  </p>
+  </p> -->
