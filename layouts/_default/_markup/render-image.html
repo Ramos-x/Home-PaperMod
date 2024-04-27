@@ -1,1 +1,48 @@
-<img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
+<!-- <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} /> -->
+
+{{ $image := .Page.Resources.GetMatch .Destination }}
+{{ $text := .Text | default "picture" }}
+{{ if $image }}
+{{ $rawImage := $image }}
+{{ with $rawImage.Exif }}
+{{ if eq .Tags.Orientation 1 }}
+{{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
+{{ else if eq .Tags.Orientation 3 }}
+{{ $image := $image.Resize (print $image.Width "x" $image.Height " webp r180") }}
+{{ else if eq .Tags.Orientation 6 }}
+{{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r270") }}
+{{ else if eq .Tags.Orientation 8 }}
+{{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r90") }}
+    <a href="{{ $rawImage.RelPermalink}}" target="view_window">
+    <picture>
+        <source type="image/webp" srcset="{{ $image.RelPermalink }}">
+        <img
+            src="{{ $rawImage.RelPermalink }}"
+            {{ with $text }}alt="{{ . }}"{{ end }}
+            loading="lazy"
+    />
+    </picture>
+    </a>
+{{ end }}
+{{ else }}
+{{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
+<a href="{{ $rawImage.RelPermalink}}" target="view_window">
+        <picture>
+            <source type="image/webp" srcset="{{ $image.RelPermalink }}">
+            <img
+                src="{{ $rawImage.RelPermalink }}"
+                {{ with $text }}alt="{{ . }}"{{ end }}
+                loading="lazy"
+        />
+        </picture>
+    </a>
+{{ end }}
+{{ else }}
+<a href="{{ .Destination | safeURL }}" target="view_window">
+    <img
+        src="{{ .Destination | safeURL }}"
+        {{ with $text }}alt="{{ . }}"{{ end }}
+        loading="lazy"
+    />
+</a>
+{{ end }}
