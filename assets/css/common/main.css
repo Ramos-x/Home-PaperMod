@@ -35,6 +35,7 @@
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-around;
     white-space: nowrap;
     padding: 10px;
 }
