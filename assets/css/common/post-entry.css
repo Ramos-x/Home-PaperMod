@@ -39,9 +39,13 @@
     padding: var(--gap);
     background: var(--entry);
     border-radius: var(--radius);
-    /* transition: transform 0.1s; */
     border: 1px solid var(--border);
     transition: 0.35s cubic-bezier(0, 0.5, 0.5, 1);
+    box-shadow: 0 0 2px 0px #6666;
+}
+
+.post-entry:hover {
+    box-shadow: 0 0 7px 1px #7777;
 }
 
 .post-entry:active {
