@@ -31,12 +31,14 @@
 }
 
 
-.social-icons a {
-    display: inline-flex;
+.social-icons {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
-    white-space: nowrap;
+}
+
+.social-icons a {
     padding: 10px;
 }
 
