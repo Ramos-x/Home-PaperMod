@@ -29,12 +29,3 @@
     --border: rgb(51, 51, 51);
 }
 
-.list {
-    /* background: var(--code-bg); */
-    background-image: url(/img/grid.png);
-}
-
-.dark.list {
-    /* background: var(--theme); */
-    background-image: url(/img/grid_dark.png);
-}
