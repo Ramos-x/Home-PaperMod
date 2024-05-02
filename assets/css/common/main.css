@@ -33,6 +33,7 @@
 
 .social-icons a {
     display: inline-flex;
+    white-space: nowrap;
     padding: 10px;
 }
 
