@@ -30,7 +30,8 @@
 }
 
 .list {
-    background: var(--code-bg);
+    /* background: var(--code-bg); */
+    background-image: url(/img/grid.png);
     transition: .35s cubic-bezier(0,.5,.5,1);
 }
 
