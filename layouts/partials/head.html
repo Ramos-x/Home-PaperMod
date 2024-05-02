@@ -116,6 +116,14 @@
 
     {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
     <style>
+        
+        .list {
+            background-image: url(/img/grid.png);
+        }
+        .dark.list {
+            background-image: url(/img/grid_dark.png);
+        }
+
         @media (prefers-color-scheme: dark) {
             :root {
                 --theme: rgb(29, 30, 32);
@@ -147,7 +155,17 @@
             }
             
         }
+        @media (prefers-color-scheme: light) {
+            .list {
+                background-image: url(/img/grid.png);
+            }
 
+            #theme-toggle,
+            .top-link {
+            display: none;
+            }
+            
+        }
     </style>
 
     <script>
