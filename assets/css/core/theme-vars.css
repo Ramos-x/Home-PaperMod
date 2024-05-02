@@ -32,9 +32,9 @@
 .list {
     /* background: var(--code-bg); */
     background-image: url(/img/grid.png);
-    transition: .35s cubic-bezier(0,.5,.5,1);
 }
 
 .dark.list {
-    background: var(--theme);
+    /* background: var(--theme); */
+    background-image: url(/img/grid_dark.png);
 }
