@@ -2,8 +2,21 @@
     position: relative;
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 2);
+
     margin: auto;
     padding: var(--gap);
+
+    /* margin-top: var(--gap);
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    padding-bottom: 0px; */
+    
+    backdrop-filter: blur(1px);
+    box-shadow: 0 0 10px 5px #fafafa33;
     /* padding-left: var(--gap);
     padding-right: var(--gap);
     padding-bottom: var(--gap); */
