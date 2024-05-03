@@ -132,10 +132,6 @@
                 --border: rgb(51, 51, 51);
             }
 
-            .list {
-                background-image: url(/img/grid_dark.png);
-            }
-
             .list:not(.dark)::-webkit-scrollbar-track {
                 background: 0 0;
             }
@@ -152,12 +148,13 @@
             .main {
                 box-shadow: 0 5px 20px 15px #05050575;
             }
+
+            html {
+                background-image: url(/img/grid_dark.png);
+            }
             
         }
         @media (prefers-color-scheme: light) {
-            .list {
-                background-image: url(/img/grid.png);
-            }
 
             #theme-toggle,
             .top-link {
@@ -166,6 +163,10 @@
 
             .main {
                 box-shadow: 0 5px 20px 15px #fafafa75;
+            }
+
+            html {
+                background-image: url(/img/grid.png);
             }
         }
 

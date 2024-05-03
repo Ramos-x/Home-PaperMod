@@ -9,7 +9,6 @@ html {
     overflow-y: scroll;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    background-image: url(/img/grid.png);
 }
 
 a,
