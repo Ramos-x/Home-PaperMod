@@ -8,6 +8,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 /* ========== 动效 ========== */
 body {
     transition: .35s cubic-bezier(0,.5,.5,1);
+    background-color: blue;
 }
 
 /* ========== 正文字体：落霞孤鹜 ========== */
