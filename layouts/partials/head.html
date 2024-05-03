@@ -146,13 +146,16 @@
                 box-shadow: 0 5px 20px 15px #05050575;
             }
 
-            html {
-                overflow: hidden;
+            /* html {
                 background-color: #040404;
                 background-image: url(/img/grid_dark.png);
-                
+            } */
+
+            :root{
+                min-height: 100vh;
+                background-color: #040404;
+                background-image: url(/img/grid_dark.png) !important;
             }
-            
         }
         @media (prefers-color-scheme: light) {
 
@@ -165,10 +168,15 @@
                 box-shadow: 0 5px 20px 15px #fafafa75;
             }
 
-            html {
-                overflow: hidden;
+            /* html {
                 background-color: #fafafa;
                 background-image: url(/img/grid.png);
+            } */
+
+            :root{
+                min-height: 100vh;
+                background-color: #fafafa;
+                background-image: url(/img/grid.png) !important;
             }
         }
 
