@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
 <meta name="robots" content="index, follow">
 {{- else }}
@@ -147,7 +147,6 @@
             }
 
             html {
-                height: 100%;
                 background-color: #040404;
                 background-image: url(/img/grid_dark.png);
             }
@@ -165,7 +164,6 @@
             }
 
             html {
-                height: 100%;
                 background-color: #fafafa;
                 background-image: url(/img/grid.png);
             }
