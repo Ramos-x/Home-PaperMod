@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
 <meta name="robots" content="index, follow">
 {{- else }}
@@ -146,9 +146,6 @@
                 box-shadow: 0 5px 20px 15px #05050575;
             }
 
-            .list {
-                background-image: url(/img/grid_dark.png);
-            }
             html {
                 background-color: #040404;
                 background-image: url(/img/grid_dark.png);
@@ -166,9 +163,6 @@
                 box-shadow: 0 5px 20px 15px #fafafa75;
             }
 
-            /* .list {
-                background-image: url(/img/grid.png);
-            } */
             html {
                 background-color: #fafafa;
                 background-image: url(/img/grid.png);
@@ -176,13 +170,9 @@
         }
 
         @media (prefers-color-scheme: no-preference) {
-                /* .list {
-                background-image: url(/img/grid.png);
-            } */
             .dark.list {
                 background-image: url(/img/grid_dark.png);
             }
-
         }
     </style>
 
