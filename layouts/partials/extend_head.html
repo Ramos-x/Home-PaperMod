@@ -4,19 +4,21 @@
 
 <!-- <link href="/css/APlayer.css" rel="stylesheet"> -->
 
-    <!-- 文章字体设置 -->
-<html>
-    <head>
-        <!-- <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" />
-        <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css" />
-        <link rel="stylesheet" href="https://fastly.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/style.css" /> -->
-        
-        <!-- <link rel="stylesheet" href="/css/lxgw-wenkai-lite-webfont@1.7.0/style.css" />
-        <link rel="stylesheet" href="/css/lxgw-wenkai-screen-webfont@1.7.0/style.css" />
-        <link rel="stylesheet" href="/css/jetbrains-mono@1.0.6/css/jetbrains-mono.css" /> -->
+<style>
+@supports ((height: constant(safe-area-inset-top)) or (height: env(safe-area-inset-top))) and (-webkit-overflow-scrolling: touch) {
+    .fullscreen {
+        /* 适配齐刘海 */
+        padding-top: 20px;
+        padding-top: constant(safe-area-inset-top);
+        padding-top: env(safe-area-inset-top);
 
-    </head>
-</html>
+        /* 适配底部小黑条 */
+        padding-bottom: 0;
+        padding-bottom: costant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+        }
+    }
+</style>
 
 
 
