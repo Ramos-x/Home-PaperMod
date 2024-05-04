@@ -142,3 +142,79 @@ article[autonumbering] .toc li a:before {
 .toc li a:hover {
     color: var(--secondary);
 }
+
+
+/* ========= Hello 动效关键帧 ============ */
+
+@-webkit-keyframes _wave-animation_hello {
+    0%,
+    60%,
+    to {
+      -webkit-transform:rotate(0);
+      transform:rotate(0)
+    }
+    10%,
+    30% {
+      -webkit-transform:rotate(14deg);
+      transform:rotate(14deg)
+    }
+    20% {
+      -webkit-transform:rotate(-8deg);
+      transform:rotate(-8deg)
+    }
+    40% {
+      -webkit-transform:rotate(-4deg);
+      transform:rotate(-4deg)
+    }
+    50% {
+      -webkit-transform:rotate(10deg);
+      transform:rotate(10deg)
+    }
+  }
+  @keyframes _wave-animation_hello {
+    0%,
+    60%,
+    to {
+      -webkit-transform:rotate(0);
+      transform:rotate(0)
+    }
+    10%,
+    30% {
+      -webkit-transform:rotate(14deg);
+      transform:rotate(14deg)
+    }
+    20% {
+      -webkit-transform:rotate(-8deg);
+      transform:rotate(-8deg)
+    }
+    40% {
+      -webkit-transform:rotate(-4deg);
+      transform:rotate(-4deg)
+    }
+    50% {
+      -webkit-transform:rotate(10deg);
+      transform:rotate(10deg)
+    }
+  }
+  /* @-webkit-keyframes _animatedgradient_174vl_1 {
+    0% {
+      background-position:0% 50%
+    }
+    50% {
+      background-position:100% 50%
+    }
+    to {
+      background-position:0% 50%
+    }
+  }
+  @keyframes _animatedgradient_174vl_1 {
+    0% {
+      background-position:0% 50%
+    }
+    50% {
+      background-position:100% 50%
+    }
+    to {
+      background-position:0% 50%
+    }
+  } */
