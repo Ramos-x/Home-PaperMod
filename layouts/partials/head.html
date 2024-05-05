@@ -117,7 +117,7 @@
     {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
     <style>
         @media (prefers-color-scheme: dark) {
-            /* :root {
+            :root {
                 --theme: rgb(29, 30, 32);
                 --entry: rgb(46, 46, 51);
                 --primary: rgb(218, 218, 219);
@@ -127,7 +127,7 @@
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-            } */
+            }
 
             .list:not(.dark)::-webkit-scrollbar-track {
                 background: 0 0;
@@ -142,7 +142,7 @@
             display: none;
             }
 
-            /* .main {
+            .main {
                 box-shadow: 0 5px 20px 15px #05050575;
             }
 
@@ -150,7 +150,7 @@
                 min-height: 100vh;
                 background-color: #040404;
                 background-image: url(/img/grid_dark.png) !important;
-            } */
+            }
         }
         @media (prefers-color-scheme: light) {
 
@@ -159,7 +159,7 @@
             display: none;
             }
 
-            /* .main {
+            .main {
                 box-shadow: 0 5px 20px 15px #fafafa75;
             }
 
@@ -167,13 +167,18 @@
                 min-height: 100vh;
                 background-color: #fafafa;
                 background-image: url(/img/grid.png) !important;
-            } */
+            }
         }
 
         @media (prefers-color-scheme: no-preference) {
             .dark.list {
                 background-image: url(/img/grid_dark.png);
             }
+
+        }
+        
+        body{
+            min-height: 100vh;
         }
     </style>
 
