@@ -115,7 +115,7 @@
     </style> -->
 
     {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
-    <style>
+    <!-- <style>
         @media (prefers-color-scheme: dark) {
             :root {
                 --theme: rgb(29, 30, 32);
@@ -146,15 +146,15 @@
                 box-shadow: 0 5px 20px 15px #05050575;
             }
 
-            /* .list{
+            .list{
                 background-image: url(/img/grid_dark.png) !important;
-            } */
+            }
         
-            /* body,html{
+            body,html{
                 min-height: 100vh;
                 background-color: #040404;
                 background-image: url(/img/grid_dark.png) !important;
-            } */
+            }
         }
         @media (prefers-color-scheme: light) {
 
@@ -167,25 +167,24 @@
                 box-shadow: 0 5px 20px 15px #fafafa75;
             }
             
-            /* .list{
+            .list{
                 background-image: url(/img/grid.png) !important;
-            } */
+            }
 
-            /* body,html{
+            body,html{
                 min-height: 100vh;
                 background-color: #fafafa;
                 background-image: url(/img/grid.png) !important;
-            } */
+            }
         }
 
         @media (prefers-color-scheme: no-preference) {
             .dark.list {
                 background-image: url(/img/grid_dark.png);
             }
-
         }
 
-    </style>
+    </style> -->
 
     <script>
         const Ramos_theme=localStorage.getItem("pref-theme");
