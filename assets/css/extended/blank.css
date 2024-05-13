@@ -4,6 +4,26 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
 
 
+/* ========== 评论系统css ========== */
+.gsc-comment-box:not(.gsc-comment-box-is-reply) {
+  border-radius: 8px!important;
+}
+.gsc-comment-box-tabs {
+  border-start-end-radius: 8px!important;
+  border-start-start-radius: 8px!important;
+}
+#__next :is(.py-2) {
+  border-start-end-radius: 8px !important;
+  border-start-start-radius: 8px !important;
+}
+.gsc-comment-box-textarea {
+  border-radius: 8px;
+}
+.gsc-comment-box-textarea-extras {
+  border-end-end-radius: 8px;
+  border-end-start-radius: 8px;
+}
+
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
 body {
     font-family: "LXGW WenKai Lite", sans-serif !important;
