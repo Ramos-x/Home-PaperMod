@@ -1,0 +1,8 @@
+<!-- {{</* detail "点下我呀🎁" */>}}
+对看到这行文字的人报以深切的祝福！🥰
+{{</* /detail */>}} -->
+
+<details>
+    <summary>{{ (.Get 0) | markdownify }}</summary>
+    {{ .Inner | markdownify }}
+</details>
