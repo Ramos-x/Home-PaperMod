@@ -105,13 +105,21 @@
          document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
      }, false);
 
-    window.addEventListener('resize', function(event) {
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, arguments), wait);
+        }
+    }
+    
+    window.addEventListener('resize', debounce(function(event) {
         checkTocPosition();
-    }, false);
+    }, 250), false);
 
-    // window.onload = function() {
-    //     checkTocPosition();
-    // };
+    window.onload = function() {
+        checkTocPosition();
+    };
 
     window.addEventListener('scroll', () => {
         // Check if there is an object in the top half of the screen or keep the last item active
