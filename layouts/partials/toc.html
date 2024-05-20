@@ -1,7 +1,7 @@
 {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
 {{- $has_headers := ge (len $headers) 1 -}}
 {{- if $has_headers -}}
-<aside id="toc-container" class="toc-container wide">
+<aside id="toc-container" class="toc-container">
     <div class="toc">
         <details {{if (.Param "TocOpen") }} open{{ end }}>
             <summary accesskey="c" title="(Alt + C)">
@@ -95,23 +95,23 @@
 <script>
     let activeElement;
     let elements;
-    // window.addEventListener('DOMContentLoaded', function (event) {
-    //     checkTocPosition();
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
 
-    //     elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-    //      // Make the first header active
-    //      activeElement = elements[0];
-    //      const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-    //      document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    //  }, false);
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         // Make the first header active
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
 
     window.addEventListener('resize', function(event) {
         checkTocPosition();
     }, false);
 
-    window.onload = function() {
-        checkTocPosition();
-    };
+    // window.onload = function() {
+    //     checkTocPosition();
+    // };
 
     window.addEventListener('scroll', () => {
         // Check if there is an object in the top half of the screen or keep the last item active
