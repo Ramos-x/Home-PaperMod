@@ -1,11 +1,8 @@
 {{ $image := .Page.Resources.GetMatch .Destination }}
 {{ $text := .Text | default "picture" }}
-{{ with $image }}
+{{ if $image }}
     {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
-    <a href="{{ .Destination | safeURL }}" target="view_window">
-        <img
-            src="{{ .Destination | safeURL }}"
-            {{ with $text }}alt="{{ . }}"{{ end }}
-        />
-    </a>
+    <img src="{{ .Destination | safeURL }}"
+        {{ with $text }}alt="{{ . }}"{{ end }}
+    />
 {{ end }}
