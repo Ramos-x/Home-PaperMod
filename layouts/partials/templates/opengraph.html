@@ -8,7 +8,7 @@
 {{- else}}
 <meta property="og:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}" />
 {{- end}}
-{{- else }}
+{{- else }} 
 
 {{- $images := partial "partials/templates/_funcs/get-page-images" . -}}
 {{- range first 6 $images }}
