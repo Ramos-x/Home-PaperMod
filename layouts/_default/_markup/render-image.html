@@ -9,13 +9,11 @@
 {{- $Text := .Text -}}
 {{- $Title := .Title -}}
 
-/*内容图片响应式开关配置 默认为true*/
 {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
 {{ with $src := .Page.Resources.GetMatch .Destination }}
     {{- if $responsiveImages -}}
         <picture>
-            /*只有使用了hugo扩展版本的 才生成webp格式图片*/
             {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
             <source type="image/webp" srcset="
             {{- with $respSizes -}}
