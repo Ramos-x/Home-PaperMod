@@ -1,38 +1,47 @@
-{{- $respSizes := slice 480 720 1080 -}}
-{{- $dataSzes := "(min-width: 768px) 720px, 100vw" -}}
-
-{{- $holder := "GIP" -}}
-{{- $hint := "photo" -}}
-{{- $filter := "lanczos" -}}
-
-{{- $Destination := .Destination -}}
-{{- $Text := .Text -}}
-{{- $Title := .Title -}}
-
-{{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
-
-{{ with $src := .Page.Resources.GetMatch .Destination }}
-    {{- if $responsiveImages -}}
+{{ $image := .Page.Resources.GetMatch .Destination }}
+{{ $text := .Text | default "picture" }}
+{{ if $image }}
+    {{ $rawImage := $image }}
+    {{ with $rawImage.Exif }}
+        {{ if eq .Tags.Orientation 1 }}
+            {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
+        {{ else if eq .Tags.Orientation 3 }}
+            {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp r180") }}
+        {{ else if eq .Tags.Orientation 6 }}
+            {{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r270") }}
+        {{ else if eq .Tags.Orientation 8 }}
+            {{ $image := $image.Resize (print $image.Height "x" $image.Width " webp r90") }}
+        {{ end }}
+        <a href="{{ $rawImage.RelPermalink}}" target="view_window">
+            <picture>
+                <source type="image/webp" srcset="{{ $image.RelPermalink }}">
+                <img
+                    src="{{ $rawImage.RelPermalink }}"
+                    {{ with $text }}alt="{{ . }}"{{ end }}
+                    loading="lazy"
+                />
+            </picture>
+        </a>
+    {{ end }}
+{{ else }}
+    {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
+    <a href="{{ $rawImage.RelPermalink}}" target="view_window">
         <picture>
-            {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
-            <source type="image/webp" srcset="
-            {{- with $respSizes -}}
-                {{- range $i, $e := . -}}
-                    {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink | absURL }} {{ . }}w
-                {{- end -}}
-            {{- end -}}" sizes="{{ $dataSzes }}" />
-            {{- end -}}
-            <source type="{{ $src.MediaType.Type }}" srcset="
-            {{- with $respSizes -}}
-                {{- range $i, $e := . -}}
-                    {{- if ge $src.Width . -}}
-                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink | absURL}} {{ . }}w
-                    {{- end -}}
-                {{- end -}}
-            {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSzes }}" />
-            <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
+            <source type="image/webp" srcset="{{ $image.RelPermalink }}">
+            <img
+                src="{{ $rawImage.RelPermalink }}"
+                {{ with $text }}alt="{{ . }}"{{ end }}
+                loading="lazy"
+            />
         </picture>
-    {{- else }}
-        <img src="{{ $Destination | safeURL }}" width="{{ $src.Width }}" height="{{ $src.Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
-    {{- end }}
+    </a>
+{{ end }}
+{{ else }}
+    <a href="{{ .Destination | safeURL }}" target="view_window">
+        <img
+            src="{{ .Destination | safeURL }}"
+            {{ with $text }}alt="{{ . }}"{{ end }}
+            loading="lazy"
+        />
+    </a>
 {{ end }}
