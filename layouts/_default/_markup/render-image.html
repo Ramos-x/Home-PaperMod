@@ -1,14 +1,11 @@
-<!-- render-image.html -->
-
-{{- $imagePath := .Get "image" -}}
-{{- $webpPath := printf "%s.webp" $imagePath -}}
-
-{{- if eq (path.Ext $imagePath) ".webp" -}}
-    <img src="{{ $imagePath }}" alt="Image">
-{{- else -}}
-    <picture>
-        <source srcset="{{ $webpPath }}" type="image/webp">
-        <source srcset="{{ $imagePath }}" type="image/{{ path.Ext $imagePath }}">
-        <img src="{{ $imagePath }}" alt="Image">
-    </picture>
-{{- end -}}
+{{ $image := .Page.Resources.GetMatch .Destination }}
+{{ $text := .Text | default "picture" }}
+{{ with $image }}
+    {{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
+    <a href="{{ .Destination | safeURL }}" target="view_window">
+        <img
+            src="{{ .Destination | safeURL }}"
+            {{ with $text }}alt="{{ . }}"{{ end }}
+        />
+    </a>
+{{ end }}
