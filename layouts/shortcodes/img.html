@@ -1,5 +1,0 @@
-{{ $image := .Resources.GetMatch .Get 0 }}
-{{ $image := $image.Resize "1000x webp" }}
-{{ with $image }}
-  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}">
-{{ end }}
