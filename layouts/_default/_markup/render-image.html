@@ -1,5 +1,5 @@
 {{ $image := .Page.Resources.GetMatch .Destination }}
-{{ $image := $image.Resize webp }}
+{{ $image := $image.Resize "webp q100" }}
 
 <img src="{{ $image.RelPermalink }}"
   {{- with .Text }} alt="{{ . }}"{{ end -}}
