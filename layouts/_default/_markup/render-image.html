@@ -1,13 +1,38 @@
-{{ $image := .Page.Resources.Get .Destination }}
-<p>
-    {{ .Destination}}<br />
-</p>
-{{ if $image }}
-    {{ $image = $image.Resize "webp q100" }}
-    <img src="{{ $image.RelPermalink }}"
-        {{- with .Text }} alt="{{ . }}"{{ end -}}
-        {{- with .Title }} title="{{ . }}"{{ end -}}
-    />
-{{else}}
-    <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
+{{- $respSizes := slice 480 720 1080 -}}
+{{- $dataSzes := "(min-width: 720px) 720px, 100vw" -}}
+
+{{- $holder := "GIP" -}}
+{{- $hint := "photo" -}}
+{{- $filter := "Lanczos" -}}
+
+{{- $Destination := .Destination -}}
+{{- $Text := .Text -}}
+{{- $Title := .Title -}}
+
+{{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
+
+{{ with $src := .Page.Resources.GetMatch .Destination }}
+    {{- if $responsiveImages -}}
+        <picture>
+            {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
+            <source type="image/webp" srcset="
+            {{- with $respSizes -}}
+                {{- range $i, $e := . -}}
+                    {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink | absURL }} {{ . }}w
+                {{- end -}}
+            {{- end -}}" sizes="{{ $dataSzes }}" />
+            {{- end -}}
+            <source type="{{ $src.MediaType.Type }}" srcset="
+            {{- with $respSizes -}}
+                {{- range $i, $e := . -}}
+                    {{- if ge $src.Width . -}}
+                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink | absURL}} {{ . }}w
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSzes }}" />
+            <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
+        </picture>
+        {{- else }}
+        <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" style="max-width: 100%; height: auto;" />
+    {{- end }}
 {{ end }}
