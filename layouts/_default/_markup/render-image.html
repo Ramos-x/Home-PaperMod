@@ -1,5 +1,5 @@
-{{ $image := .Page.Resources.Get ( .Destination | safeURL ) }}
-<p>{{.Destination | safeURL}}</p>
+{{ $image := .Page.Resources.Get ( .Destination | Permalink ) }}
+<p>{{.Destination | Permalink }}</p>
 {{ if $image }}
     {{ $image = $image.Resize "webp q100" }}
     <img src="{{ $image.RelPermalink }}"
