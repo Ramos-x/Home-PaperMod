@@ -1,6 +1,4 @@
-{{ $image := .Page.Resources.GetMatch .Destination }}
-{{ $text := .Text | default "picture" }}
-{{ $image := $image.Resize (print $image.Width "x" $image.Height " webp") }}
-<img src="{{ $image.RelPermalink }}"
-    {{ with $text }}alt="{{ . }}"{{ end }}
-/>
+<img src="{{ .Destination | safeURL }}"
+  {{- with .Text }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
