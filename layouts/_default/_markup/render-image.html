@@ -1,8 +1,8 @@
-{{- $respSizes := slice 480 720 1080 -}}
-{{- $dataSzes := "(min-width: 720px) 720px, 100vw" -}}
+{{- $respSizes := slice 720 1080 -}}
+{{- $dataSizes := "(min-width: 720px) 720px, 100vw" -}}
 
 {{- $holder := "GIP" -}}
-{{- $hint := "photo" -}}
+{{- $hint := "q85" -}}
 {{- $filter := "Lanczos" -}}
 
 {{- $Destination := .Destination -}}
@@ -21,7 +21,7 @@
                 {{- range $i, $e := . -}}
                     {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink | absURL }} {{ . }}w
                 {{- end -}}
-            {{- end -}}" sizes="{{ $dataSzes }}" />
+            {{- end -}}" sizes="{{ $dataSizes }}" />
             {{- end -}}
             <source type="{{ $src.MediaType.Type }}" srcset="
             {{- with $respSizes -}}
@@ -30,7 +30,7 @@
                         {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink | absURL}} {{ . }}w
                     {{- end -}}
                 {{- end -}}
-            {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSzes }}" />
+            {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSizes }}" />
             <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
         </picture>
         {{- else }}
