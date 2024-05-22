@@ -1,9 +1,7 @@
 /*
 This is just a placeholder blank stylesheet so as to support adding custom styles budled with theme's default styles
 
-Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
-
-
+Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
@@ -77,7 +75,7 @@ article[autonumbering] .toc li a:before {
 .toc-container.wide {
     position: absolute;
     height: 100%;
-    left: calc((var(--toc-width) + var(--gap)) * -0.9);
+    left: calc((var(--toc-width) + var(--gap)) * -1);
     width: var(--toc-width* 0.9);
 }
 
@@ -106,8 +104,8 @@ article[autonumbering] .toc li a:before {
 }
 
 .active {
-    font-size: 110%;
-    font-weight: 600;
+    font-size: 105%;
+    font-weight: 900;
 }
 
 .toc ul {

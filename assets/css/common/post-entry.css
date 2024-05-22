@@ -44,16 +44,25 @@
     box-shadow: 0 0 2px 0px #6666;
 }
 
-.post-entry:hover {
-    box-shadow: 0 0 7px 1px #7777;
+@media (prefers-color-scheme: light) {
+    .post-entry:hover {
+        box-shadow: 0 0 7px 1px #7777;
+        transform: scale(1.02);
+        filter: brightness(1.05) contrast(1.05);
+    }
 }
+
+@media (prefers-color-scheme: dark) {
+    .post-entry:hover {
+        box-shadow: 0 0 7px 1px #7777;
+        transform: scale(1.02);
+        filter: brightness(1.1) contrast(1.1);
+    }
+}
+
 
 .post-entry:active {
     transform: scale(0.98)!important;
-}
-
-.post-entry:hover {
-    transform: scale(1.02);
 }
 
 .tag-entry .entry-cover {
