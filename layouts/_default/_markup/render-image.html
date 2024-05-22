@@ -12,7 +12,7 @@
 {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
 {{ with $src := .Page.Resources.GetMatch .Destination }}
-{{ warnf "Optimizing image :%s \n", $Title }}
+{{ warnf "Optimizing image :%s \n" $Destination }}
     {{- if $responsiveImages -}}
         <picture>
             {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
