@@ -234,14 +234,12 @@
     -webkit-touch-callout: none;
     -webkit-user-drag: none;
     transition: transform .35s cubic-bezier(0,.5,.5,1) 0.2s;
-    z-index: 10000;
 }
 
-.post-content img:hover{
+/* .post-content img:hover{
     transform: scale(1.4); 
     transition:transform .5s cubic-bezier(1,-.33,.36,1.01).2s;
-    z-index: 10000;
-}
+} */
 
 .post-content img[src*="#center"] {
     margin: 1rem auto;
