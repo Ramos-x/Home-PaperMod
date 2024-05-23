@@ -2,11 +2,11 @@
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 
     <!-- 图片点击放大 Fancybox -->
-<!-- {{if .Page.Site.Params.fancybox }}
-    <script src="/Jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="/Fancybox/dist/jquery.fancybox.min.css" />
-    <script src="/Fancybox/dist/jquery.fancybox.min.js"></script>
-{{ end }} -->
+    {{if .Page.Site.Params.fancybox }}
+        <script src="/Jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="/Fancybox/dist/jquery.fancybox.min.css" />
+        <script src="/Fancybox/dist/jquery.fancybox.min.js"></script>
+    {{ end }}
     
     <!-- 文章字体设置 Fonts -->
 <html>
@@ -19,5 +19,9 @@
 
 <!-- MathJax Support -->
 {{ partial "mathjax.html" . }}
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "60a67a4a1d2c40689b21cdbb88e43bb3"}'></script>
+<!-- End Cloudflare Web Analytics -->
 
 {{- /* Footer custom content area end */ -}}

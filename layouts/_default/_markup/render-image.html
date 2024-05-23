@@ -11,8 +11,8 @@
 
 {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
-<!-- <div class="post-img-view">
-    <a data-fancybox="gallery" href="{{ .Destination | safeURL }}"> -->
+<div class="post-img-view">
+    <a data-fancybox="gallery" href="{{ .Destination | safeURL }}">
 
 {{ with $src := .Page.Resources.GetMatch .Destination }}
     {{- if $responsiveImages -}}
@@ -40,5 +40,5 @@
     {{- end }}
 {{ end }}
 
-    <!-- </a>
-</div> -->
+    </a>
+</div>
