@@ -11,6 +11,9 @@
 
 {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
+<!-- <div class="post-img-view">
+    <a data-fancybox="gallery" href="{{ .Destination | safeURL }}"> -->
+
 {{ with $src := .Page.Resources.GetMatch .Destination }}
     {{- if $responsiveImages -}}
         <picture>
@@ -36,3 +39,6 @@
         <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" style="max-width: 100%; height: auto;" />
     {{- end }}
 {{ end }}
+
+    <!-- </a>
+</div> -->

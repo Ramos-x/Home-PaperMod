@@ -1,24 +1,21 @@
 {{- /* Footer custom content area start */ -}}
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 
-
-
+    <!-- 图片点击放大 Fancybox -->
+<!-- {{if .Page.Site.Params.fancybox }}
+    <script src="/Jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="/Fancybox/dist/jquery.fancybox.min.css" />
+    <script src="/Fancybox/dist/jquery.fancybox.min.js"></script>
+{{ end }} -->
     
-    <!-- 文章字体设置 -->
+    <!-- 文章字体设置 Fonts -->
 <html>
     <footer>
-        <link rel="stylesheet" href="/css/lxgw-wenkai-lite-webfont@1.7.0/style.css" />
-        <link rel="stylesheet" href="/css/lxgw-wenkai-screen-webfont@1.7.0/style.css" />
-        <link rel="stylesheet" href="/css/jetbrains-mono@1.0.6/css/jetbrains-mono.css" />
+        <link rel="stylesheet" href="/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" />
+        <link rel="stylesheet" href="/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" />
+        <link rel="stylesheet" href="/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.css" />
     </footer>
 </html>
-
-<!-- <script>
-    document.addEventListener('mousemove', function(e) {
-    document.body.style.setProperty('--mouse-x', e.clientX + 'px');
-    document.body.style.setProperty('--mouse-y', e.clientY + 'px');
-    });
-</script> -->
 
 <!-- MathJax Support -->
 {{ partial "mathjax.html" . }}
