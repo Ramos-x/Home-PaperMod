@@ -377,9 +377,19 @@ h6:hover .anchor {
 }
 
 .paginav a {
-    padding-inline-start: 14px;
-    padding-inline-end: 14px;
+    /* padding-inline-start: 14px;
+    padding-inline-end: 14px; */
     border-radius: var(--radius);
+}
+
+.paginav .prev {
+    padding-inline-start: 18px;
+    padding-inline-end: 10px;
+}
+
+.paginav .next {
+    padding-inline-start: 10px;
+    padding-inline-end: 18px;
 }
 
 .paginav .title {
