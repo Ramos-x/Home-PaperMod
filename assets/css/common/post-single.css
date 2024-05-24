@@ -227,7 +227,7 @@
 }
 
 .post-content img {
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 1rem 0;
     height: auto;
     user-select: none;
