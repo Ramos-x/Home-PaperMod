@@ -73,10 +73,10 @@ article[autonumbering] .toc li a:before {
 }
 
 .toc-container.wide {
-    position: absolute;
-    height: 100%;
-    left: calc((var(--toc-width) + var(--gap)) * -1);
-    width: var(--toc-width* 0.9);
+  position: absolute;
+  height: calc(100% - 165px);
+  left: calc((var(--toc-width) + var(--gap)) * -1);
+  width: calc(var(--toc-width) * 1.15)
 }
 
 .wide .toc {
@@ -117,12 +117,11 @@ article[autonumbering] .toc li a:before {
     padding: 0px 15px 15px 20px;
     font-size: 16px;
 
-    /*目录显示高度*/
     max-height: 83vh;
     overflow-y: auto;
 }
 
-.toc .inner::-webkit-scrollbar-thumb {  /*滚动条*/
+.toc .inner::-webkit-scrollbar-thumb { 
     background: var(--border);
     border: 7px solid var(--theme);
     border-radius: var(--radius);
@@ -196,6 +195,8 @@ article[autonumbering] .toc li a:before {
       transform:rotate(10deg)
     }
   }
+
+  
   /* @-webkit-keyframes _animatedgradient_174vl_1 {
     0% {
       background-position:0% 50%
