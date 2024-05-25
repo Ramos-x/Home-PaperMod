@@ -122,17 +122,14 @@
     };
 
     window.addEventListener('scroll', () => {
-        // Ensure elements is defined and is an iterable (like an array or a NodeList)
-        if (elements) {
-            // Check if there is an object in the top half of the screen or keep the last item active
-            activeElement = Array.from(elements).find((element) => {
-                if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
-                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                    return element;
-                }
-            }) || activeElement
-        }
-    });
+        if (elements)
+        // Check if there is an object in the top half of the screen or keep the last item active
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
 
         elements.forEach(element => {
              const id = encodeURI(element.getAttribute('id')).toLowerCase();
