@@ -16,17 +16,31 @@
 <!-- 图片点击放大 Fancybox -->
 {{if .Page.Site.Params.fancybox }}
     <script src="/Jquery/dist/jquery.min.js"></script>
-    <script src="/Fancyapps/UI/dist/fancybox/fancybox.umd.js"></script>
-    <link rel="stylesheet" href="/Fancyapps/UI/dist/fancybox/fancybox.css" />
+    <script src="/Fancyapps/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="/Fancyapps/dist/fancybox/fancybox.css" />
     <script>
         Fancybox.bind("[data-fancybox]", {
+            // Transition effect when changing gallery items  "crossfade" | "fade" | "slide" | "classic" | string | false
+            Carousel: {
+                transition: "slide",
+            },
+            contentClick: "zoomToFit",
+            contentDblClick: "false",
+            wheel: "zoom",
             Images: {
                 initialSize: "fit",
                 protected:true,
-                Panzoom: {
-                    panMode: "mousemove",
-                    mouseMoveFactor: 1.1,
-                    mouseMoveFriction: 0.12,
+                // Panzoom: {
+                //     panMode: "mousemove",
+                //     mouseMoveFactor: 1.1,
+                //     mouseMoveFriction: 0.12,
+                // },
+            },
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW", "flipX", "flipY",],
+                    right: ["slideshow", "fullscreen", "download", "thumbs", "close"],
                 },
             },
         });
