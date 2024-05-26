@@ -1,14 +1,7 @@
 {{- /* Footer custom content area start */ -}}
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
-
-    <!-- 图片点击放大 Fancybox -->
-    {{if .Page.Site.Params.fancybox }}
-        <script src="/Jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" href="/Fancybox/dist/jquery.fancybox.min.css" />
-        <script src="/Fancybox/dist/jquery.fancybox.min.js"></script>
-    {{ end }}
     
-    <!-- 文章字体设置 Fonts -->
+<!-- 文章字体设置 Fonts -->
 <html>
     <footer>
         <!-- <link rel="stylesheet" href="/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" />
@@ -19,6 +12,26 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" />
     </footer>
 </html>
+
+<!-- 图片点击放大 Fancybox -->
+{{if .Page.Site.Params.fancybox }}
+    <script src="/Jquery/dist/jquery.min.js"></script>
+    <script src="/Fancyapps/UI/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="/Fancyapps/UI/dist/fancybox/fancybox.css" />
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Images: {
+                initialSize: "fit",
+                protected:true,
+                Panzoom: {
+                    panMode: "mousemove",
+                    mouseMoveFactor: 1.1,
+                    mouseMoveFriction: 0.12,
+                },
+            },
+        });
+    </script>
+{{ end }}
 
 <!-- MathJax Support -->
 {{ partial "mathjax.html" . }}
