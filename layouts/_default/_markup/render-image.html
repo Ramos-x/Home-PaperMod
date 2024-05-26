@@ -12,7 +12,7 @@
 {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
 <div class="post-img-view">
-    <a data-fancybox="gallery" href="{{ .Destination | safeURL }}">
+    <a data-fancybox="gallery" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
 
 {{ with $src := .Page.Resources.GetMatch .Destination }}
     {{- if $responsiveImages -}}
