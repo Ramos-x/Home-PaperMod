@@ -4,11 +4,6 @@
     transition: 0.6s cubic-bezier(0.03, 0.69, 0.36, 1);
 }
 
-.archive-posts:hover {
-    transform: scale(1.05);
-    background: #efefef;
-    border-radius: 18px;
-}
 .archive-year {
     margin-top: 40px;
 }
@@ -36,8 +31,14 @@
     position: relative;
     padding: 5px;
     margin: 10px 0;
+    transition: .35s cubic-bezier(0,.5,.5,1);
 }
 
+.archive-entry:hover {
+    transform: scale(1.05);
+    background: #efefef;
+    border-radius: 18px;
+}
 .archive-entry-title {
     margin: 5px 0;
     font-weight: 400;
