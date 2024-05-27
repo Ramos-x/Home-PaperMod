@@ -12,6 +12,66 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+        
+<!-- 避免相同元素在不同页面切换时的刷新 -->
+    <!-- <script>
+        // 监听所有链接的点击事件
+        document.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                // 阻止链接的默认行为，即阻止浏览器跳转到链接的 URL
+                event.preventDefault();
+                // 获取链接的 URL
+                var url = this.href;
+                // 使用 fetch API 获取链接的内容
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        // 创建一个新的 DOMParser 对象
+                        var parser = new DOMParser();
+
+                        // 使用 parseFromString 方法将获取到的内容转换为 DOM
+                        var doc = parser.parseFromString(data, 'text/html');
+
+                        // 删除导航栏
+                        var navbar = doc.querySelector('header');
+                        if (navbar) {
+                            navbar.remove();
+                        }
+                        // 将获取到的内容插入到主内容区域
+                        document.querySelector('main').innerHTML = doc.body.innerHTML;
+                        // 使用 history.pushState 方法改变浏览器的 URL，但不刷新页面
+                        history.pushState(null, '', url);
+                    });
+            });
+        });// 监听 popstate 事件，当用户点击浏览器的后退或前进按钮时，重新加载内容
+        window.addEventListener('popstate', function() {
+            fetch(document.location)
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector('#main').innerHTML = data;
+                });
+        });
+    </script> -->
+
+
+    <script>
+        document.querySelectorAll('.post-entry').forEach(function(entry) {
+            entry.addEventListener('click', function() {
+                var entries = document.querySelectorAll('.post-entry');
+                entries.forEach(function(entry) {
+                    entry.classList.add('fullscreen');
+                });
+            });
+        });
+    </script>
+    <style>
+        .fullscreen {
+            pointer-events: none;
+            transition: filter 4s cubic-bezier(0,.5,.5,1), opacity 4s cubic-bezier(0,.5,.5,1);
+            filter: blur(10px);
+            opacity: 0;
+        }
+    </style>
     </footer>
 </html>
 
@@ -49,6 +109,9 @@
                     right: ["download", "thumbs", "close"],
                 },
             },
+        });
+        document.querySelector('.post-entry').addEventListener('click', function() {
+            this.classList.add('fullscreen');
         });
     </script>
 {{ end }}
