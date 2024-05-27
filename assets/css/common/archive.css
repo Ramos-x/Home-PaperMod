@@ -32,11 +32,12 @@
     padding: 5px;
     margin: 10px 0;
     transition: .35s cubic-bezier(0,.5,.5,1);
+    border-radius: 18px;
 }
 
 .archive-entry:hover {
     transform: scale(1.05);
-    background: #efefef;
+    background: var(--entry);
     border-radius: 18px;
 }
 .archive-entry-title {
