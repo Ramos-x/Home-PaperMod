@@ -26,6 +26,7 @@
 {{- if site.Params.analytics.google.SiteVerificationTag }}
 <meta name="google-site-verification" content="{{ site.Params.analytics.google.SiteVerificationTag }}">
 {{- end }}
+<meta name="msvalidate.01" content="CD683FC92B11941B48C59A18E6C4355C" />
 {{- if site.Params.analytics.yandex.SiteVerificationTag }}
 <meta name="yandex-verification" content="{{ site.Params.analytics.yandex.SiteVerificationTag }}">
 {{- end }}
@@ -111,14 +112,6 @@
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{ end -}}
 
-<!-- <noscript> -->
-    <!-- <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-    </style> -->
-
     {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
     <style>
         @media (prefers-color-scheme: dark) {
@@ -150,10 +143,6 @@
             .main {
                 box-shadow: 0 5px 20px 15px #05050575;
             }
-
-            /* .list{
-                background-image: url(/img/grid_dark.png) !important;
-            } */
         
             html{
                 min-height: 100vh;
@@ -174,10 +163,6 @@
             .main {
                 box-shadow: 0 5px 20px 15px #fafafa75;
             }
-            
-            /* .list{
-                background-image: url(/img/grid.png) !important;
-            } */
 
             html{
                 min-height: 100vh;
@@ -191,7 +176,6 @@
                 background-image: url(/img/grid_dark.png);
             }
         }
-
     </style>
 
     <script>
@@ -206,7 +190,6 @@
     </script>
 
     {{- end }}
-<!-- </noscript> -->
 
 {{- partial "extend_head.html" . -}}
 
