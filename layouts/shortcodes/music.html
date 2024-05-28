@@ -1,18 +1,66 @@
 <script src="/APlayer/APlayer.js"></script>
 <script src="/APlayer/Meting.js"></script>
 <link rel="stylesheet" type="text/css" href="/APlayer/APlayer.css">
+<div id="aplayer" class="aplayer"></div>
 <meting-js
-id="60198"
-server="netease"
-type="playlist"
-autoplay="false"
-theme="#2980b9"
-loop="all"
-order="list"
-preload="auto"
-volume="0.3"
-mutex="1"
-list-folded="0"
-list-max-height="327px"
-storage-name="Meting.js">
+    id="60198"
+    server="netease"
+    type="playlist"
+    autoplay="false"
+    theme="#2980b9"
+    loop="all"
+    order="list"
+    preload="auto"
+    volume="0.3"
+    mutex="1"
+    list-folded="0"
+    list-max-height="327px"
+    storage-name="Meting.js">
 </meting-js>  
+<script>
+    // const ap = document.querySelector('meting-js').aplayer;
+    // 使用 MutationObserver
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                const ap = document.querySelector('meting-js').aplayer;
+                if (ap) {
+                    console.log(ap);
+                    observer.disconnect();
+
+                    ap.on('play', () => {
+                        console.log('play');
+                        if ('mediaSession' in navigator) {
+                            const audio = ap.list.audios[ap.list.index]; // 获取当前播放的音频信息
+
+                            navigator.mediaSession.metadata = new MediaMetadata({
+                                title: audio.name,
+                                artist: audio.artist,
+                                album: audio.album || 'Unknown Album',
+                                artwork: [
+                                    { src: audio.cover, sizes: '96x96', type: 'image/jpeg' },
+                                    { src: audio.cover, sizes: '128x128', type: 'image/jpeg' },
+                                    { src: audio.cover, sizes: '192x192', type: 'image/jpeg' },
+                                    { src: audio.cover, sizes: '256x256', type: 'image/jpeg' },
+                                    { src: audio.cover, sizes: '384x384', type: 'image/jpeg' },
+                                    { src: audio.cover, sizes: '512x512', type: 'image/jpeg' }
+                                ]
+                            });
+
+                            // Add action handlers for media controls
+                            navigator.mediaSession.setActionHandler('play', () => { ap.play(); });
+                            navigator.mediaSession.setActionHandler('pause', () => { ap.pause(); });
+                            navigator.mediaSession.setActionHandler('seekto', (event) => { ap.seek(event.seekTime); });
+                            // navigator.mediaSession.setActionHandler('seekbackward', () => { ap.seek(ap.audio.currentTime - 10); });
+                            // navigator.mediaSession.setActionHandler('seekforward', () => { ap.seek(ap.audio.currentTime + 10); });
+                            navigator.mediaSession.setActionHandler('previoustrack', () => { ap.skipBack(); });
+                            navigator.mediaSession.setActionHandler('nexttrack', () => { ap.skipForward(); });
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+    observer.observe(document.querySelector('meting-js'), { childList: true });
+</script>
