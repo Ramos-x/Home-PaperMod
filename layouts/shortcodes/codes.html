@@ -9,12 +9,18 @@
     display: flex;
     background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjRwdCIgaGVpZ2h0PSIyNHB0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPlxhPHBhdGggc3R5bGU9InN0cm9rZTpub25lO2ZpbGwtcnVsZTpub256ZXJvO2ZpbGw6IzY0NjQ2NDtmaWxsLW9wYWNpdHk6MSIgZD0iTTQgMkMyLjg5NDUzMSAyIDIgMi44OTQ1MzEgMiA0VjE3QzIgMTcuNTUwNzgxIDIuNDQ5MjE5IDE4IDMgMThTNCAxNy41NTA3ODEgNCAxN1Y0SDE3QzE3LjU1MDc4MSA0IDE4IDMuNTUwNzgxIDE4IDNTMTcuNTUwNzgxIDIgMTcgMnpNOCA2QzYuODk0NTMxIDYgNiA2Ljg5NDUzMSA2IDhWMjBDNiAyMS4xMDU0NjkgNi44OTQ1MzEgMjIgOCAyMkgyMEMyMS4xMDU0NjkgMjIgMjIgMjEuMTA1NDY5IDIyIDIwVjhDMjIgNi44OTQ1MzEgMjEuMTA1NDY5IDYgMjAgNnpNOCA4SDIwVjIwSDh6TTggOCIvPjwvc3ZnPg);
     background-position: 50%;
-    background-size: 16px 16px;
+    background-size: 18px 18px;
     background-repeat: no-repeat;
     width: 20px;"></button>
     <style>
+    #copyButton {
+      transition: .35s cubic-bezier(0,.5,.5,1);
+    }
     #copyButton:active {
-        filter: brightness(5);  /* 增加亮度 */
+      filter: brightness(5)!important;  /* 增加亮度 */
+    }
+    #copyButton:hover {
+      filter: brightness(1.5);
     }
     </style>
   </div>
