@@ -88,6 +88,7 @@
 .entry-footer {
     color: var(--secondary);
     font-size: 13px;
+    display: flex;
 }
 
 .entry-link {

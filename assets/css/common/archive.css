@@ -50,3 +50,6 @@
     color: var(--secondary);
     font-size: 14px;
 }
+.archive-meta {
+    display: flex;
+}

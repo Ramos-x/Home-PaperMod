@@ -4,6 +4,9 @@
 
 <html>
     <footer>
+        <!-- 不蒜子 -->
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> </script>
+
         <!-- 文章字体设置 Fonts -->
         <div>
             <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" />
@@ -67,6 +70,12 @@
                         entries.forEach(function(entry) {
                             entry.classList.add('fullscreen');
                         });
+                    });
+                });
+                window.addEventListener('pageshow', function() {
+                    var entries = document.querySelectorAll('.post-entry');
+                    entries.forEach(function(entry) {
+                        entry.classList.remove('fullscreen');
                     });
                 });
             </script>
