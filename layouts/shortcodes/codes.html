@@ -1,0 +1,134 @@
+{{ $id := substr (md5 .Inner) 0 16 }}
+<div id="{{ $id }}" class="codetab">
+  <div class="codetab__links">
+    {{ range .Params }}
+    <button class="codetab__link" aria-label="Tab link">{{ . }}</button>
+    {{ end }}
+    <button id="copyButton" class="copy" style="
+    margin: .4rem .5rem .4rem auto; 
+    display: flex;
+    background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjRwdCIgaGVpZ2h0PSIyNHB0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPlxhPHBhdGggc3R5bGU9InN0cm9rZTpub25lO2ZpbGwtcnVsZTpub256ZXJvO2ZpbGw6IzY0NjQ2NDtmaWxsLW9wYWNpdHk6MSIgZD0iTTQgMkMyLjg5NDUzMSAyIDIgMi44OTQ1MzEgMiA0VjE3QzIgMTcuNTUwNzgxIDIuNDQ5MjE5IDE4IDMgMThTNCAxNy41NTA3ODEgNCAxN1Y0SDE3QzE3LjU1MDc4MSA0IDE4IDMuNTUwNzgxIDE4IDNTMTcuNTUwNzgxIDIgMTcgMnpNOCA2QzYuODk0NTMxIDYgNiA2Ljg5NDUzMSA2IDhWMjBDNiAyMS4xMDU0NjkgNi44OTQ1MzEgMjIgOCAyMkgyMEMyMS4xMDU0NjkgMjIgMjIgMjEuMTA1NDY5IDIyIDIwVjhDMjIgNi44OTQ1MzEgMjEuMTA1NDY5IDYgMjAgNnpNOCA4SDIwVjIwSDh6TTggOCIvPjwvc3ZnPg);
+    background-position: 50%;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    width: 20px;"></button>
+    <style>
+    #copyButton:active {
+        filter: brightness(5);  /* 增加亮度 */
+    }
+    </style>
+  </div>
+  
+  {{ .Inner }}
+</div>
+
+<script>
+  // 获取复制按钮
+  let copyButton = document.getElementById('copyButton');
+  
+  copyButton.addEventListener('click', function() {
+    let activeCodeContent = document.querySelectorAll('.codetab__content.active .highlight .chroma .lntable tbody tr .lntd .chroma code' );
+    if (activeCodeContent && activeCodeContent[1]) {
+      let text = activeCodeContent[1].innerText;
+  
+      // 移除多余换行符
+      text = text.replace(/\n{2}/g, '\n');
+  
+      if (navigator.clipboard) {
+        // 使用 Clipboard API
+        navigator.clipboard.writeText(text).then(function() {
+          console.log('Copying to clipboard was successful!');
+        }, function(err) {
+          console.error('Could not copy text: ', err);
+        });
+      } else {
+        // 使用 document.execCommand('copy') 作为备选方案
+        let textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          console.log('Copying to clipboard was successful!');
+        } catch (err) {
+          console.error('Could not copy text: ', err);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+    } else {
+      console.error('No active code content found');
+    }
+  });
+</script>
+
+<script>
+  var containerId = JSON.parse({{ $id | jsonify }});
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+  
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll('.codetab__link');
+    codetabContents = containerElem.querySelectorAll('.codetab__content');
+  }
+  
+  for (var i = 0; i < codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute('id'));
+    codetabContents[i].style.display = 'none';
+  }
+  
+  for (var i = 0; i < codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute('id', ids[i]);
+  }
+  
+  if (codetabContents.length > 0) {
+    codetabContents[0].style.display = 'block';
+    codetabContents[0].classList.add('active');
+    codetabLinks[0].classList.add('active');
+  }
+  
+  codetabLinks.forEach(function(link, index) {
+    link.addEventListener('click', function() {
+      codetabContents.forEach(function(content, idx) {
+        if (index === idx) {
+          content.style.display = 'block';
+          content.classList.add('active');
+          link.classList.add('active');
+        } else {
+          content.style.display = 'none';
+          content.classList.remove('active');
+          codetabLinks[idx].classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // ========================== codetab ==========================
+  document.querySelectorAll('.codetab') ?
+    document.querySelectorAll('.codetab').forEach(function (elem, idx) {
+      var containerId = elem.getAttribute('id');
+      var containerElem = elem;
+      var codetabLinks = elem.querySelectorAll('.codetab__link');
+      var codetabContents = elem.querySelectorAll('.codetab__content');
+      var ids = [];
+
+      codetabLinks && codetabLinks.length > 0 ?
+        codetabLinks.forEach(function (link, index, self) {
+          link.onclick = function (e) {
+            for (var i = 0; i < self.length; i++) {
+              if (index === parseInt(i, 10)) {
+                if (!self[i].classList.contains('active')) {
+                  self[i].classList.add('active');
+                  codetabContents[i].style.display = 'block';
+                }
+              } else {
+                self[i].classList.remove('active');
+                codetabContents[i].style.display = 'none';
+              }
+            }
+          }
+        }) : null;
+    }) : null;
+</script>

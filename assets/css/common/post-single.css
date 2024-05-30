@@ -76,6 +76,10 @@
     -webkit-box-decoration-break: clone;
 }
 
+.lntd a {
+    box-shadow: 0 0;
+}
+
 .post-content a code {
     margin: auto 0;
     border-radius: 0;
@@ -154,7 +158,7 @@
 }
 
 .post-content .highlight:not(table) {
-    margin: 10px auto;
+    margin: auto auto 10px auto;
     background: var(--code-block-bg) !important;
     border-radius: var(--radius);
     direction: ltr;
@@ -195,7 +199,6 @@
     font-size: 0.78em;
     line-height: 1.5;
     background: var(--code-bg);
-    border-radius: 2px;
 }
 
 .post-content pre code {
@@ -203,8 +206,7 @@
     margin: auto 0;
     padding: 10px;
     color: rgb(213, 213, 214);
-    background: var(--code-block-bg) !important;
-    border-radius: var(--radius);
+    background: var(--code-block-bg);
     overflow-x: auto;
     word-break: break-all;
 }

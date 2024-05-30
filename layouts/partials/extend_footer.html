@@ -4,7 +4,6 @@
 
 <html>
     <footer>
-        
         <!-- 文章字体设置 Fonts -->
         <div>
             <link rel="stylesheet" href="/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" />
@@ -114,6 +113,18 @@
                                 middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
                                 //right: ["slideshow", "fullscreen", "download", "thumbs", "close"],
                                 right: ["download", "thumbs", "close"],
+                            },
+                        },
+                        on: {
+                            ready: (fancybox, slide) => {
+                                // 获取原始图片元素并隐藏它
+                                console.log(`A`);
+                                // console.log(fancybox);
+                                console.log(slide);
+                            },
+                            close: (fancybox, slide) => {
+                                // 获取原始图片元素并显示它
+                                console.log(`B`);
                             },
                         },
                     });
