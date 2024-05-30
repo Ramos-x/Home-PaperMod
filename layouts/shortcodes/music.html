@@ -25,7 +25,6 @@
             if (mutation.type === 'childList') {
                 const ap = document.querySelector('meting-js').aplayer;
                 if (ap) {
-                    observer.disconnect();
 
                     ap.on('play', () => {
                         if ('mediaSession' in navigator) {
@@ -55,6 +54,7 @@
                             navigator.mediaSession.setActionHandler('nexttrack', () => { ap.skipForward(); });
                         }
                     });
+                    observer.disconnect();
                 }
             }
         }
