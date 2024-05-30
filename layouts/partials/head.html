@@ -96,7 +96,6 @@
 <link rel="apple-touch-icon" href="{{ site.Params.assets.apple_touch_icon | default "apple-touch-icon.png" | absURL }}">
 <link rel="mask-icon" href="{{ site.Params.assets.safari_pinned_tab | default "safari-pinned-tab.svg" | absURL }}">
 
-<!-- <meta name="theme-color" content="{{ site.Params.assets.theme_color | default "#2e2e33" }}"> -->
 <meta name="theme-color" content="#fafafa00" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#04040400" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,7 +146,7 @@
             html{
                 min-height: 100vh;
                 background-color: #040404;
-                background-image: url(/img/grid_dark.png) !important;
+                background-image: url(/static/img/grid_dark.png) !important;
             }
             .post-content img {
                 filter: brightness(0.8) contrast(1.2) saturate(0.8);
@@ -167,13 +166,13 @@
             html{
                 min-height: 100vh;
                 background-color: #fafafa;
-                background-image: url(/img/grid.png) !important;
+                background-image: url(/static/img/grid.png) !important;
             }
         }
 
         @media (prefers-color-scheme: no-preference) {
             .dark.list {
-                background-image: url(/img/grid_dark.png);
+                background-image: url(/static/img/grid_dark.png);
             }
         }
     </style>
