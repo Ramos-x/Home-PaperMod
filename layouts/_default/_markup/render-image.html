@@ -29,7 +29,7 @@
             {{- with $respSizes -}}
                 {{- range $i, $e := . -}}
                     {{- if ge $src.Width . -}}
-                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $filter) ).RelPermalink | absURL}} {{ . }}w
+                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $hint " " $filter) ).RelPermalink | absURL}} {{ . }}w
                     {{- end -}}
                 {{- end -}}
             {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSizes }}" />
