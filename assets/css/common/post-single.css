@@ -19,6 +19,36 @@
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.post-meta span{
+    color: var(--secondary);
+    font-size: 14px;
+    display: flex!important;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.post-meta > span:first-child::after {
+    content: "\2002·\2002";
+}
+
+@media (max-width: 446px) {
+    .post-meta > span:first-child::after {
+        content: "";
+    }
+    .post-meta > span:nth-child(2) {
+        display: block;
+    }
+    .post-meta {
+        color: var(--secondary);
+        font-size: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex-direction: column-reverse;
+    }
 }
 
 .post-meta .i18n_list li {

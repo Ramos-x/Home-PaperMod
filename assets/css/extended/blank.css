@@ -3,6 +3,23 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
+
+/* ========== b o d y从模糊到清晰 ========== */
+.post {
+  animation: fadein 1s forwards;
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: .35s cubic-bezier(0,.5,.5,1);
+}
+
+@keyframes fadein {
+  to {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+  }
+}
+
+/* ========== 代码框 ========== */
 .codetab {
   transition: .35s cubic-bezier(0,.5,.5,1);
 }
