@@ -28,7 +28,7 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-  {{- $comma := true -}}
+  {{- $comma := false -}}
   {{- range $index, $element := $bc_list }}
 
     {{- $scratch.Add "path" (printf "%s/" $element ) | safeJS }}
@@ -42,7 +42,6 @@
       "name": {{ $bc_pg.Name }},
       "item": {{ $bc_pg.Permalink | safeHTML }}
     }
-    {{- $comma = true -}}
     {{- end }}
 
   {{- end }}
