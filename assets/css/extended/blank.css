@@ -136,7 +136,7 @@ article[autonumbering] .toc li a:before {
 .toc-container.wide {
   position: absolute;
   height: calc(100% - 165px);
-  left: calc((var(--toc-width) + var(--gap)) * -1);
+  left: calc((var(--toc-width) + var(--gap)) * -1.2);
   width: calc(var(--toc-width) * 1.15)
 }
 
