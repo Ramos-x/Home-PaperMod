@@ -9,7 +9,13 @@
     padding: 3px 10px;
     background: var(--tertiary);
     border-radius: 6px;
-    transition: transform 0.1s;
+    transition: .25s cubic-bezier(0,.5,.5,1);
+}
+
+.terms-tags a:hover {
+    /* box-shadow: 0 0 7px 1px #7777; */
+    transform: scale(1.03);
+    filter: brightness(1.02);
 }
 
 .terms-tags a:active {

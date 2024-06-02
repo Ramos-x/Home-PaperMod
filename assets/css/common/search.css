@@ -4,11 +4,17 @@
     color: var(--primary);
     font-weight: bold;
     border: 2px solid var(--tertiary);
-    border-radius: var(--radius);
+    border-radius: var(--radius_m);
+    transition: .25s cubic-bezier(0, .5, .5, 1);
+}
+
+#searchbox input:hover {
+    border: 2px solid var(--secondary);
+    transition: .15s cubic-bezier(0, .5, .5, 1);
 }
 
 #searchbox input:focus {
-    border-color: var(--secondary);
+    border-color: var(--primary);
 }
 
 #searchResults li {

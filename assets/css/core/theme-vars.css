@@ -5,7 +5,10 @@
     --main-width: 720px;
     --header-height: 60px;
     --footer-height: 60px;
-    --radius: 18px;
+    --radius: 28px;
+    --radius_l: 22px;
+    --radius_m: 18px;
+    --radius_s: 14px;
     --theme: rgb(255, 255, 255);
     --entry: rgb(255, 255, 255);
     --primary: rgb(30, 30, 30);

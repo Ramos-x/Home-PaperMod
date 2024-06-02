@@ -22,25 +22,29 @@
     flex-direction: row;
     align-items: center;
 }
-.post-meta span{
+
+.post-meta span {
     color: var(--secondary);
     font-size: 14px;
-    display: flex!important;
+    display: flex !important;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
 }
-.post-meta > span:first-child::after {
+
+.post-meta>span:first-child::after {
     content: "\2002·\2002";
 }
 
 @media (max-width: 446px) {
-    .post-meta > span:first-child::after {
+    .post-meta>span:first-child::after {
         content: "";
     }
-    .post-meta > span:nth-child(2) {
+
+    .post-meta>span:nth-child(2) {
         display: block;
     }
+
     .post-meta {
         color: var(--secondary);
         font-size: 14px;
@@ -158,8 +162,8 @@
     padding-inline-start: 10px;
 }
 
-.post-content dd ~ dd,
-.post-content dt ~ dt {
+.post-content dd~dd,
+.post-content dt~dt {
     margin-top: 10px;
 }
 
@@ -194,7 +198,7 @@
     direction: ltr;
 }
 
-.post-content li > .highlight {
+.post-content li>.highlight {
     margin-inline-end: 0;
 }
 
@@ -259,13 +263,13 @@
 }
 
 .post-content img {
-    border-radius: 12px;
+    border-radius: var(--radius_m);
     margin: 1rem 0;
     height: auto;
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-drag: none;
-    transition: transform .35s cubic-bezier(0,.5,.5,1) 0.2s;
+    transition: transform .35s cubic-bezier(0, .5, .5, 1) 0.2s;
 }
 
 /* .post-content img:hover{
@@ -281,14 +285,14 @@
     text-align: center;
 }
 
-.post-content figure > figcaption {
+.post-content figure>figcaption {
     color: var(--primary);
     font-size: 16px;
     font-weight: bold;
     margin: 8px 0 16px;
 }
 
-.post-content figure > figcaption > p {
+.post-content figure>figcaption>p {
     color: var(--secondary);
     font-size: 14px;
     font-weight: normal;
@@ -354,7 +358,7 @@
 .post-tags a,
 .share-buttons,
 .paginav {
-    border-radius: var(--radius);
+    border-radius: var(--radius_m);
     background: var(--code-bg);
     border: 1px solid var(--border);
 }
@@ -371,6 +375,13 @@
 .post-tags a:hover,
 .paginav a:hover {
     background: var(--border);
+    transition: .35s cubic-bezier(0, .5, .5, 1);
+    transform: scale(1.02);
+}
+
+.paginav a:hover{
+
+    border-radius: 18px;
 }
 
 .share-buttons {
@@ -411,7 +422,7 @@ h6:hover .anchor {
 .paginav a {
     /* padding-inline-start: 14px;
     padding-inline-end: 14px; */
-    border-radius: var(--radius);
+    border-radius: var(--radius_m);
 }
 
 .paginav .prev {
