@@ -2,4 +2,74 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
+
+    <!-- 根据 #toc-container 调整动画延迟 -->
+    <div id="transition-image">
+        <div id="progress-bar"></div>
+    </div>
+    <script>
+        // 当点击链接时，显示图片和进度条
+        document.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = this.href;
+                var transitionImage = document.getElementById('transition-image');
+                var progressBar = document.getElementById('progress-bar');
+                transitionImage.style.opacity = '1'; // 设置透明度为1
+                progressBar.style.width = '100%';
+                window.location.href = href;
+            });
+        });
+
+        // 在新的网页加载时，显示图片和进度条
+        document.addEventListener('DOMContentLoaded', function() {
+            var progressBar = document.getElementById('progress-bar');
+            var transitionImage = document.getElementById('transition-image');
+            transitionImage.style.opacity = '0'; // 设置透明度为0
+            progressBar.style.width = '100%';
+
+            // 当页面加载完成后，隐藏图片和进度条
+            // window.addEventListener('load', function() {
+            //         transitionImage.style.opacity = '0';
+            //         transitionImage.style.display = 'none';
+            //         progressBar.style.opacity = '0';
+            //         progressBar.style.display = 'none';
+            // });
+            
+            // 使用 setInterval 来定期更新进度条的宽度
+            var interval = setInterval(function() {
+            // 获取页面加载的进度
+            var progress = calculateProgress();
+
+            // 更新进度条的宽度
+            progressBar.style.width = progress + '%';
+
+            // 如果页面加载完成，隐藏图片和进度条，并清除定时器
+            if (progress >= 100) {
+                transitionImage.style.opacity = '0';
+                transitionImage.style.display = 'none';
+                progressBar.style.opacity = '0';
+                progressBar.style.display = 'none';
+                clearInterval(interval);
+            }
+            }, 100);
+        });
+
+
+        // 计算页面加载的进度
+        function calculateProgress() {
+            var performance = window.performance;
+
+            if (!performance) {
+                // 如果浏览器不支持 window.performance，返回100
+                return 100;
+            }
+
+            var timing = performance.timing;
+            var progress = ((timing.loadEventEnd - timing.navigationStart) / (timing.domComplete - timing.navigationStart)) * 100;
+
+            return Math.min(100, Math.max(0, Math.round(progress)));
+        }
+    </script>
+
 {{- /* Head custom content area end */ -}}
