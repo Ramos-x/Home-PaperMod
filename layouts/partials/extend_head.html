@@ -24,22 +24,25 @@
 
 // 在新的网页加载时，显示图片和进度条
 document.addEventListener('DOMContentLoaded', function() {
-    var transitionImage = document.getElementById('transition-image');
+    // var transitionImage = document.getElementById('transition-image');
     var progressBar = document.getElementById('progress-bar');
-    transitionImage.style.transition = '.85s cubic-bezier(0,.5,.5,1)!important;'
-    transitionImage.style.opacity = '0'; // 设置透明度为0
+    // transitionImage.style.transition = '.85s cubic-bezier(0,.5,.5,1)!important;'
+    // transitionImage.style.opacity = '0'; // 设置透明度为0
     
-    setTimeout(function() {
-        transitionImage.style.display = 'none';
-    }, 900);
+    // setTimeout(function() {
+    //     transitionImage.style.display = 'none';
+    // }, 900);
     progressBar.style.width = '50%';
     window.onload = function() {
         progressBar.style.width = '100%';
         setTimeout(function() {
             setTimeout(function() {
-                progressBar.style.display = 'none';
-            }, 1000);
-        }, 1000);
+                progressBar.style.height = '0';
+                setTimeout(function() {
+                    progressBar.style.display = 'none';
+                }, 900);
+            }, 900);
+        }, 900);
     };
 
     
@@ -69,15 +72,15 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ========== transition-image ========== */
 #progress-bar {
   position: fixed;
-  top: 0; /* 放到 transition-image 的下面，这里的 10px 是 progress-bar 的高度，你可以根据需要调整 */
+  top: 0; 
   left: 0;
   width: 0vmin;
-  height: 4px; /* 设置为一个小短条 */
+  height: 1px;
   background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
   z-index: 9000;
-  transition: .85s cubic-bezier(0,.5,.5,1)!important;
+  transition: .45s cubic-bezier(0,.5,.5,1)!important;
 }
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   #transition-image {
     position: fixed;
     top: 0;
@@ -91,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
     justify-content: center;
     align-items: center;
     opacity: 1;
-    /* transition: .45s cubic-bezier(0,.5,.5,1); */
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -108,8 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     justify-content: center;
     align-items: center;
     opacity: 1;
-    /* transition: .45s cubic-bezier(0,.5,.5,1); */
   }
-}
+} */
 </style>
 {{- /* Head custom content area end */ -}}
