@@ -31,8 +31,8 @@
     position: relative;
     padding: 5px;
     margin: 10px 0;
-    transition: .35s cubic-bezier(0,.5,.5,1);
-    border-radius: 18px;
+    transition: .85s cubic-bezier(0,.5,.5,1);
+    border-radius: var(--radius_m);
 }
 
 .archive-entry:hover {

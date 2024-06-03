@@ -47,20 +47,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    var elements = document.querySelectorAll('.main > *');
-    elements.forEach(function(element, index) {
+    var main1 = document.querySelectorAll('.main > *');
+    main1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
         }, 250 * index);
     });
-    var elements = document.querySelectorAll('.post > *');
-    elements.forEach(function(element, index) {
+    var acrive1 = document.querySelectorAll('.archive-posts >*');
+    acrive1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
         }, 100 * index);
     });
-    var elements = document.querySelectorAll('.post-content > *');
-    elements.forEach(function(element, index) {
+    var page1 = document.querySelectorAll('.post > *');
+    page1.forEach(function(element, index) {
+        setTimeout(function() {
+            element.classList.add('loaded');
+        }, 100 * index);
+    });
+    var post1 = document.querySelectorAll('.post-content > *');
+    post1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
         }, 100 * index);

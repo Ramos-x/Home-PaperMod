@@ -40,26 +40,26 @@
     background: var(--entry);
     border-radius: var(--radius);
     border: 1px solid var(--border);
-    transition: all 0.85s cubic-bezier(0, 0.5, 0.5, 1) scale 0.35s cubic-bezier(0, 0.5, 0.5, 1)!important;
+    filter: brightness(1) contrast(1);
+    transition: all .85s cubic-bezier(0, 0.5, 0.5, 1)!important;
     box-shadow: 0 0 2px 0px #6666;
 }
 
 @media (prefers-color-scheme: light) {
-/* ========== 鼠标悬停效果 ========== */
-    .post-entry:hover {
+    .post-entry:hover,.post-entry.loaded:hover {
         box-shadow: 0 0 7px 1px #7777;
         transform: scale(1.02) !important;
-        filter: brightness(1.05) contrast(1.05);
-        transition: all 0.35s cubic-bezier(0, 0.5, 0.5, 1) !important;
+        filter: brightness(1.05) contrast(1.05) blur(0)opacity(1);
+        transition: .85s cubic-bezier(0, 0.5, 0.5, 1)!important;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    .post-entry:hover {
+    .post-entry:hover,.post-entry.loaded:hover {
         box-shadow: 0 0 7px 1px #7777;
         transform: scale(1.02)!important;
-        filter: brightness(1.1) contrast(1.1);
-        transition: all 0.35s cubic-bezier(0, 0.5, 0.5, 1)!important;
+        filter: brightness(1.1) contrast(1.1) blur(0)opacity(1);
+        transition: .85s cubic-bezier(0, 0.5, 0.5, 1)!important;
     }
 }
 
