@@ -3,51 +3,7 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
-/* ========== transition-image ========== */
-#progress-bar {
-  position: fixed;
-  top: 0; /* 放到 transition-image 的下面，这里的 10px 是 progress-bar 的高度，你可以根据需要调整 */
-  left: 0;
-  width: 0vmin;
-  height: 4px; /* 设置为一个小短条 */
-  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
-  z-index: 9000;
-  transition: all .45s cubic-bezier(0,.5,.5,1)!important;
-}
-@media (prefers-color-scheme: light) {
-  #transition-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid.png');
-    background-size: 15vmin auto, cover;
-    z-index: 9000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: .45s cubic-bezier(0,.5,.5,1);
-  }
-}
-@media (prefers-color-scheme: dark) {
-  #transition-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid_dark.png');
-    background-size: 20% auto, cover;
-    z-index: 9000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: .45s cubic-bezier(0,.5,.5,1);
-  }
-}
+
 
 /* ========== post从模糊到清晰并向上位移 ========== */
 .post > * {

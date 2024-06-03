@@ -3,71 +3,113 @@
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
 
-        <div id="transition-image">
-            <div id="progress-bar"></div>
-        </div>
-        <script>
-//==============打开页面卡片动效
-        document.addEventListener('DOMContentLoaded', function() {
-            window.onload = function() {
-                var elements = document.querySelectorAll('.main > *');
-                elements.forEach(function(element, index) {
-                    setTimeout(function() {
-                        element.classList.add('loaded');
-                    }, 250 * index);
-                });
-                var elements = document.querySelectorAll('.post > *');
-                elements.forEach(function(element, index) {
-                    setTimeout(function() {
-                        element.classList.add('loaded');
-                    }, 100 * index);
-                });
-                var elements = document.querySelectorAll('.post-content > *');
-                elements.forEach(function(element, index) {
-                    setTimeout(function() {
-                        element.classList.add('loaded');
-                    }, 100 * index);
-                });
-            };
-        })
-
-
+    <div id="progress-bar"></div>
+    <div id="transition-image"></div>
+    
+    <script>
 //==============打开页面加载动效
-            // // 当点击链接时，显示图片和进度条
-            // document.querySelectorAll('a').forEach(function(link) {
-            //     link.addEventListener('click', function(e) {
-            //         e.preventDefault();
-            //         var href = this.href;
-            //         var transitionImage = document.getElementById('transition-image');
-            //         var progressBar = document.getElementById('progress-bar');
-            //         transitionImage.style.display = '';
-            //         transitionImage.style.opacity = '1';
-            //         progressBar.style.width = '100%';
-            //         window.location.href = href;
-            //     });
-            // });
+// // 当点击链接时，显示图片和进度条
+// document.querySelectorAll('a').forEach(function(link) {
+//     link.addEventListener('click', function(e) {
+//         e.preventDefault();
+//         var href = this.href;
+//         var transitionImage = document.getElementById('transition-image');
+//         var progressBar = document.getElementById('progress-bar');
+//         transitionImage.style.display = '';
+//         transitionImage.style.opacity = '1';
+//         progressBar.style.width = '100%';
+//         window.location.href = href;
+//     });
+// });
 
-            // 在新的网页加载时，显示图片和进度条
-            document.addEventListener('DOMContentLoaded', function() {
-                var transitionImage = document.getElementById('transition-image');
-                var progressBar = document.getElementById('progress-bar');
-                transitionImage.style.opacity = '0'; // 设置透明度为0
-                progressBar.style.width = '100%';
-                // progressBar.style.transition = "scaleX(100)"; // 设置进度条的位置
+// 在新的网页加载时，显示图片和进度条
+document.addEventListener('DOMContentLoaded', function() {
+    var transitionImage = document.getElementById('transition-image');
+    var progressBar = document.getElementById('progress-bar');
+    transitionImage.style.transition = '.85s cubic-bezier(0,.5,.5,1)!important;'
+    transitionImage.style.opacity = '0'; // 设置透明度为0
+    
+    setTimeout(function() {
+        transitionImage.style.display = 'none';
+    }, 900);
+    progressBar.style.width = '50%';
+    window.onload = function() {
+        progressBar.style.width = '100%';
+        setTimeout(function() {
+            setTimeout(function() {
+                progressBar.style.display = 'none';
+            }, 1000);
+        }, 1000);
+    };
 
-                setTimeout(function() {
-                    transitionImage.style.display = 'none';
-                    progressBar.style.display = 'none';
-                }, 1000);
+    
 
-                // 当页面加载完成后，隐藏图片和进度条
-                // window.addEventListener('load', function() {
-                //     // transitionImage.style.opacity = '0';
-                //     // progressBar.style.opacity = '0';
-                //     transitionImage.style.display = 'none';
-                //     progressBar.style.display = 'none';
-                // });
-            });
+    var elements = document.querySelectorAll('.main > *');
+    elements.forEach(function(element, index) {
+        setTimeout(function() {
+            element.classList.add('loaded');
+        }, 250 * index);
+    });
+    var elements = document.querySelectorAll('.post > *');
+    elements.forEach(function(element, index) {
+        setTimeout(function() {
+            element.classList.add('loaded');
+        }, 100 * index);
+    });
+    var elements = document.querySelectorAll('.post-content > *');
+    elements.forEach(function(element, index) {
+        setTimeout(function() {
+            element.classList.add('loaded');
+        }, 100 * index);
+    });
+});
 
-        </script>
+</script>
+<style>
+/* ========== transition-image ========== */
+#progress-bar {
+  position: fixed;
+  top: 0; /* 放到 transition-image 的下面，这里的 10px 是 progress-bar 的高度，你可以根据需要调整 */
+  left: 0;
+  width: 0vmin;
+  height: 4px; /* 设置为一个小短条 */
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
+  z-index: 9000;
+  transition: .85s cubic-bezier(0,.5,.5,1)!important;
+}
+@media (prefers-color-scheme: light) {
+  #transition-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid.png');
+    background-size: 15vmin auto, cover;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    /* transition: .45s cubic-bezier(0,.5,.5,1); */
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #transition-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid_dark.png');
+    background-size: 20% auto, cover;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    /* transition: .45s cubic-bezier(0,.5,.5,1); */
+  }
+}
+</style>
 {{- /* Head custom content area end */ -}}
