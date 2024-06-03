@@ -31,6 +31,7 @@
 }
 
 .top-link {
+    display: flex;
     visibility: hidden;
     position: fixed;
     bottom: 60px;
@@ -38,10 +39,13 @@
     z-index: 99;
     background: var(--tertiary);
     width: 42px;
-    height: 42px;
-    padding: 12px;
+    height: 82px;
+    padding: 10px;
     border-radius: 64px;
-    transition: visibility 0.5s, opacity 0.8s linear;
+    transition: .85s cubic-bezier(0,.5,.5,1) !important;
+    align-items: stretch;
+    justify-content: center;
+    align-content: center;
 }
 
 .top-link,
