@@ -65,7 +65,7 @@
 }
 
 
-.post-entry:active {
+.post-entry.loaded:active {
     transform: scale(0.98)!important;
 }
 
