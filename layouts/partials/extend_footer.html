@@ -5,12 +5,13 @@
 <html>
     <footer>
         
-
+        {{ if .Params.mermaid }}
         <!-- mermaid -->
         <script type="module">
         import mermaid from '//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
         </script>
+        {{ end }}
 
         <!-- 不蒜子 -->
         {{- if .Site.Params.busuanzi -}}
@@ -100,10 +101,10 @@
 
         </div>
 
+        {{ if .Params.mathjax }}
         <!-- MathJax Support -->
-        <div>
-            {{ partial "mathjax.html" . }}
-        </div>
+        <div>{{ partial "mathjax.html" . }}</div>
+        {{ end }}
 
     </footer>
 </html>

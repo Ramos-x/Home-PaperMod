@@ -379,9 +379,8 @@
     transform: scale(1.02);
 }
 
-.paginav a:hover{
-
-    border-radius: 18px;
+.paginav a {
+    transition: .85s cubic-bezier(0, .5, .5, 1);
 }
 
 .share-buttons {
@@ -426,13 +425,13 @@ h6:hover .anchor {
 }
 
 .paginav .prev {
-    padding-inline-start: 18px;
+    padding-inline-start: 28px;
     padding-inline-end: 10px;
 }
 
 .paginav .next {
     padding-inline-start: 10px;
-    padding-inline-end: 18px;
+    padding-inline-end: 28px;
 }
 
 .paginav .title {
@@ -448,7 +447,7 @@ h6:hover .anchor {
 }
 
 .paginav span:hover:not(.title) {
-    box-shadow: 0 1px 0;
+    /* box-shadow: 0 1px 0; */
 }
 
 .paginav .next {
