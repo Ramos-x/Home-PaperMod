@@ -4,6 +4,11 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
 
+/* ========== 图片居中 ========== */
+.post-img-view.loaded{
+  display: flex;
+  justify-content: center;
+}
 
 /* ========== post从模糊到清晰并向上位移 ========== */
 .archive-posts >* {
@@ -93,13 +98,15 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 
 .codetab__links button {
   user-select: none;
-  padding: .25rem .5rem;
+  padding: .25rem .6rem;
   text-transform: capitalize;
-  color: antiquewhite
+  color: antiquewhite;
+  display: flex;
+  align-items: center;
 }
 
 .codetab__links :first-child {
-  padding: .25rem .8rem .25rem 1rem !important;
+  padding: .25rem 1rem .25rem 1.2rem !important
 }
 
 .codetab__link.active {
