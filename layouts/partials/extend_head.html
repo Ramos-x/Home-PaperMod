@@ -13,9 +13,6 @@ body {
 }
 </style>
 
-
-    <div id="progress-bar"></div>
-    <div id="transition-image"></div>
     <script>
 //==============打开页面加载动效
 // // 当点击链接时，显示图片和进度条
@@ -34,14 +31,8 @@ body {
 
 // 在新的网页加载时，显示图片和进度条
 document.addEventListener('DOMContentLoaded', function() {
-    // var transitionImage = document.getElementById('transition-image');
     var progressBar = document.getElementById('progress-bar');
-    // transitionImage.style.transition = '.85s cubic-bezier(0,.5,.5,1)!important;'
-    // transitionImage.style.opacity = '0'; // 设置透明度为0
-    
-    // setTimeout(function() {
-    //     transitionImage.style.display = 'none';
-    // }, 900);
+
     progressBar.style.width = '50%';
     window.onload = function() {
         progressBar.style.width = '100%';
@@ -55,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 900);
     };
 
-    
 
     var main1 = document.querySelectorAll('.main > *');
     main1.forEach(function(element, index) {
