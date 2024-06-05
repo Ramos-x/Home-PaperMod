@@ -1,11 +1,21 @@
 {{- /* Head custom content area start */ -}}
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
+
+<!-- /* ========== umami  ========== */ -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
+
+<style>
+/* ========== 正文字体：落霞孤鹜 + 动效 ========== */
+body {
+  font-family: "LXGW WenKai", sans-serif !important;
+  transition: .85s cubic-bezier(0, .5, .5, 1);
+}
+</style>
+
 
     <div id="progress-bar"></div>
     <div id="transition-image"></div>
-    
     <script>
 //==============打开页面加载动效
 // // 当点击链接时，显示图片和进度条

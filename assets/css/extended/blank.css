@@ -116,10 +116,10 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 }
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
-body {
+/* body {
   font-family: "LXGW WenKai", sans-serif !important;
   transition: .85s cubic-bezier(0, .5, .5, 1);
-}
+} */
 
 /* ========== 代码字体：JetBrains Mono ========== */
 code {
