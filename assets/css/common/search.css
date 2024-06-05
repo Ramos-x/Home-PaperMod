@@ -24,6 +24,7 @@
     margin: 10px 0;
     position: relative;
     font-weight: 500;
+    transform: scale(1) translateY(0);
 }
 
 #searchResults {

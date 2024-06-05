@@ -7,7 +7,7 @@ let first, last, current_elem = null
 let resultsAvailable = false;
 
 // load our search index
-window.onload = function () {
+window.addEventListener('load', function () {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -17,13 +17,13 @@ window.onload = function () {
                     // fuse.js options; check fuse.js website for details
                     let options = {
                         distance: 100,
-                        threshold: 0.4,
+                        threshold: 0.6,
                         ignoreLocation: true,
                         keys: [
                             'title',
                             'permalink',
                             'summary',
-                            'content'
+                            'contents'
                         ]
                     };
                     if (params.fuseOpts) {
@@ -33,15 +33,16 @@ window.onload = function () {
                             includeMatches: params.fuseOpts.includematches ?? false,
                             minMatchCharLength: params.fuseOpts.minmatchcharlength ?? 1,
                             shouldSort: params.fuseOpts.shouldsort ?? true,
-                            findAllMatches: params.fuseOpts.findallmatches ?? false,
-                            keys: params.fuseOpts.keys ?? ['title', 'permalink', 'summary', 'content'],
+                            findAllMatches: params.fuseOpts.findallmatches ?? true,
+                            keys: params.fuseOpts.keys ?? ['title', 'permalink', 'summary', 'contents'],
                             location: params.fuseOpts.location ?? 0,
-                            threshold: params.fuseOpts.threshold ?? 0.4,
-                            distance: params.fuseOpts.distance ?? 100,
+                            threshold: params.fuseOpts.threshold ?? 0.6,
+                            distance: params.fuseOpts.distance ?? 1000,
                             ignoreLocation: params.fuseOpts.ignorelocation ?? true
                         }
                     }
                     fuse = new Fuse(data, options); // build the index from the json file
+                    console.log(fuse);
                 }
             } else {
                 console.log(xhr.responseText);
@@ -50,7 +51,7 @@ window.onload = function () {
     };
     xhr.open('GET', "../index.json");
     xhr.send();
-}
+})
 
 function activeToggle(ae) {
     document.querySelectorAll('.focus').forEach(function (element) {
@@ -88,7 +89,7 @@ sInput.onkeyup = function (e) {
             let resultSet = ''; // our results bucket
 
             for (let item in results) {
-                resultSet += `<li class="post-entry"><header class="entry-header">${results[item].item.title}&nbsp;»</header>` +
+                resultSet += `<li class="post-entry loaded"><header class="entry-header">${results[item].item.title}&nbsp;»</header>` +
                     `<a href="${results[item].item.permalink}" aria-label="${results[item].item.title}"></a></li>`
             }
 
