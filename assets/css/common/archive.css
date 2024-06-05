@@ -35,8 +35,8 @@
     border-radius: var(--radius_m);
 }
 
-.archive-entry:hover {
-    transform: scale(1.05);
+.archive-entry.loaded:hover {
+    transform: scale(1.03);
     background: var(--entry);
     border-radius: 18px;
 }
