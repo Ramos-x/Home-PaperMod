@@ -2,6 +2,7 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 
+
 <!-- /* ========== umami  ========== */ -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
 
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     main1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
-        }, 250 * index);
+        }, 100 * index);
     });
     var acrive1 = document.querySelectorAll('.archive-posts >*');
     acrive1.forEach(function(element, index) {

@@ -66,4 +66,17 @@
   {{- end }}
 </article>
 
+<!-- MathJax -->
+{{ if .Params.mathjax }}
+<div>{{ partial "mathjax.html" . }}</div>
+{{ end }}
+
+<!-- Mermaid -->
+{{ if .Params.mermaid }}
+<script type="module">
+import mermaid from '//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: true });
+</script>
+{{ end }}
+
 {{- end }}{{/* end main */}}
