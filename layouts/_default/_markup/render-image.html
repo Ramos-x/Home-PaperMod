@@ -1,44 +1,56 @@
-{{- $respSizes := slice 720 1080 -}}
-{{- $dataSizes := "(min-width: 720px) 720px, 100vw" -}}
-
-{{- $holder := "GIP" -}}
-{{- $hint := "q85" -}}
-{{- $filter := "Lanczos" -}}
-
 {{- $Destination := .Destination -}}
 {{- $Text := .Text -}}
 {{- $Title := .Title -}}
+{{- $isExternal := or (strings.HasPrefix $Destination "http://") (strings.HasPrefix $Destination "https://") -}} <!-- 检查是否是站外链接 -->
 
-{{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
-
+{{ if $isExternal }}
 <div class="post-img-view">
     <a data-fancybox="gallery" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
-
-{{ with $src := .Page.Resources.GetMatch .Destination }}
-    {{- if $responsiveImages -}}
-        <picture>
-            {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
-            <source type="image/webp" srcset="
-            {{- with $respSizes -}}
-                {{- range $i, $e := . -}}
-                    {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink | absURL }} {{ . }}w
-                {{- end -}}
-            {{- end -}}" sizes="{{ $dataSizes }}" />
-            {{- end -}}
-            <source type="{{ $src.MediaType.Type }}" srcset="
-            {{- with $respSizes -}}
-                {{- range $i, $e := . -}}
-                    {{- if ge $src.Width . -}}
-                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $hint " " $filter) ).RelPermalink | absURL}} {{ . }}w
-                    {{- end -}}
-                {{- end -}}
-            {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSizes }}" />
-            <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
-        </picture>
-        {{- else }}
-        <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" style="max-width: 100%; height: auto;" />
-    {{- end }}
-{{ end }}
-
+        <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
     </a>
 </div>
+{{ else }}
+
+    {{- $respSizes := slice 720 1080 -}}
+    {{- $dataSizes := "(min-width: 720px) 720px, 100vw" -}}
+
+    {{- $holder := "GIP" -}}
+    {{- $hint := "q85" -}}
+    {{- $filter := "Lanczos" -}}
+
+
+    {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
+
+    <div class="post-img-view">
+        <a data-fancybox="gallery" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
+
+    {{ with $src := .Page.Resources.GetMatch .Destination }}
+        {{- if $responsiveImages -}}
+            <picture>
+                {{- if and hugo.IsExtended (ne $src.MediaType.Type "image/webp") -}}
+                <source type="image/webp" srcset="
+                {{- with $respSizes -}}
+                    {{- range $i, $e := . -}}
+                        {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x webp " $hint " " $filter) ).RelPermalink | absURL }} {{ . }}w
+                    {{- end -}}
+                {{- end -}}" sizes="{{ $dataSizes }}" />
+                {{- end -}}
+                <source type="{{ $src.MediaType.Type }}" srcset="
+                {{- with $respSizes -}}
+                    {{- range $i, $e := . -}}
+                        {{- if ge $src.Width . -}}
+                            {{- if $i }}, {{ end -}}{{- ($src.Resize (print . "x jpg " $hint " " $filter) ).RelPermalink | absURL}} {{ . }}w
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSizes }}" />
+                <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
+            </picture>
+            {{- else }}
+            <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" style="max-width: 100%; height: auto;" />
+        {{- end }}
+    {{ end }}
+
+        </a>
+    </div>
+    
+{{ end }}

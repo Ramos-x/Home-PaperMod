@@ -1,8 +1,9 @@
-<script id="MathJax-script" async src="/static/MathJax/es5/tex-mml-chtml.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer  src="/static/MathJax/es5/tex-mml-chtml.js"></script>
 <script>    
 window.MathJax = {
   tex: {
-    packages: ['base'],        // extensions to use
+    packages: {'[+]': ['AMSmath', 'base']},     // extensions to use
     inlineMath: [              // start/end delimiter pairs for in-line math
       ['$', '$'],
       ['\\(', '\\)']

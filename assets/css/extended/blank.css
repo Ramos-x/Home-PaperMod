@@ -3,6 +3,20 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
+/* ========== 代码复制按钮 ========== */
+.copyButton {
+  width: 22px;
+  margin: .4rem .8rem .4rem auto;
+  filter: brightness(.7);
+  color: rgb(196, 196, 197);
+  transition: .35s cubic-bezier(0,.5,.5,1);
+}
+.copyButton:active {
+  filter: brightness(2)!important;  /* 增加亮度 */
+}
+.copyButton:hover {
+  filter: brightness(.9);
+}
 
 /* ========== 图片居中 ========== */
 .post-img-view.loaded{
@@ -37,7 +51,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   transform: translateY(0);
 }
 
-.post-content>* {
+/* .post-content>* {
   -webkit-filter: blur(5px) opacity(0);
   filter: brightness(1) contrast(1) blur(5px) opacity(0);
   transform: translateY(60px);
@@ -48,7 +62,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   -webkit-filter: blur(0) opacity(1);
   filter: brightness(1) contrast(1) blur(0) opacity(1);
   transform: translateY(0);
-}
+} */
 
 .main>* {
   -webkit-filter: blur(5px) opacity(0);
@@ -79,7 +93,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   transition: .85s cubic-bezier(0, .5, .5, 1);
 }
 
-.codetab__content.active .highlight {
+.codetab__content .highlight,.codetab__content.active .highlight {
   margin-top: 0;
   border-radius: 0 0 var(--radius) var(--radius);
 }

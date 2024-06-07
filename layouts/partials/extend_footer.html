@@ -11,7 +11,7 @@
         <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <meta name="referrer" content="no-referrer-when-downgrade">
         {{- end -}}
-      
+        
         <!-- 文章字体设置 Fonts -->
         <div>
             <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" />
@@ -19,25 +19,25 @@
             <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" />
             <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.css" />
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" />
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" />
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
         </div>
-
+        
         <!-- post-entry 点击消失 -->
         <div>
             <script>
-                document.querySelectorAll('.post-entry').forEach(function(entry) {
-                    entry.addEventListener('click', function() {
+                document.querySelectorAll('.post-entry').forEach(function (entry) {
+                    entry.addEventListener('click', function () {
                         var entries = document.querySelectorAll('.post-entry');
-                        entries.forEach(function(entry) {
+                        entries.forEach(function (entry) {
                             entry.classList.add('fullscreen');
                         });
                     });
                 });
-                window.addEventListener('pageshow', function() {
+                window.addEventListener('pageshow', function () {
                     var entries = document.querySelectorAll('.post-entry');
-                    entries.forEach(function(entry) {
+                    entries.forEach(function (entry) {
                         entry.classList.remove('fullscreen');
                     });
                 });
@@ -45,7 +45,7 @@
             <style>
                 .fullscreen {
                     pointer-events: none;
-                    transition: filter 2s cubic-bezier(0,.5,.5,1), opacity 2s cubic-bezier(0,.5,.5,1);
+                    transition: filter 2s cubic-bezier(0, .5, .5, 1), opacity 2s cubic-bezier(0, .5, .5, 1);
                     filter: blur(10px);
                     opacity: 0;
                 }
@@ -71,7 +71,7 @@
                         wheel: "zoom",
                         Images: {
                             initialSize: "fit",
-                            protected:true,
+                            protected: true,
                             // Panzoom: {
                             //     panMode: "mousemove",
                             //     mouseMoveFactor: 1.1,
@@ -90,6 +90,87 @@
                     });
                 </script>
             {{ end }}
+        </div>
+        
+        <!-- 复制按钮 -->
+        <div>
+            <script>
+                // 复制按钮初始化
+                let copyButtons = document.querySelectorAll('.copyButton').forEach(function (copyButton) {
+                    let parent = copyButton.parentElement.nextElementSibling;
+                        // console.log(parent);
+                    let code = parent.querySelectorAll('code')[1].innerText;
+                        // console.log(code);
+                    code = code.replace(/\n{2}/g, '\n');
+                        // console.log(code);
+                    if (code) {
+                        copyButton.addEventListener('click', function () {
+                            if (navigator.clipboard) {
+                                // 使用 Clipboard API
+                                navigator.clipboard.writeText(code);
+                            }
+                        })
+                    }
+                });
+                    // ========================== codetab ==========================
+                    document.querySelectorAll('.codetab') ?
+                        document.querySelectorAll('.codetab').forEach(function (elem, idx) {
+                            var containerId = elem.getAttribute('id');
+                            var containerElem = elem;
+                            var codetabLinks = elem.querySelectorAll('.codetab__link');
+                            var codetabContents = elem.querySelectorAll('.codetab__content');
+                            var ids = [];
+                            
+                            // console.log(containerId);
+                            // console.log(containerElem);
+                            // console.log(codetabLinks);
+                            // console.log(codetabContents);
+
+                            codetabLinks && codetabLinks.length > 0 ?
+                                codetabLinks.forEach(function (link, index, self) {
+
+                                    link.onclick = function (e) {
+                                        // 标签页切换
+                                        for (var i = 0; i < self.length; i++) {
+                                            if (index === parseInt(i, 10)) {
+                                                if (!self[i].classList.contains('active')) {
+                                                    self[i].classList.add('active');
+                                                    codetabContents[i].classList.add('active');
+                                                    codetabContents[i].style.display = 'block';
+                                                }
+                                            } else {
+                                                self[i].classList.remove('active');
+                                                codetabContents[i].classList.remove('active');
+                                                codetabContents[i].style.display = 'none';
+                                            }
+                                        }
+                                        // 复制按键切换
+                                        let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
+                                        // console.log(code);
+                                        code = code.replace(/\n{2}/g, '\n');
+                                        // console.log(code);
+                                        if (code) {
+                                            let copyButton=containerElem.querySelectorAll('.copyButton')[0];
+                                            // console.log(copyButton);
+
+                                            // 克隆copyButton并替换它自己来移除所有事件监听器
+                                            var newButton = copyButton.cloneNode(true);
+                                            copyButton.parentNode.replaceChild(newButton, copyButton);
+
+                                            // 在新的copyButton上添加事件监听器
+                                            newButton.addEventListener('click', function() {
+                                                if (navigator.clipboard) {
+                                                    navigator.clipboard.writeText(code);
+                                                }
+                                            });
+                                            // 更新copyButton变量引用到新的按钮，以便继续使用它
+                                            copyButton = newButton;
+                                        }
+                                    }
+                                }) : null;
+                        }) : null;
+            </script>
+            
         </div>
     </footer>
 </html>

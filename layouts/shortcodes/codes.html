@@ -4,77 +4,12 @@
     {{ range .Params }}
     <button class="codetab__link" aria-label="Tab link">{{ . }}</button>
     {{ end }}
-    <!-- <button id="copyButton" class="copy" style="
-    margin: .4rem .5rem .4rem auto; 
-    display: flex;
-    background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjRwdCIgaGVpZ2h0PSIyNHB0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPlxhPHBhdGggc3R5bGU9InN0cm9rZTpub25lO2ZpbGwtcnVsZTpub256ZXJvO2ZpbGw6IzY0NjQ2NDtmaWxsLW9wYWNpdHk6MSIgZD0iTTQgMkMyLjg5NDUzMSAyIDIgMi44OTQ1MzEgMiA0VjE3QzIgMTcuNTUwNzgxIDIuNDQ5MjE5IDE4IDMgMThTNCAxNy41NTA3ODEgNCAxN1Y0SDE3QzE3LjU1MDc4MSA0IDE4IDMuNTUwNzgxIDE4IDNTMTcuNTUwNzgxIDIgMTcgMnpNOCA2QzYuODk0NTMxIDYgNiA2Ljg5NDUzMSA2IDhWMjBDNiAyMS4xMDU0NjkgNi44OTQ1MzEgMjIgOCAyMkgyMEMyMS4xMDU0NjkgMjIgMjIgMjEuMTA1NDY5IDIyIDIwVjhDMjIgNi44OTQ1MzEgMjEuMTA1NDY5IDYgMjAgNnpNOCA4SDIwVjIwSDh6TTggOCIvPjwvc3ZnPg);
-    background-position: 50%;
-    background-size: 18px 18px;
-    background-repeat: no-repeat;
-    width: 20px;"></button> -->
-    <svg id="copyButton" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="copyButton">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
     </svg>
-    
-    <style>
-    #copyButton {
-      width: 22px;
-      margin: .4rem .8rem .4rem auto;
-      filter: brightness(.7);
-      color: rgb(196, 196, 197);
-      transition: .35s cubic-bezier(0,.5,.5,1);
-    }
-    #copyButton:active {
-      filter: brightness(2)!important;  /* 增加亮度 */
-    }
-    #copyButton:hover {
-      filter: brightness(.9);
-    }
-    </style>
   </div>
-  
   {{ .Inner }}
 </div>
-
-<script>
-  // 获取复制按钮
-  let copyButton = document.getElementById('copyButton');
-  
-  copyButton.addEventListener('click', function() {
-    let activeCodeContent = document.querySelectorAll('.codetab__content.active .highlight .chroma .lntable tbody tr .lntd .chroma code' );
-    if (activeCodeContent && activeCodeContent[1]) {
-      let text = activeCodeContent[1].innerText;
-  
-      // 移除多余换行符
-      text = text.replace(/\n{2}/g, '\n');
-  
-      if (navigator.clipboard) {
-        // 使用 Clipboard API
-        navigator.clipboard.writeText(text).then(function() {
-          console.log('Copying to clipboard was successful!');
-        }, function(err) {
-          console.error('Could not copy text: ', err);
-        });
-      } else {
-        // 使用 document.execCommand('copy') 作为备选方案
-        let textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          console.log('Copying to clipboard was successful!');
-        } catch (err) {
-          console.error('Could not copy text: ', err);
-        } finally {
-          document.body.removeChild(textarea);
-        }
-      }
-    } else {
-      console.error('No active code content found');
-    }
-  });
-</script>
 
 <script>
   var containerId = JSON.parse({{ $id | jsonify }});
@@ -102,47 +37,5 @@
     codetabContents[0].classList.add('active');
     codetabLinks[0].classList.add('active');
   }
-  
-  codetabLinks.forEach(function(link, index) {
-    link.addEventListener('click', function() {
-      codetabContents.forEach(function(content, idx) {
-        if (index === idx) {
-          content.style.display = 'block';
-          content.classList.add('active');
-          link.classList.add('active');
-        } else {
-          content.style.display = 'none';
-          content.classList.remove('active');
-          codetabLinks[idx].classList.remove('active');
-        }
-      });
-    });
-  });
 
-  // ========================== codetab ==========================
-  document.querySelectorAll('.codetab') ?
-    document.querySelectorAll('.codetab').forEach(function (elem, idx) {
-      var containerId = elem.getAttribute('id');
-      var containerElem = elem;
-      var codetabLinks = elem.querySelectorAll('.codetab__link');
-      var codetabContents = elem.querySelectorAll('.codetab__content');
-      var ids = [];
-
-      codetabLinks && codetabLinks.length > 0 ?
-        codetabLinks.forEach(function (link, index, self) {
-          link.onclick = function (e) {
-            for (var i = 0; i < self.length; i++) {
-              if (index === parseInt(i, 10)) {
-                if (!self[i].classList.contains('active')) {
-                  self[i].classList.add('active');
-                  codetabContents[i].style.display = 'block';
-                }
-              } else {
-                self[i].classList.remove('active');
-                codetabContents[i].style.display = 'none';
-              }
-            }
-          }
-        }) : null;
-    }) : null;
 </script>
