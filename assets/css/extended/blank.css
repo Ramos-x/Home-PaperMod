@@ -29,7 +29,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   -webkit-filter: blur(5px) opacity(0);
   filter: brightness(1) contrast(1) blur(5px) opacity(0);
   transform: translateY(60px);
-  transition: .85s cubic-bezier(0, .5, .5, 1);
+  transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
 }
 
 .archive-posts >*.loaded {
@@ -42,10 +42,23 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   -webkit-filter: blur(5px) opacity(0);
   filter: brightness(1) contrast(1) blur(5px) opacity(0);
   transform: translateY(60px);
-  transition: .85s cubic-bezier(0, .5, .5, 1);
+  transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
 }
 
 .post>*.loaded {
+  -webkit-filter: blur(0) opacity(1);
+  filter: brightness(1) contrast(1) blur(0) opacity(1);
+  transform: translateY(0);
+}
+
+.main>* {
+  -webkit-filter: blur(5px) opacity(0);
+  filter: brightness(1) contrast(1) blur(5px) opacity(0);
+  transform: translateY(60px);
+  transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
+}
+
+.main>*.loaded {
   -webkit-filter: blur(0) opacity(1);
   filter: brightness(1) contrast(1) blur(0) opacity(1);
   transform: translateY(0);
@@ -63,21 +76,6 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   filter: brightness(1) contrast(1) blur(0) opacity(1);
   transform: translateY(0);
 } */
-
-.main>* {
-  -webkit-filter: blur(5px) opacity(0);
-  filter: brightness(1) contrast(1) blur(5px) opacity(0);
-  transform: translateY(60px);
-  transition: .85s cubic-bezier(0, .5, .5, 1);
-}
-
-.main>*.loaded {
-  -webkit-filter: blur(0) opacity(1);
-  filter: brightness(1) contrast(1) blur(0) opacity(1);
-  transform: translateY(0);
-  transition: all .85s cubic-bezier(0, 0.5, 0.5, 1) !important;
-}
-
 
 /* ========== 从模糊到清晰并向上位移的关键帧 ========== */
 @keyframes fadeinAndMoveUp {
