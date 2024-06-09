@@ -404,7 +404,7 @@ h3:hover .anchor,
 h4:hover .anchor,
 h5:hover .anchor,
 h6:hover .anchor {
-    display: inline-flex;
+    display: inline;
     color: var(--secondary);
     margin-inline-start: 8px;
     font-weight: 500;
