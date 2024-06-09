@@ -70,37 +70,35 @@
     color: var(--content);
 }
 
-.post-content h3,
-.post-content h4,
-.post-content h5,
-.post-content h6 {
-    margin: 24px 0 16px;
-}
 
 .post-content h1 {
-    margin: 40px auto 32px;
-    font-size: 40px;
+    font-size: 36px;
+    margin: 30px auto 20px;
 }
 
 .post-content h2 {
-    margin: 32px auto 24px;
     font-size: 32px;
+    margin: 24px auto 18px;
 }
 
 .post-content h3 {
-    font-size: 24px;
+    font-size: 28px;
+    margin: 20px 0 16px;
 }
 
 .post-content h4 {
-    font-size: 16px;
+    font-size: 24px;
+    margin: 16px 0 14px;
 }
 
 .post-content h5 {
-    font-size: 14px;
+    font-size: 20px;
+    margin: 14px 0 12px;
 }
 
 .post-content h6 {
-    font-size: 12px;
+    font-size: 16px;
+    margin: 8px 0 4px;
 }
 
 .post-content a:not(.post-img-view *,.lnlinks),.toc a:hover {
@@ -299,7 +297,7 @@
 }
 
 .toc {
-    margin: 0 2px 40px 2px;
+    margin: 0 2px;
     border: 1px solid var(--border);
     background: var(--code-bg);
     border-radius: var(--radius);

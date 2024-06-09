@@ -146,35 +146,41 @@ code {
 }
 
 /* ========= 文章和目录自动编号（从二级标题开始）============ */
-body {
+
+.post-content {
+  counter-reset: h1
+}
+h1 {
   counter-reset: h2
 }
-
 h2 {
   counter-reset: h3
 }
-
 h3 {
   counter-reset: h4
 }
-
 h4 {
   counter-reset: h5
 }
 
+article[autonumbering] h1:not(.post-title)::before {
+  counter-increment: h1;
+  content: counter(h1) ". "
+}
+
 article[autonumbering] h2:before {
   counter-increment: h2;
-  content: counter(h2) ". "
+  content: counter(h1) "."counter(h2) " "
 }
 
 article[autonumbering] h3:before {
   counter-increment: h3;
-  content: counter(h2) "."counter(h3) " "
+  content: counter(h1) "."counter(h2) "."counter(h3) " "
 }
 
 article[autonumbering] h4:before {
   counter-increment: h4;
-  content: counter(h2) "."counter(h3) "."counter(h4) " "
+  content: counter(h1) "."counter(h2) "."counter(h3) "."counter(h4) " "
 }
 
 article[autonumbering] .toc ul {
@@ -195,7 +201,7 @@ article[autonumbering] .toc li a:before {
 }
 
 .toc {
-  margin: 0 2px 60px 2px;
+  /* margin: 0 2px 60px 2px; */
   border: 1px solid var(--border);
   background: var(--entry);
   border-radius: var(--radius);
