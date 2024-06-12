@@ -32,7 +32,7 @@
     display: inline;
     vertical-align: middle;
     pointer-events: none;
-    transform: translate(0, -10%);
+    transform: translate(0, -8%);
     border-radius: 6px;
     margin-inline-end: 8px;
 }

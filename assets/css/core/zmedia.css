@@ -2,6 +2,11 @@
     /* theme-vars */
     :root {
         --gap: 14px;
+        --header-height: 50px;
+    }
+
+    .main {
+        padding: 0px var(--gap);
     }
 
     /* profile-mode */
