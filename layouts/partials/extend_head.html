@@ -78,33 +78,29 @@
     //   observer.observe(element);
     // });
 
-    var main1 = document.querySelectorAll('.main > *');
+    var main1 = document.querySelectorAll('.list > .main > *');
     main1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
-        }, 150 * index);
-        // element.classList.add('loaded');
+        }, 130 * index);
     });
-    var acrive1 = document.querySelectorAll('.archive-posts >*');
+    var main1 = document.querySelectorAll('#top > .main > *');
+    main1.forEach(function(element, index) {
+        setTimeout(function() {
+            element.classList.add('loaded');
+        }, 130 * index);
+    });
+    var acrive1 = document.querySelectorAll('.archive-year-header, .archive-month-header, .archive-posts >*');
     acrive1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
-        }, 150 * index);
-        // element.classList.add('loaded');
+        }, 60 * index);
     });
     var page1 = document.querySelectorAll('.post > *');
     page1.forEach(function(element, index) {
         setTimeout(function() {
             element.classList.add('loaded');
-        }, 150 * index);
-        // element.classList.add('loaded');
-    });
-    var post1 = document.querySelectorAll('.post-content > *');
-    post1.forEach(function(element, index) {
-        setTimeout(function() {
-            element.classList.add('loaded');
-        }, 50 * index);
-        element.classList.add('loaded');
+        }, 190 * index);
     });
   });
 

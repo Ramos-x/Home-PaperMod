@@ -137,7 +137,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
 body {
   font-family: "LXGW WenKai" !important;
-  transition: .85s cubic-bezier(0, .5, .5, 1);
+  transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 /* ========== 代码字体：JetBrains Mono ========== */
@@ -209,7 +209,7 @@ article[autonumbering] .toc li a:before {
   border: 1px solid var(--border);
   background: var(--entry);
   border-radius: var(--radius);
-  padding: 0.4em;
+  padding: .5em .7em .3em .7em;
 }
 
 .toc-container.wide {
@@ -227,6 +227,8 @@ article[autonumbering] .toc li a:before {
   border-radius: unset;
   width: 100%;
   margin: 0 2px 60px 2px;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
 }
 
 .toc details summary {
@@ -257,7 +259,7 @@ article[autonumbering] .toc li a:before {
   padding: 0px 15px 15px 20px;
   font-size: 16px;
 
-  max-height: 83vh;
+  /* max-height: 83vh; */
   overflow-y: auto;
 }
 
