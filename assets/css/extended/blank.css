@@ -38,7 +38,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   transform: translateY(0);
 }
 
-.post>* {
+.post>*:not(.giscus) {
   -webkit-filter: blur(5px) opacity(0);
   filter: brightness(1) contrast(1) blur(5px) opacity(0);
   transform: translateY(60px);
@@ -96,9 +96,46 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   border-radius: 0 0 var(--radius) var(--radius);
 }
 
+@media (prefers-color-scheme: dark) {
+  .codetab__links {
+    background-color: #161B22;
+    outline: #30363D solid 1px;
+  }
+  .codetab__links button {
+    color: #c9d1d9;
+  }
+  .codetab__link.active {
+    border-bottom: #30363D solid 2px;
+  }
+  .post-content .highlight:not(table) {
+    background-color: #0D1117;
+    outline: #30363d solid 1px;
+  }
+
+}
+@media (prefers-color-scheme: light) {
+  .codetab__links {
+    background-color: #FFF;
+    outline: #e5e7eb solid 1px;
+  }
+  .codetab__links button {
+    color: #1F2328;
+  }
+  .codetab__link.active {
+    background-color: #FFF!important;
+    border-bottom: #D0D7DE solid 2px;
+  }
+  .post-content .highlight:not(table) {
+    background-color: #FFF;
+    outline: #e5e7eb solid 1px;
+  }
+  .post-content pre code {
+    background-color: #FFF;
+  }
+}
+
 .codetab__links {
-  background-color: #181818;
-  border-bottom: antiquewhite solid 1px;
+  /* border-bottom: #c9d1d9 solid 1px; */
   border-radius: var(--radius) var(--radius) 0 0;
   overflow: auto;
   user-select: none;
@@ -112,7 +149,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   user-select: none;
   padding: .25rem .6rem;
   text-transform: capitalize;
-  color: antiquewhite;
+  /* color: #c9d1d9; */
   display: flex;
   align-items: center;
 }
@@ -126,7 +163,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
   user-select: none;
   /* font-size: 105%; */
   font-weight: 800;
-  border-bottom: antiquewhite solid 2px;
+  /* border-bottom: #c9d1d9 solid 2px; */
 }
 
 .lntable {
