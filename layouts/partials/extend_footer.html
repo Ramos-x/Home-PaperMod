@@ -14,14 +14,31 @@
         
         <!-- 文章字体设置 Fonts -->
         <div>
-            <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" />
+            <!-- 注释掉现有的 <link> 标签 -->
+            <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" /> -->
             <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
             <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
-            <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" />
+            <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+            
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                var fonts = [
+                  "/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css",
+                  "/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"
+                ];
+            
+                fonts.forEach(function(href) {
+                  var link = document.createElement("link");
+                  link.rel = "stylesheet";
+                  link.href = href;
+                  document.head.appendChild(link);
+                });
+              });
+            </script>
         </div>
         
         <!-- post-entry 点击消失 -->
