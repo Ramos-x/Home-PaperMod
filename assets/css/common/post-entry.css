@@ -42,7 +42,7 @@
     border: 1px solid var(--border);
     filter: brightness(1) contrast(1);
     transform: scale(1) translateY(60px);
-    transition: all .95s cubic-bezier(0.2, 1, 1, 1) !important;
+    transition: all 1.6s cubic-bezier(0,1.1,.6,1) !important;
     box-shadow: 0 0 2px 0px #6666;
 }
 
@@ -51,7 +51,7 @@
         box-shadow: 0 0 7px 1px #7777;
         transform: scale(1.02) !important;
         filter: brightness(1.05) contrast(1.05) blur(0)opacity(1);
-        transition: .85s cubic-bezier(0, 0.5, 0.4, 1)!important;
+        transition: .95s cubic-bezier(0, 0.5, 0.4, 1)!important;
     }
 }
 
@@ -60,7 +60,7 @@
         box-shadow: 0 0 7px 1px #7777;
         transform: scale(1.02)!important;
         filter: brightness(1.1) contrast(1.1) blur(0)opacity(1);
-        transition: .85s cubic-bezier(0, 0.5, 0.4, 1)!important;
+        transition: .95s cubic-bezier(0, 0.5, 0.4, 1)!important;
     }
 }
 

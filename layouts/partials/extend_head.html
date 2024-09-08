@@ -6,13 +6,22 @@
 <!-- /* ========== umami  ========== */ -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
 
-<!-- <style>
-  /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
-  body {
-    font-family: "LXGW WenKai", sans-serif !important;
-    transition: .85s cubic-bezier(0, .5, .5, 1);
-  }
-</style> -->
+
+  <!-- /* ========== 字体 Web Font Loader 库 ========== */ -->
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+  <script>
+    WebFont.load({
+      google: {
+        cacheBust: true,
+        families: ['LXGW WenKai', 'JetBrains Mono', 'Arial', 'Droid Sans', 'Droid Serif'],
+        urls: [
+            '/static/Fonts/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
+            '/static/Fonts/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
+            '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+          ]
+      }
+    });
+  </script>
 
 <script>
   //==============打开页面加载动效
