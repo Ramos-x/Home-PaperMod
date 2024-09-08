@@ -282,7 +282,7 @@
 
 .post-content img {
     border-radius: var(--radius_m);
-    margin: auto;
+    margin: 1rem auto;
     height: auto;
     user-select: none;
     -webkit-touch-callout: none;
