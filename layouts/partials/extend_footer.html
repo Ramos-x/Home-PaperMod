@@ -23,6 +23,9 @@
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
             <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+                     
+            <link rel="preload" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" as="style">
+            <link rel="preload" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" as="style">
             
             <script>
               document.addEventListener("DOMContentLoaded", function() {
@@ -38,6 +41,14 @@
                   document.head.appendChild(link);
                 });
               });
+            
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/static/JS/service-worker.js').then(function(registration) {
+                //   console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(error) {
+                //   console.log('Service Worker registration failed:', error);
+                });
+              }
             </script>
         </div>
         
