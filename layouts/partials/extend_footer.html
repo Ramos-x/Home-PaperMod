@@ -1,169 +1,213 @@
 {{- /* Footer custom content area start */ -}}
-{{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
-    
+{{- /* Insert any custom code web-analytics, resources, etc. here */ -}}
+
 
 <html>
-    <footer>
-        
+<footer>
 
-        <!-- 不蒜子 -->
-        {{- if .Site.Params.busuanzi -}}
-        <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-        <meta name="referrer" content="no-referrer-when-downgrade">
-        {{- end -}}
-        
 
-        
-        <!-- post-entry 点击消失 -->
-        <div>
-            <script>
-                document.querySelectorAll('.post-entry').forEach(function (entry) {
-                    entry.addEventListener('click', function () {
-                        var entries = document.querySelectorAll('.post-entry');
-                        entries.forEach(function (entry) {
-                            entry.classList.add('fullscreen');
-                        });
-                    });
-                });
-                window.addEventListener('pageshow', function () {
+    <!-- 不蒜子 -->
+    {{- if .Site.Params.busuanzi -}}
+    <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    {{- end -}}
+
+    <!-- 文章字体设置 Fonts -->
+
+    <!-- 注释掉现有的 <link> 标签 -->
+    <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" /> -->
+    <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
+    <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
+    <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+    <!-- <link rel="preload" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" as="style"> -->
+    <!-- <link rel="preload" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" as="style"> -->
+     
+    <!-- 文章字体设置 Fonts -->
+    <script src="/static/Fonts/webfont.js"></script>
+    <script>
+        WebFont.load({
+            custom: {
+                families: ['LXGW WenKai', 'JetBrains Mono'],
+                urls: [
+                    '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
+                    '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+                ]
+            },
+            active: function () {
+                // console.log('Fonts have loaded');
+                // 在字体加载完成后执行特定的操作
+            },
+            inactive: function () {
+                // console.log('Fonts failed to load');
+                // 在字体加载失败后执行特定的操作
+            }
+        });
+
+        // 注册 Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
+                // console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(function (error) {
+                // console.log('Service Worker registration failed:', error);
+            });
+        }
+    </script>
+
+    <!-- post-entry 点击消失 -->
+    <div>
+        <script>
+            document.querySelectorAll('.post-entry').forEach(function (entry) {
+                entry.addEventListener('click', function () {
                     var entries = document.querySelectorAll('.post-entry');
                     entries.forEach(function (entry) {
-                        entry.classList.remove('fullscreen');
+                        entry.classList.add('fullscreen');
                     });
                 });
-            </script>
-            <style>
-                .fullscreen {
-                    pointer-events: none;
-                    transition: filter 2s cubic-bezier(0, .5, .5, 1), opacity 2s cubic-bezier(0, .5, .5, 1);
-                    filter: blur(10px);
-                    opacity: 0;
+            });
+            window.addEventListener('pageshow', function () {
+                var entries = document.querySelectorAll('.post-entry');
+                entries.forEach(function (entry) {
+                    entry.classList.remove('fullscreen');
+                });
+            });
+        </script>
+        <style>
+            .fullscreen {
+                pointer-events: none;
+                transition: filter 2s cubic-bezier(0, .5, .5, 1), opacity 2s cubic-bezier(0, .5, .5, 1);
+                filter: blur(10px);
+                opacity: 0;
+            }
+        </style>
+    </div>
+
+    <!-- 复制按钮 -->
+    <div>
+        <script>
+            // 复制按钮初始化
+            let copyButtons = document.querySelectorAll('.copyButton').forEach(function (copyButton) {
+                let parent = copyButton.parentElement.nextElementSibling;
+                // console.log(parent);
+                let code = parent.querySelectorAll('code')[1].innerText;
+                // console.log(code);
+                code = code.replace(/\n{2}/g, '\n');
+                // console.log(code);
+                if (code) {
+                    copyButton.addEventListener('click', function () {
+                        if (navigator.clipboard) {
+                            // 使用 Clipboard API
+                            navigator.clipboard.writeText(code);
+                        }
+                    })
                 }
-            </style>
-        </div>
+            });
+            // ========================== codetab ==========================
+            document.querySelectorAll('.codetab') ?
+                document.querySelectorAll('.codetab').forEach(function (elem, idx) {
+                    var containerId = elem.getAttribute('id');
+                    var containerElem = elem;
+                    var codetabLinks = elem.querySelectorAll('.codetab__link');
+                    var codetabContents = elem.querySelectorAll('.codetab__content');
+                    var ids = [];
 
-        <!-- 复制按钮 -->
-        <div>
-            <script>
-                // 复制按钮初始化
-                let copyButtons = document.querySelectorAll('.copyButton').forEach(function (copyButton) {
-                    let parent = copyButton.parentElement.nextElementSibling;
-                        // console.log(parent);
-                    let code = parent.querySelectorAll('code')[1].innerText;
-                        // console.log(code);
-                    code = code.replace(/\n{2}/g, '\n');
-                        // console.log(code);
-                    if (code) {
-                        copyButton.addEventListener('click', function () {
-                            if (navigator.clipboard) {
-                                // 使用 Clipboard API
-                                navigator.clipboard.writeText(code);
-                            }
-                        })
-                    }
-                });
-                    // ========================== codetab ==========================
-                    document.querySelectorAll('.codetab') ?
-                        document.querySelectorAll('.codetab').forEach(function (elem, idx) {
-                            var containerId = elem.getAttribute('id');
-                            var containerElem = elem;
-                            var codetabLinks = elem.querySelectorAll('.codetab__link');
-                            var codetabContents = elem.querySelectorAll('.codetab__content');
-                            var ids = [];
-                            
-                            // console.log(containerId);
-                            // console.log(containerElem);
-                            // console.log(codetabLinks);
-                            // console.log(codetabContents);
+                    // console.log(containerId);
+                    // console.log(containerElem);
+                    // console.log(codetabLinks);
+                    // console.log(codetabContents);
 
-                            codetabLinks && codetabLinks.length > 0 ?
-                                codetabLinks.forEach(function (link, index, self) {
+                    codetabLinks && codetabLinks.length > 0 ?
+                        codetabLinks.forEach(function (link, index, self) {
 
-                                    link.onclick = function (e) {
-                                        // 标签页切换
-                                        for (var i = 0; i < self.length; i++) {
-                                            if (index === parseInt(i, 10)) {
-                                                if (!self[i].classList.contains('active')) {
-                                                    self[i].classList.add('active');
-                                                    codetabContents[i].classList.add('active');
-                                                    codetabContents[i].style.display = 'block';
-                                                }
-                                            } else {
-                                                self[i].classList.remove('active');
-                                                codetabContents[i].classList.remove('active');
-                                                codetabContents[i].style.display = 'none';
-                                            }
+                            link.onclick = function (e) {
+                                // 标签页切换
+                                for (var i = 0; i < self.length; i++) {
+                                    if (index === parseInt(i, 10)) {
+                                        if (!self[i].classList.contains('active')) {
+                                            self[i].classList.add('active');
+                                            codetabContents[i].classList.add('active');
+                                            codetabContents[i].style.display = 'block';
                                         }
-                                        // 复制按键切换
-                                        let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
-                                        // console.log(code);
-                                        code = code.replace(/\n{2}/g, '\n');
-                                        // console.log(code);
-                                        if (code) {
-                                            let copyButton=containerElem.querySelectorAll('.copyButton')[0];
-                                            // console.log(copyButton);
-
-                                            // 克隆copyButton并替换它自己来移除所有事件监听器
-                                            var newButton = copyButton.cloneNode(true);
-                                            copyButton.parentNode.replaceChild(newButton, copyButton);
-
-                                            // 在新的copyButton上添加事件监听器
-                                            newButton.addEventListener('click', function() {
-                                                if (navigator.clipboard) {
-                                                    navigator.clipboard.writeText(code);
-                                                }
-                                            });
-                                            // 更新copyButton变量引用到新的按钮，以便继续使用它
-                                            copyButton = newButton;
-                                        }
+                                    } else {
+                                        self[i].classList.remove('active');
+                                        codetabContents[i].classList.remove('active');
+                                        codetabContents[i].style.display = 'none';
                                     }
-                                }) : null;
+                                }
+                                // 复制按键切换
+                                let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
+                                // console.log(code);
+                                code = code.replace(/\n{2}/g, '\n');
+                                // console.log(code);
+                                if (code) {
+                                    let copyButton = containerElem.querySelectorAll('.copyButton')[0];
+                                    // console.log(copyButton);
+
+                                    // 克隆copyButton并替换它自己来移除所有事件监听器
+                                    var newButton = copyButton.cloneNode(true);
+                                    copyButton.parentNode.replaceChild(newButton, copyButton);
+
+                                    // 在新的copyButton上添加事件监听器
+                                    newButton.addEventListener('click', function () {
+                                        if (navigator.clipboard) {
+                                            navigator.clipboard.writeText(code);
+                                        }
+                                    });
+                                    // 更新copyButton变量引用到新的按钮，以便继续使用它
+                                    copyButton = newButton;
+                                }
+                            }
                         }) : null;
-            </script>
-            
-        </div>
+                }) : null;
+        </script>
 
-            <!-- 图片点击放大 Fancybox -->
-        <div>
-            <!-- <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/fancybox/dist/js/jquery.fancybox.min.js"></script>
-            <link href="https://cdn.jsdelivr.net/npm/fancybox/dist/css/jquery.fancybox.min.css" rel="stylesheet"> -->
-            <!-- <script src="/static/Jquery/dist/jquery.min.js" defer></script> -->
-            <script src="/static/Fancyapps/dist/fancybox/fancybox.umd.js" ></script>
-            <link rel="stylesheet" href="/static/Fancyapps/dist/fancybox/fancybox.css" />
-            <script>
-                Fancybox.bind("[data-fancybox]", {
-                    // Transition effect when changing gallery items  "crossfade" | "fade" | "slide" | "classic" | string | false
-                    Carousel: {
-                        transition: "slide",
-                    },
-                    groupAll: true,
-                    groupAttr: "data",
-                    contentClick: "zoomToFit",
-                    contentDblClick: "false",
-                    wheel: "zoom",
-                    Images: {
-                        initialSize: "fit",
-                        protected: true,
-                        // Panzoom: {
-                        //     panMode: "mousemove",
-                        //     mouseMoveFactor: 1.1,
-                        //     mouseMoveFriction: 0.12,
-                        // },
-                    },
-                    Toolbar: {
-                        display: {
-                            left: ["infobar"],
-                            //middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW", "flipX", "flipY",],
-                            middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
-                            //right: ["slideshow", "fullscreen", "download", "thumbs", "close"],
-                            right: ["download", "close"],
-                        },
-                    },
-                });
-            </script>
-        </div>
+    </div>
 
-    </footer>
+    <!-- 图片点击放大 Fancybox -->
+    <div>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fancybox/dist/js/jquery.fancybox.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/fancybox/dist/css/jquery.fancybox.min.css" rel="stylesheet"> -->
+        <!-- <script src="/static/Jquery/dist/jquery.min.js" defer></script> -->
+        <script src="/static/Fancyapps/dist/fancybox/fancybox.umd.js"></script>
+        <link rel="stylesheet" href="/static/Fancyapps/dist/fancybox/fancybox.css" />
+        <script>
+            Fancybox.bind("[data-fancybox]", {
+                // Transition effect when changing gallery items  "crossfade" | "fade" | "slide" | "classic" | string | false
+                Carousel: {
+                    transition: "slide",
+                },
+                groupAll: true,
+                groupAttr: "data",
+                contentClick: "zoomToFit",
+                contentDblClick: "false",
+                wheel: "zoom",
+                Images: {
+                    initialSize: "fit",
+                    protected: true,
+                    // Panzoom: {
+                    //     panMode: "mousemove",
+                    //     mouseMoveFactor: 1.1,
+                    //     mouseMoveFriction: 0.12,
+                    // },
+                },
+                Toolbar: {
+                    display: {
+                        left: ["infobar"],
+                        //middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW", "flipX", "flipY",],
+                        middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
+                        //right: ["slideshow", "fullscreen", "download", "thumbs", "close"],
+                        right: ["download", "close"],
+                    },
+                },
+            });
+        </script>
+    </div>
+
+</footer>
+
 </html>
 {{- /* Footer custom content area end */ -}}

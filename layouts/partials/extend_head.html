@@ -6,54 +6,8 @@
 
 
 <!-- /* ========== umami  ========== */ -->
-<script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script>
+<!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
-
-<!-- 文章字体设置 Fonts -->
-<div>
-  <!-- 注释掉现有的 <link> 标签 -->
-  <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" /> -->
-  <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
-  <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
-  <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" /> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-  <!-- <link rel="preload" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" as="style"> -->
-  <!-- <link rel="preload" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" as="style"> -->
-</div>
-
-<!-- 引入 Web Font Loader 库 -->
-<script src="/static/Fonts/webfont.js"></script>
-<script>
-  WebFont.load({
-    custom: {
-      families: ['LXGW WenKai', 'JetBrains Mono'],
-      urls: [
-        '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
-        '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
-      ]
-    },
-    active: function () {
-      // console.log('Fonts have loaded');
-      // 在字体加载完成后执行特定的操作
-    },
-    inactive: function () {
-      // console.log('Fonts failed to load');
-      // 在字体加载失败后执行特定的操作
-    }
-  });
-
-    // 注册 Service Worker
-    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
-      // console.log('Service Worker registered with scope:', registration.scope);
-    }).catch(function (error) {
-      // console.log('Service Worker registration failed:', error);
-    });
-  }
-</script>
 
 <script>
   //==============打开页面加载动效
