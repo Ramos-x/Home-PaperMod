@@ -8,112 +8,156 @@
 <!-- /* ========== umami  ========== */ -->
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
+<!-- 文章字体设置 Fonts -->
+
+<!-- 注释掉现有的 <link> 标签 -->
+<!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" /> -->
+<!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
+<!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
+<!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
+<!-- <link rel="preload" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" as="style"> -->
+<!-- <link rel="preload" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" as="style"> -->
+
+<!-- 文章字体设置 Fonts -->
+<script src="/static/Fonts/webfont.js"></script>
+<script>
+    WebFont.load({
+        custom: {
+            families: ['LXGW WenKai', 'JetBrains Mono'],
+            urls: [
+                '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
+                '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+            ]
+        },
+        active: function () {
+            // console.log('Fonts have loaded');
+            // 在字体加载完成后执行特定的操作
+        },
+        inactive: function () {
+            // console.log('Fonts failed to load');
+            // 在字体加载失败后执行特定的操作
+        }
+    });
+
+    // 注册 Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
+            // console.log('Service Worker registered with scope:', registration.scope);
+        }).catch(function (error) {
+            // console.log('Service Worker registration failed:', error);
+        });
+    }
+</script>
 
 <script>
-  //==============打开页面加载动效
-  // // 当点击链接时，显示图片和进度条
-  // document.querySelectorAll('a').forEach(function(link) {
-  //     link.addEventListener('click', function(e) {
-  //         e.preventDefault();
-  //         var href = this.href;
-  //         var transitionImage = document.getElementById('transition-image');
-  //         var progressBar = document.getElementById('progress-bar');
-  //         transitionImage.style.display = '';
-  //         transitionImage.style.opacity = '1';
-  //         progressBar.style.width = '100%';
-  //         window.location.href = href;
-  //     });
-  // });
-
-  // 在新的网页加载时，显示图片和进度条
-  document.addEventListener('DOMContentLoaded', function () {
-    var progressBar = document.getElementById('progress-bar');
-
-    progressBar.style.width = '50%';
-    window.onload = function () {
-      progressBar.style.width = '100%';
-      setTimeout(function () {
-        setTimeout(function () {
-          progressBar.style.height = '0';
-          progressBar.style.opacity = '0';
-          setTimeout(function () {
-            progressBar.style.display = 'none';
-          }, 900);
-        }, 900);
-      }, 900);
-    };
-
-    // // 创建IntersectionObserver实例
-    // var observer = new IntersectionObserver(function (entries) {
-    //   entries.forEach(function (entry, index) {
-    //     // 检查元素是否在视窗内且没有loaded类
-    //     // setTimeout(function () {
-    //       if (entry.isIntersecting && !entry.target.classList.contains('loaded')) {
-    //         entry.target.classList.add('loaded');
-    //       }
-    //     // }, 150 * index);
-    //   });
-    // }, {
-    //   root: null, // 观察相对于视窗
-    //   rootMargin: '0px',
-    //   threshold: 0 // 当目标元素可见性达到10%时触发回调
+    //==============打开页面加载动效
+    // // 当点击链接时，显示图片和进度条
+    // document.querySelectorAll('a').forEach(function(link) {
+    //     link.addEventListener('click', function(e) {
+    //         e.preventDefault();
+    //         var href = this.href;
+    //         var transitionImage = document.getElementById('transition-image');
+    //         var progressBar = document.getElementById('progress-bar');
+    //         transitionImage.style.display = '';
+    //         transitionImage.style.opacity = '1';
+    //         progressBar.style.width = '100%';
+    //         window.location.href = href;
+    //     });
     // });
 
-    // // 开始观察
-    // var main1 = document.querySelectorAll('.main > *');
-    // main1.forEach(function (element) {
-    //   observer.observe(element);
-    // });
-    // var archive1 = document.querySelectorAll('.archive-posts > *');
-    // archive1.forEach(function (element) {
-    //   observer.observe(element);
-    // });
-    // var post1 = document.querySelectorAll('.post > *');
-    // post1.forEach(function (element) {
-    //   observer.observe(element);
-    // });
+    // 在新的网页加载时，显示图片和进度条
+    document.addEventListener('DOMContentLoaded', function () {
+        var progressBar = document.getElementById('progress-bar');
 
-    var main1 = document.querySelectorAll('.list > .main > *');
-    main1.forEach(function (element, index) {
-      setTimeout(function () {
-        element.classList.add('loaded');
-      }, 160 * index);
+        progressBar.style.width = '50%';
+        window.onload = function () {
+            progressBar.style.width = '100%';
+            setTimeout(function () {
+                setTimeout(function () {
+                    progressBar.style.height = '0';
+                    progressBar.style.opacity = '0';
+                    setTimeout(function () {
+                        progressBar.style.display = 'none';
+                    }, 900);
+                }, 900);
+            }, 900);
+        };
+
+        // // 创建IntersectionObserver实例
+        // var observer = new IntersectionObserver(function (entries) {
+        //   entries.forEach(function (entry, index) {
+        //     // 检查元素是否在视窗内且没有loaded类
+        //     // setTimeout(function () {
+        //       if (entry.isIntersecting && !entry.target.classList.contains('loaded')) {
+        //         entry.target.classList.add('loaded');
+        //       }
+        //     // }, 150 * index);
+        //   });
+        // }, {
+        //   root: null, // 观察相对于视窗
+        //   rootMargin: '0px',
+        //   threshold: 0 // 当目标元素可见性达到10%时触发回调
+        // });
+
+        // // 开始观察
+        // var main1 = document.querySelectorAll('.main > *');
+        // main1.forEach(function (element) {
+        //   observer.observe(element);
+        // });
+        // var archive1 = document.querySelectorAll('.archive-posts > *');
+        // archive1.forEach(function (element) {
+        //   observer.observe(element);
+        // });
+        // var post1 = document.querySelectorAll('.post > *');
+        // post1.forEach(function (element) {
+        //   observer.observe(element);
+        // });
+
+        var main1 = document.querySelectorAll('.list > .main > *');
+        main1.forEach(function (element, index) {
+            setTimeout(function () {
+                element.classList.add('loaded');
+            }, 160 * index);
+        });
+        var main1 = document.querySelectorAll('#top > .main > *');
+        main1.forEach(function (element, index) {
+            setTimeout(function () {
+                element.classList.add('loaded');
+            }, 130 * index);
+        });
+        var acrive1 = document.querySelectorAll('.archive-year-header, .archive-month-header, .archive-posts >*');
+        acrive1.forEach(function (element, index) {
+            setTimeout(function () {
+                element.classList.add('loaded');
+            }, 60 * index);
+        });
+        var page1 = document.querySelectorAll('.post > *');
+        page1.forEach(function (element, index) {
+            setTimeout(function () {
+                element.classList.add('loaded');
+            }, 190 * index);
+        });
     });
-    var main1 = document.querySelectorAll('#top > .main > *');
-    main1.forEach(function (element, index) {
-      setTimeout(function () {
-        element.classList.add('loaded');
-      }, 130 * index);
-    });
-    var acrive1 = document.querySelectorAll('.archive-year-header, .archive-month-header, .archive-posts >*');
-    acrive1.forEach(function (element, index) {
-      setTimeout(function () {
-        element.classList.add('loaded');
-      }, 60 * index);
-    });
-    var page1 = document.querySelectorAll('.post > *');
-    page1.forEach(function (element, index) {
-      setTimeout(function () {
-        element.classList.add('loaded');
-      }, 190 * index);
-    });
-  });
 
 </script>
 <style>
-  /* ========== transition-image ========== */
-  #progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0vmin;
-    height: 1px;
-    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
-    z-index: 9000;
-    transition: .45s cubic-bezier(0, .5, .5, 1) !important;
-  }
+    /* ========== transition-image ========== */
+    #progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0vmin;
+        height: 1px;
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
+        z-index: 9000;
+        transition: .45s cubic-bezier(0, .5, .5, 1) !important;
+    }
 
-  /* @media (prefers-color-scheme: light) {
+    /* @media (prefers-color-scheme: light) {
   #transition-image {
     position: fixed;
     top: 0;

@@ -31,18 +31,19 @@
 }
 
 .top-link {
-    display: flex;
+    opacity: 0;
     visibility: hidden;
+    display: flex;
     position: fixed;
-    bottom: 60px;
-    right: 30px;
+    bottom: 1rem;
+    right: .5rem;
     z-index: 99;
     background: var(--tertiary);
-    width: 42px;
-    height: 82px;
-    padding: 10px;
-    border-radius: 64px;
-    transition: .85s cubic-bezier(0,.5,.5,1) !important;
+    width: 2.5rem;
+    height: 5rem;
+    padding: 0.3rem;
+    border-radius: 65px;
+    transition: 3s cubic-bezier(0.46, 0.03, 0.52, 0.96) !important;
     align-items: stretch;
     justify-content: center;
     align-content: center;
