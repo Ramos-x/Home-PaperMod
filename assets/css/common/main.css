@@ -3,8 +3,8 @@
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 4);
 
-    margin: auto;
-    padding: var(--gap);
+    margin: 1vw auto auto auto;
+    padding: 1vw min(3vw,var(--gap));
     
     backdrop-filter: blur(1px);
     /* overflow: hidden; */

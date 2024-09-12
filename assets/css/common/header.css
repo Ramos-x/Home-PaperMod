@@ -4,7 +4,8 @@
     max-width: calc(var(--nav-width) + var(--gap) * 2);
     margin-inline-start: auto;
     margin-inline-end: auto;
-    line-height: var(--header-height);
+    line-height: clamp(50px,4vw,60px);
+    /* line-height: var(--header-height); */
     justify-content: space-around;
 }
 

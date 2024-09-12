@@ -5,9 +5,9 @@
         --header-height: 50px;
     }
 
-    .main {
+    /* .main {
         padding: 0px var(--gap);
-    }
+    } */
 
     /* profile-mode */
     .profile img {
@@ -41,9 +41,9 @@
         height: 11px
     }
 
-    .page-header, .post-header {
+    /* .page-header, .post-header {
     margin: 8px auto var(--content-gap) 0;
-    }
+    } */
 }
 
 /* footer */

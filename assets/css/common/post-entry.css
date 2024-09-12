@@ -35,8 +35,8 @@
 
 .post-entry {
     position: relative;
-    margin-bottom: var(--gap);
-    padding: var(--gap);
+    margin-bottom: min(2vw,var(--gap));
+    padding: min(2vw,var(--gap));
     background: var(--entry);
     border-radius: var(--radius);
     border: 1px solid var(--border);
