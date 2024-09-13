@@ -35,7 +35,7 @@
     visibility: hidden;
     display: flex;
     position: fixed;
-    bottom: 1rem;
+    bottom: 1vw;
     right: .5rem;
     z-index: 99;
     background: var(--tertiary);

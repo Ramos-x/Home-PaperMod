@@ -8,24 +8,24 @@
 
     <!-- 不蒜子 -->
     {{- if .Site.Params.busuanzi -}}
-    <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="referrer" content="no-referrer-when-downgrade"> -->
     {{- end -}}
 
 
     <!-- post-entry 点击消失 -->
     <div>
         <script>
-            document.querySelectorAll('.post-entry').forEach(function (entry) {
+            document.querySelectorAll('.post-entry,.logo a,#menu').forEach(function (entry) {
                 entry.addEventListener('click', function () {
-                    var entries = document.querySelectorAll('.post-entry');
+                    var entries = document.querySelectorAll('.main');
                     entries.forEach(function (entry) {
                         entry.classList.add('fullscreen');
                     });
                 });
             });
             window.addEventListener('pageshow', function () {
-                var entries = document.querySelectorAll('.post-entry');
+                var entries = document.querySelectorAll('.main');
                 entries.forEach(function (entry) {
                     entry.classList.remove('fullscreen');
                 });
@@ -34,9 +34,20 @@
         <style>
             .fullscreen {
                 pointer-events: none;
-                transition: filter 2s cubic-bezier(0, .5, .5, 1), opacity 2s cubic-bezier(0, .5, .5, 1);
-                filter: blur(10px);
+                transition: filter 1s cubic-bezier(0, .5, .5, 1), opacity 1s cubic-bezier(0, .5, .5, 1),transform 2s cubic-bezier(0, .6, .6, 1);
+                filter: blur(15px);
+                transform: translateY(60px)!important;
                 opacity: 0;
+            }
+        </style>
+    </div>
+        <style>
+            .fullscreen {
+                pointer-events: none;
+                transition: filter .4s cubic-bezier(0, .5, .5, 1), opacity .4s cubic-bezier(0, .5, .5, 1), transform .5s cubic-bezier(0, .6, .6, 1);
+                filter: blur(10px);
+                transform: translateY(60px)!important;
+                opacity: 0!important;
             }
         </style>
     </div>
