@@ -45,16 +45,16 @@
 
       // 注册 Service Worker 并预加载 #menu 下的所有链接
       if ('serviceWorker' in navigator) {
-        console.log('Service Worker is supported.');
+        // console.log('Service Worker is supported.');
 
         navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
-            console.log('Service Worker registered with scope:', registration.scope);
+            // console.log('Service Worker registered with scope:', registration.scope);
             // console.log(registration);
         }).catch(function (error) {
-          console.log('Service Worker registration failed:', error);
+        //   console.log('Service Worker registration failed:', error);
         });
       } else {
-        console.log('Service Worker is not supported.');
+        // console.log('Service Worker is not supported.');
       }
 </script>
 
