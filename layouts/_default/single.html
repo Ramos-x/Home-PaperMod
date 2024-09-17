@@ -64,7 +64,10 @@
   </footer>
 
   {{- if (.Param "comments") }}
-  {{- partial "comments.html" . }}
+
+  {{/* partial "giscus.html" . 已经停用，服务端已删除 */}}
+  {{ partial "twikoo.html" . }}
+
   {{- end }}
 </article>
 
