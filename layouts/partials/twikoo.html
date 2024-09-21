@@ -6,5 +6,34 @@
         envId: "https://twikoo.dtft.net/.netlify/functions/twikoo",
         el: '#tcomment', // 容器元素
         path: window.TWIKOO_MAGIC_PATH || window.location.pathname, // 当前页面路径
-    })
+    });
+
+    let hitokotoFetched = false; // 标志位，表示是否已经获取过一言数据
+
+    // 监听 tk-comments-no 元素的出现
+    const commentObserver = new MutationObserver((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                const tkCommentsNo = document.querySelector('.tk-comments-no span');
+                if (tkCommentsNo && !hitokotoFetched) {
+                    // 获取一言数据并更新页面内容
+                    fetch('https://v1.hitokoto.cn')
+                        .then(response => response.json())
+                        .then(data => {
+                            const hitokotoText = data.hitokoto;
+                            tkCommentsNo.textContent = `「 ${hitokotoText} 」`;
+                            console.log('Hitokoto text updated:', hitokotoText);
+                            hitokotoFetched = true; // 设置标志位为 true，表示已经获取过一言数据
+                        })
+                        .catch(error => console.error('Error fetching hitokoto:', error));
+                    
+                    // 停止观察
+                    observer.disconnect();
+                }
+            }
+        }
+    });
+
+    // 开始观察文档的根节点
+    commentObserver.observe(document.body, { childList: true, subtree: true });
 </script>

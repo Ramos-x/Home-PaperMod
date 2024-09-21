@@ -20,29 +20,19 @@
                 entry.addEventListener('click', function () {
                     var entries = document.querySelectorAll('.main');
                     entries.forEach(function (entry) {
-                        entry.classList.add('fullscreen');
+                        entry.classList.add('unloaded');
                     });
                 });
             });
             window.addEventListener('pageshow', function () {
                 var entries = document.querySelectorAll('.main');
                 entries.forEach(function (entry) {
-                    entry.classList.remove('fullscreen');
+                    entry.classList.remove('unloaded');
                 });
             });
         </script>
         <style>
-            .fullscreen {
-                pointer-events: none;
-                transition: filter 1s cubic-bezier(0, .5, .5, 1), opacity 1s cubic-bezier(0, .5, .5, 1),transform 2s cubic-bezier(0, .6, .6, 1);
-                filter: blur(15px);
-                transform: translateY(60px)!important;
-                opacity: 0;
-            }
-        </style>
-    </div>
-        <style>
-            .fullscreen {
+            .unloaded {
                 pointer-events: none;
                 transition: filter .4s cubic-bezier(0, .5, .5, 1), opacity .4s cubic-bezier(0, .5, .5, 1), transform .5s cubic-bezier(0, .6, .6, 1);
                 filter: blur(10px);
