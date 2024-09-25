@@ -3,10 +3,10 @@
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     max-width: calc(var(--main-width) + var(--gap) * 4);
 
-    margin: 1vw auto 4vw auto;
+    margin: 1vw auto 0vw auto;
     padding: 1vw min(3vw,var(--gap));
     
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(0.8px);
     /* overflow: hidden; */
 }
 

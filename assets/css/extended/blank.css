@@ -3,6 +3,19 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
+
+/* ========== 选中文字的背景颜色 ========== */
+::selection {
+    background-color: #67c23a77; /* 你想要的背景颜色 */
+    color: #000; /* 你想要的文字颜色 */
+}
+a:hover {
+    color: #67c23a; /* 悬停时的字体颜色 */
+}
+a {
+    transition: all .12s cubic-bezier(0,.5,.5,1), margin-right 0s;
+}
+
 /* ========== notice.html ========== */
 .notice {
     --root-color: #444;
@@ -128,15 +141,15 @@ body.dark .notice {
 .copyButton {
   width: 22px;
   margin: .4rem .8rem .4rem auto;
-  filter: brightness(.7);
   color: rgb(196, 196, 197);
   transition: .35s cubic-bezier(0,.5,.5,1);
 }
 .copyButton:active {
-  filter: brightness(2)!important;  /* 增加亮度 */
+  filter: brightness(1.2)!important;  /* 增加亮度 */
 }
 .copyButton:hover {
-  filter: brightness(.9);
+  color: #67c23a;
+  transition: all .12s cubic-bezier(0,.5,.5,1), margin-right 0s;
 }
 
 /* ========== 图片居中 ========== */
