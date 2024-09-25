@@ -1,0 +1,5 @@
+{{ if .IsRSS }}
+    {{ .Inner | plainify }}
+{{ else }}
+    {{ .Inner }}
+{{ end }}
