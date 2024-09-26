@@ -45,14 +45,14 @@
         display: block;
     }
 
-    .post-meta {
+    /* .post-meta {
         color: var(--secondary);
         font-size: 14px;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
         flex-direction: column-reverse;
-    }
+    } */
 }
 
 .post-meta .i18n_list li {

@@ -4,6 +4,71 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --theme: rgb(29, 30, 32);
+        --entry: rgb(46, 46, 51);
+        --entry1: #161b22;
+        --primary: rgb(218, 218, 219);
+        --secondary: rgb(155, 156, 157);
+        --tertiary: rgb(22, 29, 43);
+        --content: rgb(196, 196, 197);
+        --code-block-bg: #0d1117;
+        --code-bg: rgb(55, 56, 62);
+        --border: rgb(51, 51, 51);
+    }
+
+    .list:not(.dark)::-webkit-scrollbar-track {
+        background: 0 0;
+    }
+
+    .list:not(.dark)::-webkit-scrollbar-thumb {
+        border-color: var(--theme);
+    }
+
+    #theme-toggle {
+        display: none;
+    }
+
+    .main {
+        box-shadow: 0 5px 20px 15px #05050575;
+    }
+
+    html {
+        min-height: 100vh;
+        background-color: #040404;
+        background-image: url("/static/img/grid_dark.webp") !important;
+    }
+
+    .post-content img {
+        filter: brightness(0.8) contrast(1.2) saturate(0.8);
+        margin: 1rem auto;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+
+    #theme-toggle {
+        display: none;
+    }
+
+    .main {
+        box-shadow: 0 5px 20px 15px #fafafa75;
+    }
+
+    html {
+        min-height: 100vh;
+        background-color: #fafafa;
+        background-image: url("/static/img/grid.webp") !important;
+    }
+}
+
+@media (prefers-color-scheme: no-preference) {
+    .dark.list {
+        background-image: url("/static/img/grid.webp");
+    }
+}
+
 /* ========== 选中文字的背景颜色 ========== */
 ::selection {
     background-color: #67c23a77; /* 你想要的背景颜色 */
