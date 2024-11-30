@@ -92,54 +92,28 @@
             }, 900);
         };
 
-        // // 创建IntersectionObserver实例
-        // var observer = new IntersectionObserver(function (entries) {
-        //   entries.forEach(function (entry, index) {
-        //     // 检查元素是否在视窗内且没有loaded类
-        //     // setTimeout(function () {
-        //       if (entry.isIntersecting && !entry.target.classList.contains('loaded')) {
-        //         entry.target.classList.add('loaded');
-        //       }
-        //     // }, 150 * index);
-        //   });
-        // }, {
-        //   root: null, // 观察相对于视窗
-        //   rootMargin: '0px',
-        //   threshold: 0 // 当目标元素可见性达到10%时触发回调
-        // });
-
-        // // 开始观察
-        // var main1 = document.querySelectorAll('.main > *');
-        // main1.forEach(function (element) {
-        //   observer.observe(element);
-        // });
-        // var archive1 = document.querySelectorAll('.archive-posts > *');
-        // archive1.forEach(function (element) {
-        //   observer.observe(element);
-        // });
-        // var post1 = document.querySelectorAll('.post > *');
-        // post1.forEach(function (element) {
-        //   observer.observe(element);
-        // });
-
+        // 恢复原来的动画效果
         var main1 = document.querySelectorAll('.list > .main > *');
         main1.forEach(function (element, index) {
             setTimeout(function () {
                 element.classList.add('loaded');
             }, 160 * index);
         });
+        
         var main1 = document.querySelectorAll('#top > .main > *');
         main1.forEach(function (element, index) {
             setTimeout(function () {
                 element.classList.add('loaded');
             }, 130 * index);
         });
+        
         var acrive1 = document.querySelectorAll('.archive-year-header, .archive-month-header, .archive-posts >*');
         acrive1.forEach(function (element, index) {
             setTimeout(function () {
                 element.classList.add('loaded');
             }, 60 * index);
         });
+        
         var page1 = document.querySelectorAll('.post > *');
         page1.forEach(function (element, index) {
             setTimeout(function () {
