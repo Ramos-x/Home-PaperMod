@@ -576,36 +576,3 @@ article[autonumbering] .toc li a:before {
     transform: rotate(10deg)
   }
 }
-
-.say {
-    padding: 40px 20px 35px;
-    position: relative;
-}
-
-.say.loaded:first-of-type {
-    border-top: none; /* 移除第一个 .say.loaded 元素的顶部边框 */
-}
-
-.say:not(:first-child) {
-    border-top: 1px solid rgba(144, 147, 153, 0.31); /* 可以根据需要调整颜色 */
-    margin-top: 0px; /* 调整间距，使横线往上移动 */
-    padding-top: 40px; /* 调整内边距，使内容与横线之间有间距 */
-}
-
-.say-content p{
-    padding-left: 50px;
-}
-
-.say-header{
-    font-size: small;
-    padding-bottom: 10px;
-}
-
-.say-comment{
-    display: flex;
-    justify-content: flex-end;
-    transition: all .12s cubic-bezier(0,.5,.5,1), margin-right 0s;
-}
-.say-comment:hover{
-    color: #67c23a;
-}
