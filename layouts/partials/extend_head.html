@@ -59,69 +59,102 @@
 </script>
 
 <script>
-    //==============打开页面加载动效
-    // // 当点击链接时，显示图片和进度条
-    // document.querySelectorAll('a').forEach(function(link) {
-    //     link.addEventListener('click', function(e) {
-    //         e.preventDefault();
-    //         var href = this.href;
-    //         var transitionImage = document.getElementById('transition-image');
-    //         var progressBar = document.getElementById('progress-bar');
-    //         transitionImage.style.display = '';
-    //         transitionImage.style.opacity = '1';
-    //         progressBar.style.width = '100%';
-    //         window.location.href = href;
-    //     });
-    // });
+    document.addEventListener('DOMContentLoaded', function() {
+        function createSequentialObserver(selector, delay) {
+            let elements = Array.from(document.querySelectorAll(selector));
+            // 按照元素在页面中的垂直位置排序
+            elements.sort((a, b) => {
+                return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+            });
 
-    // 在新的网页加载时，显示图片和进度条
-    document.addEventListener('DOMContentLoaded', function () {
-        var progressBar = document.getElementById('progress-bar');
+            let isAnimating = false;
+            let lastAnimatedTop = -Infinity; // 记录最后一个动画元素的位置
 
-        progressBar.style.width = '50%';
-        window.onload = function () {
-            progressBar.style.width = '100%';
-            setTimeout(function () {
-                setTimeout(function () {
-                    progressBar.style.height = '0';
-                    progressBar.style.opacity = '0';
-                    setTimeout(function () {
-                        progressBar.style.display = 'none';
-                    }, 900);
-                }, 900);
-            }, 900);
-        };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isAnimating) {
+                        isAnimating = true;
+                        animateVisibleElements();
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
 
-        // 恢复原来的动画效果
-        var main1 = document.querySelectorAll('.list > .main > *');
-        main1.forEach(function (element, index) {
-            setTimeout(function () {
+            function animateVisibleElements() {
+                // 找出所有在当前视窗上方未动画的元素
+                const aboveElements = elements.filter(element => {
+                    const rect = element.getBoundingClientRect();
+                    return rect.top < window.innerHeight && !element.classList.contains('loaded') && rect.top > lastAnimatedTop;
+                });
+
+                if (aboveElements.length === 0) {
+                    isAnimating = false;
+                    return;
+                }
+
+                // 按照位置排序
+                aboveElements.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+                // 执行第一个元素的动画
+                const element = aboveElements[0];
+                const rect = element.getBoundingClientRect();
+                lastAnimatedTop = rect.top;
+                
                 element.classList.add('loaded');
-            }, 160 * index);
-        });
-        
-        var main1 = document.querySelectorAll('#top > .main > *');
-        main1.forEach(function (element, index) {
-            setTimeout(function () {
-                element.classList.add('loaded');
-            }, 130 * index);
-        });
-        
-        var acrive1 = document.querySelectorAll('.archive-year-header, .archive-month-header, .archive-posts >*');
-        acrive1.forEach(function (element, index) {
-            setTimeout(function () {
-                element.classList.add('loaded');
-            }, 60 * index);
-        });
-        
-        var page1 = document.querySelectorAll('.post > *');
-        page1.forEach(function (element, index) {
-            setTimeout(function () {
-                element.classList.add('loaded');
-            }, 190 * index);
-        });
+
+                // 继续下一个动画
+                setTimeout(() => {
+                    animateVisibleElements();
+                }, delay);
+            }
+
+            // 观察所有元素
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // 初始检查
+            setTimeout(() => {
+                if (!isAnimating) {
+                    const visibleElement = elements.find(element => {
+                        const rect = element.getBoundingClientRect();
+                        return rect.top < window.innerHeight && rect.bottom > 0;
+                    });
+
+                    if (visibleElement) {
+                        isAnimating = true;
+                        animateVisibleElements();
+                    }
+                }
+            }, 100);
+
+            // 监听滚动事件，确保新进入视图的元素能够触发动画
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    if (!isAnimating) {
+                        const visibleElement = elements.find(element => {
+                            const rect = element.getBoundingClientRect();
+                            return rect.top < window.innerHeight && rect.bottom > 0 && !element.classList.contains('loaded');
+                        });
+
+                        if (visibleElement) {
+                            isAnimating = true;
+                            animateVisibleElements();
+                        }
+                    }
+                }, 100);
+            });
+        }
+
+        // 为不同区域的元素创建观察器
+        createSequentialObserver('.list > .main > *', 160);
+        createSequentialObserver('#top > .main > *', 130);
+        createSequentialObserver('.archive-year-header, .archive-month-header, .archive-posts >*', 60);
+        createSequentialObserver('.post > *', 190);
     });
-
 </script>
 <style>
     /* ========== transition-image ========== */
