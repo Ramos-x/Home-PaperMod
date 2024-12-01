@@ -62,50 +62,60 @@
     document.addEventListener('DOMContentLoaded', function() {
         function createSequentialObserver(selector, delay) {
             let elements = Array.from(document.querySelectorAll(selector));
-            // 按照元素在页面中的垂直位置排序
             elements.sort((a, b) => {
-                return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+                const aTop = a.getBoundingClientRect().top + window.pageYOffset;
+                const bTop = b.getBoundingClientRect().top + window.pageYOffset;
+                return aTop - bTop;
             });
 
             let isAnimating = false;
-            let lastAnimatedTop = -Infinity; // 记录最后一个动画元素的位置
+            let lastProcessedY = -Infinity;
 
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !isAnimating) {
+                if (!isAnimating) {
+                    const hasVisibleUnloaded = entries.some(entry => 
+                        entry.isIntersecting && !entry.target.classList.contains('loaded')
+                    );
+                    if (hasVisibleUnloaded) {
                         isAnimating = true;
-                        animateVisibleElements();
+                        processVisibleElements();
                     }
-                });
+                }
             }, {
-                threshold: 0.05
+                rootMargin: "50px 0px",
+                threshold: [0, 0.1, 0.5, 1]
             });
 
-            function animateVisibleElements() {
-                // 找出所有在当前视窗上方未动画的元素
-                const aboveElements = elements.filter(element => {
+            function processVisibleElements() {
+                const viewportTop = window.pageYOffset;
+                const viewportBottom = viewportTop + window.innerHeight;
+                
+                // 找出所有在视窗范围内或刚刚离开视窗的未加载元素
+                const unloadedElements = elements.filter(element => {
+                    if (element.classList.contains('loaded')) return false;
                     const rect = element.getBoundingClientRect();
-                    return rect.top < window.innerHeight && !element.classList.contains('loaded') && rect.top > lastAnimatedTop;
+                    const elementTop = rect.top + window.pageYOffset;
+                    return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
                 });
 
-                if (aboveElements.length === 0) {
+                if (unloadedElements.length === 0) {
                     isAnimating = false;
                     return;
                 }
 
-                // 按照位置排序
-                aboveElements.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-
-                // 执行第一个元素的动画
-                const element = aboveElements[0];
-                const rect = element.getBoundingClientRect();
-                lastAnimatedTop = rect.top;
+                // 获取最上方的未加载元素
+                const nextElement = unloadedElements[0];
+                const elementTop = nextElement.getBoundingClientRect().top + window.pageYOffset;
                 
-                element.classList.add('loaded');
+                // 更新最后处理的位置
+                lastProcessedY = elementTop;
+                
+                // 添加动画类
+                nextElement.classList.add('loaded');
 
-                // 继续下一个动画
+                // 继续处理下一个元素
                 setTimeout(() => {
-                    animateVisibleElements();
+                    processVisibleElements();
                 }, delay);
             }
 
@@ -114,39 +124,36 @@
                 observer.observe(element);
             });
 
-            // 初始检查
-            setTimeout(() => {
-                if (!isAnimating) {
-                    const visibleElement = elements.find(element => {
-                        const rect = element.getBoundingClientRect();
-                        return rect.top < window.innerHeight && rect.bottom > 0;
-                    });
-
-                    if (visibleElement) {
-                        isAnimating = true;
-                        animateVisibleElements();
-                    }
-                }
-            }, 100);
-
-            // 监听滚动事件，确保新进入视图的元素能够触发动画
+            // 滚动处理
             let scrollTimeout;
             window.addEventListener('scroll', () => {
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     if (!isAnimating) {
-                        const visibleElement = elements.find(element => {
+                        const viewportTop = window.pageYOffset;
+                        const viewportBottom = viewportTop + window.innerHeight;
+                        
+                        const hasUnloadedInView = elements.some(element => {
+                            if (element.classList.contains('loaded')) return false;
                             const rect = element.getBoundingClientRect();
-                            return rect.top < window.innerHeight && rect.bottom > 0 && !element.classList.contains('loaded');
+                            const elementTop = rect.top + window.pageYOffset;
+                            return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
                         });
 
-                        if (visibleElement) {
+                        if (hasUnloadedInView) {
                             isAnimating = true;
-                            animateVisibleElements();
+                            processVisibleElements();
                         }
                     }
-                }, 100);
+                }, 50);
             });
+
+            // 初始检查
+            setTimeout(() => {
+                if (!isAnimating) {
+                    processVisibleElements();
+                }
+            }, 100);
         }
 
         // 为不同区域的元素创建观察器
