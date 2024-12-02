@@ -71,7 +71,7 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
 
 /* ========== 选中文字的背景颜色 ========== */
 ::selection {
-    background-color: #67c23a77; /* 你想要的背景颜色 */
+    background-color: #67c23ae0; /* 你想要的背景颜色 */
     color: #000; /* 你想要的文字颜色 */
 }
 a:hover {
@@ -364,13 +364,13 @@ body.dark .notice {
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
 body {
-  font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-family: 'PingFang SC', 'LXGW WenKai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 /* ========== 代码字体：JetBrains Mono ========== */
 code {
-  font-family: "JetBrains Mono";
+  font-family: 'JetBrains Mono', Monaco, Consolas, 'Courier New', monospace;
 }
 
 /* ========= 文章和目录自动编号（从二级标题开始）============ */
@@ -474,8 +474,9 @@ article[autonumbering] .toc li a:before {
 }
 
 .inner a.active {
-  font-size: 105%;
+  font-size: 110%;
   font-weight: 900;
+  color: #67c23a;
 }
 
 .toc ul {
@@ -508,8 +509,8 @@ article[autonumbering] .toc li a:before {
   padding-bottom: 5px;
 }
 
-.toc li a:hover {
-  color: var(--secondary);
+.toc li a:hover { 
+    color: #6cee2b;
 }
 
 
@@ -575,4 +576,35 @@ article[autonumbering] .toc li a:before {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg)
   }
+}
+
+/* ========== 文章标题和内容定位 ========== */
+.first-entry .post-entry {
+    position: relative;  /* 为绝对定位的子元素创建定位上下文 */
+}
+
+.first-entry .entry-header {
+    position: absolute;
+    top: 1rem;
+    left: 0.5rem;
+    z-index: 2;  /* 确保标题在内容之上 */
+    width: 100%;
+}
+
+.first-entry .entry-header h2{
+    font-family: none;
+    color: antiquewhite;
+    font-weight: 600;
+}
+
+.first-entry .entry-content {
+    position: absolute;
+    top: 2rem;
+    left: 0.5rem;
+    z-index: 1;  /* 确保内容在底层但高于其他可能的元素 */
+    width: 100%;
+}
+
+.first-entry .entry-content p {
+    color: antiquewhite;
 }

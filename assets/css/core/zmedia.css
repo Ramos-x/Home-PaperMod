@@ -5,9 +5,6 @@
         --header-height: 50px;
     }
 
-    /* .main {
-        padding: 0px var(--gap);
-    } */
 
     /* profile-mode */
     .profile img {
@@ -46,18 +43,14 @@
     } */
 }
 
-/* footer */
+/* footer
 @media screen and (max-width: 900px) {
     .list .top-link {
         transform: translateY(-5rem);
     }
-}
+} */
 
-@media screen and (max-width: 340px) {
-    .share-buttons {
-        justify-content: unset;
-    }
-}
+
 
 @media (prefers-reduced-motion) {
     /* terms; profile-mode; post-single; post-entry; post-entry; search; search */

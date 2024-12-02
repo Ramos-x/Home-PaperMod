@@ -35,11 +35,9 @@
         },
         active: function () {
             // console.log('Fonts have loaded');
-            // 在字体加载完成后执行特定的操作
         },
         inactive: function () {
             // console.log('Fonts failed to load');
-            // 在字体加载失败后执行特定的操作
         }
     });
 
@@ -82,8 +80,8 @@
                     }
                 }
             }, {
-                rootMargin: "50px 0px",
-                threshold: [0, 0.1, 0.5, 1]
+                rootMargin: "10px 0px",
+                threshold: 0
             });
 
             function processVisibleElements() {
