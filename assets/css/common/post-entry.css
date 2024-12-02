@@ -117,6 +117,8 @@
     font-size: 14px;
     margin-bottom: var(--gap);
     text-align: center;
+    transition: .95s cubic-bezier(0,.5,.4,1) !important;
+    z-index:  1;
 }
 
 .entry-cover img {

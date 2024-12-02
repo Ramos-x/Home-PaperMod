@@ -35,9 +35,11 @@
         },
         active: function () {
             // console.log('Fonts have loaded');
+            // 在字体加载完成后执行特定的操作
         },
         inactive: function () {
             // console.log('Fonts failed to load');
+            // 在字体加载失败后执行特定的操作
         }
     });
 
@@ -207,4 +209,29 @@
   }
 } */
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 监听post-header的loaded类变化
+        const postHeader = document.querySelector('.post-header');
+        if (postHeader) {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        if (postHeader.classList.contains('loaded')) {
+                            // 当post-header有loaded类时,为postcontent添加loaded类
+                            const postContent = document.querySelector('.post-content');
+                            if (postContent) {
+                                postContent.classList.add('loaded');
+                            }
+                        }
+                    }
+                });
+            });
+
+            observer.observe(postHeader, {
+                attributes: true
+            });
+        }
+    });
+</script>
 {{- /* Head custom content area end */ -}}

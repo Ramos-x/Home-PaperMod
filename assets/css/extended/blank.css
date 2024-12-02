@@ -609,3 +609,15 @@ article[autonumbering] .toc li a:before {
     color: antiquewhite;
     font-weight: 600;
 }
+
+
+.first-entry.loaded :hover{
+    transform: scale(1.02) !important;
+    filter: brightness(1.05) contrast(1.05) blur(0) opacity(1);
+    transition: .95s cubic-bezier(0,.5,.4,1) !important;
+}
+.first-entry.loaded {
+    transform: scale(1) !important;
+    filter: brightness(1) contrast(1) blur(0) opacity(1);
+    transition: .95s cubic-bezier(0,.5,.4,1) !important;
+}
