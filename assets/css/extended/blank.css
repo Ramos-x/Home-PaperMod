@@ -607,4 +607,5 @@ article[autonumbering] .toc li a:before {
 
 .first-entry .entry-content p {
     color: antiquewhite;
+    font-weight: 600;
 }
