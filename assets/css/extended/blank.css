@@ -579,14 +579,18 @@ article[autonumbering] .toc li a:before {
 }
 
 /* ========== 文章标题和内容定位 ========== */
+.first-entry .entry-cover {
+    z-index: 2;
+}
+
 .first-entry .post-entry {
     position: relative;  /* 为绝对定位的子元素创建定位上下文 */
 }
 
 .first-entry .entry-header {
     position: absolute;
-    top: 1rem;
-    left: 0.5rem;
+    top: 2rem;
+    left: 1rem;
     z-index: 2;  /* 确保标题在内容之上 */
     width: 100%;
 }
@@ -599,9 +603,9 @@ article[autonumbering] .toc li a:before {
 
 .first-entry .entry-content {
     position: absolute;
-    top: 2rem;
-    left: 0.5rem;
-    z-index: 1;  /* 确保内容在底层但高于其他可能的元素 */
+    top: 3rem;
+    left: 1rem;
+    z-index: 2;  /* 确保内容在底层但高于其他可能的元素 */
     width: 100%;
 }
 
@@ -611,11 +615,12 @@ article[autonumbering] .toc li a:before {
 }
 
 
-.first-entry.loaded :hover{
+.first-entry .entry-cover.loaded :hover{
     transform: scale(1.02) !important;
     filter: brightness(1.05) contrast(1.05) blur(0) opacity(1);
     transition: .95s cubic-bezier(0,.5,.4,1) !important;
 }
+
 .first-entry.loaded {
     transform: scale(1) !important;
     filter: brightness(1) contrast(1) blur(0) opacity(1);
