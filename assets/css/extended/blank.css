@@ -364,7 +364,7 @@ body.dark .notice {
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
 body {
-  font-family: 'PingFang SC', 'LXGW WenKai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:  'LXGW WenKai','PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
