@@ -321,7 +321,7 @@ body.dark .notice {
     outline: #e5e7eb solid 1px;
   }
   .post-content pre code {
-    background-color: #FFF;
+    /*background-color: #FFF;*/
   }
 }
 
