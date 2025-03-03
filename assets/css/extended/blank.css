@@ -74,11 +74,13 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     background-color: #67c23ae0; /* 你想要的背景颜色 */
     color: #000; /* 你想要的文字颜色 */
 }
+
 a:hover {
     color: #67c23a; /* 悬停时的字体颜色 */
 }
+
 a {
-    transition: all .12s cubic-bezier(0,.5,.5,1), margin-right 0s;
+    transition: all .12s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 /* ========== notice.html ========== */
@@ -97,7 +99,7 @@ a {
     --tip-content: #efe
 }
 
-@media (prefers-color-scheme:dark) {
+@media (prefers-color-scheme: dark) {
     .notice {
         --root-color: #ddd;
         --root-background: #eff;
@@ -204,63 +206,65 @@ body.dark .notice {
 
 /* ========== 代码复制按钮 ========== */
 .copyButton {
-  width: 22px;
-  margin: .4rem .8rem .4rem auto;
-  color: rgb(196, 196, 197);
-  transition: .35s cubic-bezier(0,.5,.5,1);
+    width: 22px;
+    margin: .4rem .8rem .4rem auto;
+    color: rgb(196, 196, 197);
+    transition: .35s cubic-bezier(0, .5, .5, 1);
 }
+
 .copyButton:active {
-  filter: brightness(1.2)!important;  /* 增加亮度 */
+    filter: brightness(1.2) !important; /* 增加亮度 */
 }
+
 .copyButton:hover {
-  color: #67c23a;
-  transition: all .12s cubic-bezier(0,.5,.5,1), margin-right 0s;
+    color: #67c23a;
+    transition: all .12s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 /* ========== 图片居中 ========== */
-.post-img-view.loaded{
-  display: flex;
-  justify-content: center;
+.post-img-view.loaded {
+    display: flex;
+    justify-content: center;
 }
 
 /* ========== post从模糊到清晰并向上位移 ========== */
-.archive-posts >* {
-  -webkit-filter: blur(5px) opacity(0);
-  filter: brightness(1) contrast(1) blur(4px) opacity(0);
-  transform: translateY(60px);
-  transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
+.archive-posts > * {
+    -webkit-filter: blur(5px) opacity(0);
+    filter: brightness(1) contrast(1) blur(4px) opacity(0);
+    transform: translateY(60px);
+    transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
 }
 
-.archive-posts >*.loaded {
-  -webkit-filter: blur(0) opacity(1);
-  filter: brightness(1) contrast(1) blur(0) opacity(1);
-  transform: translateY(0);
+.archive-posts > *.loaded {
+    -webkit-filter: blur(0) opacity(1);
+    filter: brightness(1) contrast(1) blur(0) opacity(1);
+    transform: translateY(0);
 }
 
-.post>*:not(.giscus) {
-  -webkit-filter: blur(5px) opacity(0);
-  filter: brightness(1) contrast(1) blur(4px) opacity(0);
-  transform: translateY(60px);
-  transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
+.post > *:not(.giscus) {
+    -webkit-filter: blur(5px) opacity(0);
+    filter: brightness(1) contrast(1) blur(4px) opacity(0);
+    transform: translateY(60px);
+    transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
 }
 
-.post>*.loaded {
-  -webkit-filter: blur(0) opacity(1);
-  filter: brightness(1) contrast(1) blur(0) opacity(1);
-  transform: translateY(0);
+.post > *.loaded {
+    -webkit-filter: blur(0) opacity(1);
+    filter: brightness(1) contrast(1) blur(0) opacity(1);
+    transform: translateY(0);
 }
 
-.main>* {
-  -webkit-filter: blur(5px) opacity(0);
-  filter: brightness(1) contrast(1) blur(4px) opacity(0);
-  transform: translateY(60px);
-  transition: transform 1.95s cubic-bezier(0,1.1,.6,1), filter 1.5s cubic-bezier(0,1.1,.6,1);
+.main > * {
+    -webkit-filter: blur(5px) opacity(0);
+    filter: brightness(1) contrast(1) blur(4px) opacity(0);
+    transform: translateY(60px);
+    transition: transform 1.95s cubic-bezier(0, 1.1, .6, 1), filter 1.5s cubic-bezier(0, 1.1, .6, 1);
 }
 
-.main>*.loaded {
-  -webkit-filter: blur(0) opacity(1);
-  filter: brightness(1) contrast(1) blur(0) opacity(1);
-  transform: translateY(0);
+.main > *.loaded {
+    -webkit-filter: blur(0) opacity(1);
+    filter: brightness(1) contrast(1) blur(0) opacity(1);
+    transform: translateY(0);
 }
 
 /* .post-content>* {
@@ -279,237 +283,252 @@ body.dark .notice {
 
 /* ========== 代码框 ========== */
 .codetab {
-  transition: .85s cubic-bezier(0, .5, .5, 1);
+    transition: .85s cubic-bezier(0, .5, .5, 1);
 }
 
-.codetab__content .highlight,.codetab__content.active .highlight {
-  margin-top: 0;
-  border-radius: 0 0 var(--radius) var(--radius);
+.codetab__content .highlight, .codetab__content.active .highlight {
+    margin-top: 0;
+    border-radius: 0 0 var(--radius) var(--radius);
 }
 
 @media (prefers-color-scheme: dark) {
-  .codetab__links {
-    background-color: #161B22;
-    outline: #30363D solid 1px;
-  }
-  .codetab__links button {
-    color: #c9d1d9;
-  }
-  .codetab__link.active {
-    border-bottom: #30363D solid 2px;
-  }
-  .post-content .highlight:not(table) {
-    background-color: #0D1117;
-    outline: #30363d solid 1px;
-  }
+    .codetab__links {
+        background-color: #161B22;
+        outline: #30363D solid 1px;
+    }
+
+    .codetab__links button {
+        color: #c9d1d9;
+    }
+
+    .codetab__link.active {
+        border-bottom: #30363D solid 2px;
+    }
+
+    .post-content .highlight:not(table) {
+        background-color: #0D1117;
+        outline: #30363d solid 1px;
+    }
 
 }
+
 @media (prefers-color-scheme: light) {
-  .codetab__links {
-    background-color: #FFF;
-    outline: #e5e7eb solid 1px;
-  }
-  .codetab__links button {
-    color: #1F2328;
-  }
-  .codetab__link.active {
-    background-color: #FFF!important;
-    border-bottom: #D0D7DE solid 2px;
-  }
-  .post-content .highlight:not(table) {
-    background-color: #FFF;
-    outline: #e5e7eb solid 1px;
-  }
-  .post-content pre code {
-    /*background-color: #FFF;*/
-  }
+    .codetab__links {
+        background-color: #FFF;
+        outline: #e5e7eb solid 1px;
+    }
+
+    .codetab__links button {
+        color: #1F2328;
+    }
+
+    .codetab__link.active {
+        background-color: #FFF !important;
+        border-bottom: #D0D7DE solid 2px;
+    }
+
+    .post-content .highlight:not(table) {
+        background-color: #FFF;
+        outline: #e5e7eb solid 1px;
+    }
+
+    .post-content pre code {
+        /*background-color: #FFF;*/
+    }
 }
 
 .codetab__links {
-  /* border-bottom: #c9d1d9 solid 1px; */
-  border-radius: var(--radius) var(--radius) 0 0;
-  overflow: auto;
-  user-select: none;
-  font-family: 'JetBrains Mono';
-  font-size: smaller;
-  font-weight: 400;
-  display: flex;
+    /* border-bottom: #c9d1d9 solid 1px; */
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: auto;
+    user-select: none;
+    font-family: 'JetBrains Mono';
+    font-size: smaller;
+    font-weight: 400;
+    display: flex;
 }
 
 .codetab__links button {
-  user-select: none;
-  padding: .25rem .6rem;
-  text-transform: capitalize;
-  /* color: #c9d1d9; */
-  display: flex;
-  align-items: center;
+    user-select: none;
+    padding: .25rem .6rem;
+    text-transform: capitalize;
+    /* color: #c9d1d9; */
+    display: flex;
+    align-items: center;
 }
 
 .codetab__links :first-child {
-  padding: .25rem 1rem .25rem 1.2rem !important
+    padding: .25rem 1rem .25rem 1.2rem !important
 }
 
 .codetab__link.active {
-  background: var(--code-block-bg);
-  user-select: none;
-  /* font-size: 105%; */
-  font-weight: 800;
-  /* border-bottom: #c9d1d9 solid 2px; */
+    background: var(--code-block-bg);
+    user-select: none;
+    /* font-size: 105%; */
+    font-weight: 800;
+    /* border-bottom: #c9d1d9 solid 2px; */
 }
 
 .lntable {
-  scrollbar-width: none;
-  text-wrap: nowrap;
+    scrollbar-width: none;
+    text-wrap: nowrap;
 }
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
 body {
-  font-family:  'LXGW WenKai','PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
+    font-family: 'LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei', sans-serif;
+    transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 /* ========== 代码字体：JetBrains Mono ========== */
 code {
-  font-family: 'JetBrains Mono', Monaco, Consolas, 'Courier New', monospace;
+    font-family: 'JetBrains Mono', Monaco, Consolas, 'Courier New', monospace;
 }
 
 /* ========= 文章和目录自动编号（从二级标题开始）============ */
 
 .post-content {
-  counter-reset: h1
+    counter-reset: h1
 }
+
 h1 {
-  counter-reset: h2
+    counter-reset: h2
 }
+
 h2 {
-  counter-reset: h3
+    counter-reset: h3;
+    font-weight: 400;
 }
+
 h3 {
-  counter-reset: h4
+    counter-reset: h4;
+    font-weight: 400;
 }
+
 h4 {
-  counter-reset: h5
+    counter-reset: h5
 }
 
 article[autonumbering] h1:not(.post-title)::before {
-  counter-increment: h1;
-  content: counter(h1) ". "
+    counter-increment: h1;
+    content: counter(h1) ". "
 }
 
 article[autonumbering] h2:before {
-  counter-increment: h2;
-  content: counter(h1) "."counter(h2) " "
+    counter-increment: h2;
+    content: counter(h1) "." counter(h2) " "
 }
 
 article[autonumbering] h3:before {
-  counter-increment: h3;
-  content: counter(h1) "."counter(h2) "."counter(h3) " "
+    counter-increment: h3;
+    content: counter(h1) "." counter(h2) "." counter(h3) " "
 }
 
 article[autonumbering] h4:before {
-  counter-increment: h4;
-  content: counter(h1) "."counter(h2) "."counter(h3) "."counter(h4) " "
+    counter-increment: h4;
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) " "
 }
+
 article[autonumbering] h5:before {
-  counter-increment: h5;
-  content: counter(h1) "."counter(h2) "."counter(h3) "."counter(h4) "."counter(h5) " "
+    counter-increment: h5;
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "
 }
 
 article[autonumbering] .toc ul {
-  counter-reset: item
+    counter-reset: item
 }
 
 article[autonumbering] .toc li a:before {
-  content: counters(item, ".") " ";
-  counter-increment: item
+    content: counters(item, ".") " ";
+    counter-increment: item
 }
 
 
 /* ========= 目录左置 ============ */
 :root {
-  --nav-width: 1380px;
-  --article-width: 650px;
-  --toc-width: 300px;
+    --nav-width: 1380px;
+    --article-width: 650px;
+    --toc-width: 300px;
 }
 
 .toc {
-  /* margin: 0 2px 60px 2px; */
-  border: 1px solid var(--border);
-  background: var(--entry);
-  border-radius: var(--radius);
-  padding: .5em .7em .3em .7em;
+    /* margin: 0 2px 60px 2px; */
+    border: 1px solid var(--border);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: .5em .7em .3em .7em;
 }
 
 .toc-container.wide {
-  position: absolute;
-  height: calc(100% - 165px);
-  left: calc((var(--toc-width) + var(--gap)) * -1.2);
-  width: calc(var(--toc-width) * 1.15)
+    position: absolute;
+    height: calc(100% - 165px);
+    left: calc((var(--toc-width) + var(--gap)) * -1.2);
+    width: calc(var(--toc-width) * 1.15)
 }
 
 .wide .toc {
-  position: sticky;
-  top: var(--gap);
-  border: unset;
-  background: unset;
-  border-radius: unset;
-  width: 100%;
-  margin: 0 2px 60px 2px;
-  max-height: calc(100vh - 50px);
-  overflow-y: auto;
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 60px 2px;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
 }
 
 .toc details summary {
-  cursor: zoom-in;
-  margin-inline-start: 20px;
-  padding: 12px 0;
+    cursor: zoom-in;
+    margin-inline-start: 20px;
+    padding: 12px 0;
 }
 
 .toc details[open] summary {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .toc-container.wide .toc .inner {
-  margin: 0;
+    margin: 0;
 }
 
 .inner a.active {
-  font-size: 110%;
-  font-weight: 900;
-  color: #67c23a;
+    font-size: 110%;
+    font-weight: 900;
+    color: #67c23a;
 }
 
 .toc ul {
-  list-style-type: circle;
+    list-style-type: circle;
 }
 
 .toc .inner {
-  margin: 0 0 0 20px;
-  padding: 0px 15px 15px 20px;
-  font-size: 16px;
+    margin: 0 0 0 20px;
+    padding: 0px 15px 15px 20px;
+    font-size: 16px;
 
-  /* max-height: 83vh; */
-  overflow-y: auto;
+    /* max-height: 83vh; */
+    overflow-y: auto;
 }
 
 .toc .inner::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border: 7px solid var(--theme);
-  border-radius: var(--radius);
+    background: var(--border);
+    border: 7px solid var(--theme);
+    border-radius: var(--radius);
 }
 
 .toc li ul {
-  margin-inline-start: calc(var(--gap) * 0.5);
-  list-style-type: none;
+    margin-inline-start: calc(var(--gap) * 0.5);
+    list-style-type: none;
 }
 
 .toc li {
-  list-style: none;
-  font-size: 0.95rem;
-  padding-bottom: 5px;
+    list-style: none;
+    font-size: 0.95rem;
+    padding-bottom: 5px;
 }
 
-.toc li a:hover { 
+.toc li a:hover {
     color: #6cee2b;
 }
 
@@ -518,62 +537,62 @@ article[autonumbering] .toc li a:before {
 
 @-webkit-keyframes _wave-animation_hello {
 
-  0%,
-  60%,
-  to {
-    -webkit-transform: rotate(0);
-    transform: rotate(0)
-  }
+    0%,
+    60%,
+    to {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
 
-  10%,
-  30% {
-    -webkit-transform: rotate(14deg);
-    transform: rotate(14deg)
-  }
+    10%,
+    30% {
+        -webkit-transform: rotate(14deg);
+        transform: rotate(14deg)
+    }
 
-  20% {
-    -webkit-transform: rotate(-8deg);
-    transform: rotate(-8deg)
-  }
+    20% {
+        -webkit-transform: rotate(-8deg);
+        transform: rotate(-8deg)
+    }
 
-  40% {
-    -webkit-transform: rotate(-4deg);
-    transform: rotate(-4deg)
-  }
+    40% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg)
+    }
 
-  50% {
-    -webkit-transform: rotate(10deg);
-    transform: rotate(10deg)
-  }
+    50% {
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg)
+    }
 }
 
 @keyframes _wave-animation_hello {
 
-  0%,
-  60%,
-  to {
-    -webkit-transform: rotate(0);
-    transform: rotate(0)
-  }
+    0%,
+    60%,
+    to {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
 
-  10%,
-  30% {
-    -webkit-transform: rotate(14deg);
-    transform: rotate(14deg)
-  }
+    10%,
+    30% {
+        -webkit-transform: rotate(14deg);
+        transform: rotate(14deg)
+    }
 
-  20% {
-    -webkit-transform: rotate(-8deg);
-    transform: rotate(-8deg)
-  }
+    20% {
+        -webkit-transform: rotate(-8deg);
+        transform: rotate(-8deg)
+    }
 
-  40% {
-    -webkit-transform: rotate(-4deg);
-    transform: rotate(-4deg)
-  }
+    40% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg)
+    }
 
-  50% {
-    -webkit-transform: rotate(10deg);
-    transform: rotate(10deg)
-  }
+    50% {
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg)
+    }
 }

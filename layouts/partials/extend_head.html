@@ -19,15 +19,15 @@
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-<!-- <link rel="preload" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" as="style"> -->
-<!-- <link rel="preload" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" as="style"> -->
+<link as="style" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" rel="preload">
+<link as="style" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">
 
 <!-- 文章字体设置 Fonts -->
 <script src="/static/Fonts/webfont.js"></script>
 <script>
     WebFont.load({
         custom: {
-            families: ['LXGW WenKai', 'JetBrains Mono'],
+            families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
             urls: [
                 '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
                 '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
@@ -43,23 +43,23 @@
         }
     });
 
-      // 注册 Service Worker 并预加载 #menu 下的所有链接
-      if ('serviceWorker' in navigator) {
+    // 注册 Service Worker 并预加载 #menu 下的所有链接
+    if ('serviceWorker' in navigator) {
         // console.log('Service Worker is supported.');
 
         navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
             // console.log('Service Worker registered with scope:', registration.scope);
             // console.log(registration);
         }).catch(function (error) {
-        //   console.log('Service Worker registration failed:', error);
+            //   console.log('Service Worker registration failed:', error);
         });
-      } else {
+    } else {
         // console.log('Service Worker is not supported.');
-      }
+    }
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         function createSequentialObserver(selector, delay) {
             let elements = Array.from(document.querySelectorAll(selector));
             elements.sort((a, b) => {
@@ -73,7 +73,7 @@
 
             const observer = new IntersectionObserver((entries) => {
                 if (!isAnimating) {
-                    const hasVisibleUnloaded = entries.some(entry => 
+                    const hasVisibleUnloaded = entries.some(entry =>
                         entry.isIntersecting && !entry.target.classList.contains('loaded')
                     );
                     if (hasVisibleUnloaded) {
@@ -89,7 +89,7 @@
             function processVisibleElements() {
                 const viewportTop = window.pageYOffset;
                 const viewportBottom = viewportTop + window.innerHeight;
-                
+
                 // 找出所有在视窗范围内或刚刚离开视窗的未加载元素
                 const unloadedElements = elements.filter(element => {
                     if (element.classList.contains('loaded')) return false;
@@ -106,10 +106,10 @@
                 // 获取最上方的未加载元素
                 const nextElement = unloadedElements[0];
                 const elementTop = nextElement.getBoundingClientRect().top + window.pageYOffset;
-                
+
                 // 更新最后处理的位置
                 lastProcessedY = elementTop;
-                
+
                 // 添加动画类
                 nextElement.classList.add('loaded');
 
@@ -132,7 +132,7 @@
                     if (!isAnimating) {
                         const viewportTop = window.pageYOffset;
                         const viewportBottom = viewportTop + window.innerHeight;
-                        
+
                         const hasUnloadedInView = elements.some(element => {
                             if (element.classList.contains('loaded')) return false;
                             const rect = element.getBoundingClientRect();
@@ -169,7 +169,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 0vmin;
+        width: 0;
         height: 1px;
         background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
         z-index: 9000;
@@ -210,12 +210,12 @@
 } */
 </style>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // 监听post-header的loaded类变化
         const postHeader = document.querySelector('.post-header');
         if (postHeader) {
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                         if (postHeader.classList.contains('loaded')) {
                             // 当post-header有loaded类时,为postcontent添加loaded类
