@@ -1,7 +1,7 @@
 {{- /* Head custom content area start */ -}}
 {{- /* Insert any custom code (web-analytics, resources, etc.) - it will appear in the
 
-<head></head> section of every page. */ -}}
+section of every page. */ -}}
 {{- /* Can be overwritten by partial with the same name in the global layouts. */ -}}
 
 
@@ -15,12 +15,10 @@
 <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
 <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
 <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" /> -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.7.0/style.min.css" /> -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css" /> -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-<link as="style" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" rel="preload">
-<link as="style" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="stylesheet"/>
+<!--<link as="style" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" rel="preload">-->
+<!--<link as="style" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">-->
 
 <!-- 文章字体设置 Fonts -->
 <script src="/static/Fonts/webfont.js"></script>
@@ -29,8 +27,8 @@
         custom: {
             families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
             urls: [
-                '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
-                '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
+                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
             ]
         },
         active: function () {
@@ -60,11 +58,30 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        function createSequentialObserver(selector, delay) {
-            let elements = Array.from(document.querySelectorAll(selector));
-            elements.sort((a, b) => {
-                const aTop = a.getBoundingClientRect().top + window.pageYOffset;
-                const bTop = b.getBoundingClientRect().top + window.pageYOffset;
+        const createSequentialObserver = (selectors, delay) => {
+            const elementsRegistry = [];
+
+            selectors.forEach(selector => {
+                const elements = Array.from(document.querySelectorAll(selector));
+                elements.forEach(element => {
+                    elementsRegistry.push({element, loaded: false, isImmediate: false});
+                });
+            });
+
+            // 标记 .archive-year-header 和 .archive-month-header 为 "立即加载"
+            const immediateSelectors = ['.archive-year-header', '.archive-month-header'];
+            immediateSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(element => {
+                    const registryItem = elementsRegistry.find(item => item.element === element);
+                    if (registryItem) {
+                        registryItem.isImmediate = true;
+                    }
+                });
+            });
+
+            elementsRegistry.sort((a, b) => {
+                const aTop = a.element.getBoundingClientRect().top + window.pageYOffset;
+                const bTop = b.element.getBoundingClientRect().top + window.pageYOffset;
                 return aTop - bTop;
             });
 
@@ -82,85 +99,99 @@
                     }
                 }
             }, {
-                rootMargin: "5px 0px",
-                threshold: [0, 0.5, 1]
+                rootMargin: '20px 0px',
+                threshold: [0, 0.5, 1],
             });
 
-            function processVisibleElements() {
+            const processVisibleElements = () => {
                 const viewportTop = window.pageYOffset;
                 const viewportBottom = viewportTop + window.innerHeight;
 
-                // 找出所有在视窗范围内或刚刚离开视窗的未加载元素
-                const unloadedElements = elements.filter(element => {
-                    if (element.classList.contains('loaded')) return false;
-                    const rect = element.getBoundingClientRect();
+                const nextItem = elementsRegistry.find(item => {
+                    if (item.loaded) return false;
+                    const rect = item.element.getBoundingClientRect();
                     const elementTop = rect.top + window.pageYOffset;
-                    return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
+                    return elementTop >= lastProcessedY && elementTop <= viewportBottom + 100;
                 });
 
-                if (unloadedElements.length === 0) {
+                if (!nextItem) {
                     isAnimating = false;
                     return;
                 }
 
-                // 获取最上方的未加载元素
-                const nextElement = unloadedElements[0];
-                const elementTop = nextElement.getBoundingClientRect().top + window.pageYOffset;
+                const element = nextItem.element;
 
-                // 更新最后处理的位置
-                lastProcessedY = elementTop;
+                // 跳过节流逻辑，对 .archive-year-header 和 .archive-month-header 直接处理
+                if (nextItem.isImmediate) {
+                    nextItem.loaded = true;
+                    element.classList.add('loaded');
+                    lastProcessedY = element.getBoundingClientRect().top + window.pageYOffset;
+                    processVisibleElements(); // 继续处理下一个
+                    return;
+                }
 
-                // 添加动画类
-                nextElement.classList.add('loaded');
+                lastProcessedY = element.getBoundingClientRect().top + window.pageYOffset;
+                nextItem.loaded = true;
+                element.classList.add('loaded');
 
-                // 继续处理下一个元素
-                setTimeout(() => {
-                    processVisibleElements();
-                }, delay);
-            }
+                setTimeout(processVisibleElements, delay);
+            };
 
-            // 观察所有元素
-            elements.forEach(element => {
-                observer.observe(element);
+            elementsRegistry.forEach(item => {
+                observer.observe(item.element);
             });
 
-            // 滚动处理
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    if (!isAnimating) {
-                        const viewportTop = window.pageYOffset;
-                        const viewportBottom = viewportTop + window.innerHeight;
+            const scrollHandler = throttle(() => {
+                if (!isAnimating) {
+                    const viewportTop = window.pageYOffset;
+                    const viewportBottom = viewportTop + window.innerHeight;
 
-                        const hasUnloadedInView = elements.some(element => {
-                            if (element.classList.contains('loaded')) return false;
-                            const rect = element.getBoundingClientRect();
-                            const elementTop = rect.top + window.pageYOffset;
-                            return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
-                        });
+                    const hasUnloadedInView = elementsRegistry.some(item => {
+                        if (item.loaded) return false;
+                        const rect = item.element.getBoundingClientRect();
+                        const elementTop = rect.top + window.pageYOffset;
+                        return elementTop >= lastProcessedY && elementTop <= viewportBottom + 100;
+                    });
 
-                        if (hasUnloadedInView) {
-                            isAnimating = true;
-                            processVisibleElements();
-                        }
+                    if (hasUnloadedInView) {
+                        isAnimating = true;
+                        processVisibleElements();
                     }
-                }, 50);
-            });
+                }
+            }, 100);
 
-            // 初始检查
+            window.addEventListener('scroll', scrollHandler);
+
             setTimeout(() => {
                 if (!isAnimating) {
                     processVisibleElements();
                 }
-            }, 100);
-        }
+            }, 50);
+        };
 
-        // 为不同区域的元素创建观察器
-        createSequentialObserver('.list > .main > *', 160);
-        createSequentialObserver('#top > .main > *', 130);
-        createSequentialObserver('.archive-year-header, .archive-month-header, .archive-posts >*', 60);
-        createSequentialObserver('.post > *', 190);
+        const throttle = (fn, wait) => {
+            let timeout = null;
+            return function (...args) {
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        fn.apply(this, args);
+                        timeout = null;
+                    }, wait);
+                }
+            };
+        };
+
+        createSequentialObserver(
+            [
+                '.list > .main > *',
+                '#top > .main > *',
+                '.archive-year-header',
+                '.archive-month-header',
+                '.archive-posts > *',
+                '.post > *',
+            ],
+            150
+        );
     });
 </script>
 <style>
