@@ -34,16 +34,16 @@
             {{- end -}}
         {{- end -}}, {{$cover.Permalink }} {{printf "%dw" ($cover.Width)}}" sizes="{{ $dataSzes }}" />
 
-        <img loading="lazy" src="{{ $cover.Permalink }}" alt="{{ $alt }}" 
+            <img alt="{{ $alt }}" fetchpriority="high" src="{{ $cover.Permalink }}"
             width="{{ $cover.Width }}" height="{{ $cover.Height }}">
         </picture>
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-        <img loading="lazy" src="{{ (path.Join .RelPermalink .Params.cover.image) | absURL }}" alt="{{ $alt }}">
+    <img alt="{{ $alt }}" fetchpriority="high" src="{{ (path.Join .RelPermalink .Params.cover.image) | absURL }}">
         {{- end }}
     {{- else }}{{/* For absolute urls and external links, no img processing here */}}
         {{- if $addLink }}<a href="{{ (.Params.cover.image) | absURL }}" target="_blank"
             rel="noopener noreferrer">{{ end -}}
-            <img loading="lazy" src="{{ (.Params.cover.image) | absURL }}" alt="{{ $alt }}">
+        <img alt="{{ $alt }}" fetchpriority="high" src="{{ (.Params.cover.image) | absURL }}">
     {{- end }}
     {{- if $addLink }}</a>{{ end -}}
     {{/*  Display Caption  */}}

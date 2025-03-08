@@ -15,31 +15,36 @@ section of every page. */ -}}
 <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
 <!-- <link rel="stylesheet" href="/static/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
 <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
-<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="stylesheet"/>
+<!-- 预加载关键资源 -->
+<link href="https://cdn.jsdelivr.net" rel="preconnect">
+<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" rel="preload">
+<link as="style" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">
 <!--<link as="style" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" rel="preload">-->
 <!--<link as="style" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">-->
 
 <!-- 文章字体设置 Fonts -->
-<script src="/static/Fonts/webfont.js"></script>
+<script defer src="/static/Fonts/webfont.js"></script>
 <script>
-    WebFont.load({
-        custom: {
-            families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
-            urls: [
-                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
-                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
-            ]
-        },
-        active: function () {
-            // console.log('Fonts have loaded');
-            // 在字体加载完成后执行特定的操作
-        },
-        inactive: function () {
-            // console.log('Fonts failed to load');
-            // 在字体加载失败后执行特定的操作
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        WebFont.load({
+            custom: {
+                families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
+                urls: [
+                    'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
+                    'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+                ]
+            },
+            active: function () {
+                // console.log('Fonts have loaded');
+                // 在字体加载完成后执行特定的操作
+            },
+            inactive: function () {
+                // console.log('Fonts failed to load');
+                // 在字体加载失败后执行特定的操作
+            }
+        });
     });
+
 
     // 注册 Service Worker 并预加载 #menu 下的所有链接
     if ('serviceWorker' in navigator) {
