@@ -1,10 +1,3 @@
-{{- /* Head custom content area start */ -}}
-{{- /* Insert any custom code (web-analytics, resources, etc.) - it will appear in the
-
-section of every page. */ -}}
-{{- /* Can be overwritten by partial with the same name in the global layouts. */ -}}
-
-
 <!-- /* ========== umami  ========== */ -->
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
@@ -25,27 +18,6 @@ section of every page. */ -}}
 <!-- 文章字体设置 Fonts -->
 <script src="/static/Fonts/webfont.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        WebFont.load({
-            custom: {
-                families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
-                urls: [
-                    'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
-                    'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
-                ]
-            },
-            active: function () {
-                // console.log('Fonts have loaded');
-                // 在字体加载完成后执行特定的操作
-            },
-            inactive: function () {
-                // console.log('Fonts failed to load');
-                // 在字体加载失败后执行特定的操作
-            }
-        });
-    });
-
-
     // 注册 Service Worker 并预加载 #menu 下的所有链接
     if ('serviceWorker' in navigator) {
         // console.log('Service Worker is supported.');
