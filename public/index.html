@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html dir="auto" lang="en">
+
+<head>
+    <meta content="Hugo 0.140.1" name="generator">
+    <script data-no-instant defer src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload"></script>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="noindex, nofollow" name="robots">
+    <title></title>
+
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <link href="//localhost:1313/" rel="canonical">
+    <link as="style"
+          crossorigin="anonymous"
+          href="/assets/css/stylesheet.5312d086f2e24aa4ab0e2e250836a185a69af647e4132503fce7d1bb3d88e008.css" integrity="sha256-UxLQhvLiSqSrDi4lCDahhaaa9kfkEyUD/OfRuz2I4Ag=" rel="preload stylesheet">
+    <link
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🐸</text></svg>"
+            rel="icon"
+    />
+
+
+    <meta content="#fafafa00" media="(prefers-color-scheme: light)" name="theme-color">
+    <meta content="#04040400" media="(prefers-color-scheme: dark)" name="theme-color">
+    <meta content="yes" name="mobile-web-app-capable"/>
+
+    <meta content="#2e2e33" name="msapplication-TileColor">
+    <link href="//localhost:1313/index.xml" rel="alternate" type="application/rss+xml">
+    <link href="//localhost:1313/" hreflang="en" rel="alternate">
+
+
+    <script src="/static/Fonts/webfont.js"></script>
+    <script>
+        WebFont.load({
+            custom: {
+                families: ['LXGW WenKai', 'JetBrains Mono'],
+                urls: [
+                    '/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css',
+                    '/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+                ]
+            },
+            active: function () {
+
+
+            },
+            inactive: function () {
+
+
+            }
+        });
+
+
+        if ('serviceWorker' in navigator) {
+
+
+            navigator.serviceWorker.register('/static/JS/service-worker.js').then(function (registration) {
+
+
+            }).catch(function (error) {
+
+            });
+        } else {
+
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function createSequentialObserver(selector, delay) {
+                let elements = Array.from(document.querySelectorAll(selector));
+                elements.sort((a, b) => {
+                    const aTop = a.getBoundingClientRect().top + window.pageYOffset;
+                    const bTop = b.getBoundingClientRect().top + window.pageYOffset;
+                    return aTop - bTop;
+                });
+
+                let isAnimating = false;
+                let lastProcessedY = -Infinity;
+
+                const observer = new IntersectionObserver((entries) => {
+                    if (!isAnimating) {
+                        const hasVisibleUnloaded = entries.some(entry =>
+                            entry.isIntersecting && !entry.target.classList.contains('loaded')
+                        );
+                        if (hasVisibleUnloaded) {
+                            isAnimating = true;
+                            processVisibleElements();
+                        }
+                    }
+                }, {
+                    rootMargin: "5px 0px",
+                    threshold: [0, 0.5, 1]
+                });
+
+                function processVisibleElements() {
+                    const viewportTop = window.pageYOffset;
+                    const viewportBottom = viewportTop + window.innerHeight;
+
+
+                    const unloadedElements = elements.filter(element => {
+                        if (element.classList.contains('loaded')) return false;
+                        const rect = element.getBoundingClientRect();
+                        const elementTop = rect.top + window.pageYOffset;
+                        return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
+                    });
+
+                    if (unloadedElements.length === 0) {
+                        isAnimating = false;
+                        return;
+                    }
+
+
+                    const nextElement = unloadedElements[0];
+                    const elementTop = nextElement.getBoundingClientRect().top + window.pageYOffset;
+
+
+                    lastProcessedY = elementTop;
+
+
+                    nextElement.classList.add('loaded');
+
+
+                    setTimeout(() => {
+                        processVisibleElements();
+                    }, delay);
+                }
+
+
+                elements.forEach(element => {
+                    observer.observe(element);
+                });
+
+
+                let scrollTimeout;
+                window.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        if (!isAnimating) {
+                            const viewportTop = window.pageYOffset;
+                            const viewportBottom = viewportTop + window.innerHeight;
+
+                            const hasUnloadedInView = elements.some(element => {
+                                if (element.classList.contains('loaded')) return false;
+                                const rect = element.getBoundingClientRect();
+                                const elementTop = rect.top + window.pageYOffset;
+                                return elementTop >= lastProcessedY && elementTop <= (viewportBottom + 100);
+                            });
+
+                            if (hasUnloadedInView) {
+                                isAnimating = true;
+                                processVisibleElements();
+                            }
+                        }
+                    }, 50);
+                });
+
+
+                setTimeout(() => {
+                    if (!isAnimating) {
+                        processVisibleElements();
+                    }
+                }, 100);
+            }
+
+
+            createSequentialObserver('.list > .main > *', 160);
+            createSequentialObserver('#top > .main > *', 130);
+            createSequentialObserver('.archive-year-header, .archive-month-header, .archive-posts >*', 60);
+            createSequentialObserver('.post > *', 190);
+        });
+    </script>
+    <style>
+
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0vmin;
+            height: 1px;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
+            z-index: 9000;
+            transition: .45s cubic-bezier(0, .5, .5, 1) !important;
+        }
+
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const postHeader = document.querySelector('.post-header');
+            if (postHeader) {
+                const observer = new MutationObserver(function (mutations) {
+                    mutations.forEach(function (mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (postHeader.classList.contains('loaded')) {
+
+                                const postContent = document.querySelector('.post-content');
+                                if (postContent) {
+                                    postContent.classList.add('loaded');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                observer.observe(postHeader, {
+                    attributes: true
+                });
+            }
+        });
+    </script>
+</head>
+
+<body class="list" id="top">
+<header class="header">
+    <div id="progress-bar"></div>
+    <div id="transition-image"></div>
+    <nav class="nav">
+        <div class="logo">
+            <div class="logo-switches">
+                <button accesskey="t" id="theme-toggle" title="(Alt + T)">
+                    <svg fill="none" height="18" id="moon" stroke="currentColor" stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg fill="none" height="18" id="sun" stroke="currentColor" stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" x2="12" y1="1" y2="3"></line>
+                        <line x1="12" x2="12" y1="21" y2="23"></line>
+                        <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+                        <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+                        <line x1="1" x2="3" y1="12" y2="12"></line>
+                        <line x1="21" x2="23" y1="12" y2="12"></line>
+                        <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+                        <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+
+<main class="main">
+</main>
+
+<footer class="footer">
+
+    <span>&copy; 2021-2025 Ramos</span> ·
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-ND 4.0</a> 
+    </span>
+
+</footer>
+<a accesskey="g" aria-label="go to top" class="top-link" href="#top" id="top-link" title="Go to Top (Alt + G)">
+    <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="m4.5 18.75 7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="m4.5 12.75 7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</a>
+<html>
+<footer>
+
+
+    <div>
+        <script>
+            document.querySelectorAll('.post-entry,.logo a,#menu a').forEach(function (entry) {
+                entry.addEventListener('click', function () {
+                    var entries = document.querySelectorAll('.main');
+                    entries.forEach(function (entry) {
+                        entry.classList.add('unloaded');
+                    });
+                });
+            });
+            window.addEventListener('pageshow', function () {
+                var entries = document.querySelectorAll('.main');
+                entries.forEach(function (entry) {
+                    entry.classList.remove('unloaded');
+                });
+            });
+        </script>
+        <style>
+            .unloaded {
+                pointer-events: none;
+                transition: filter .4s cubic-bezier(0, .5, .5, 1), opacity .4s cubic-bezier(0, .5, .5, 1), transform .5s cubic-bezier(0, .6, .6, 1);
+                filter: blur(10px);
+                transform: translateY(60px) !important;
+                opacity: 0 !important;
+            }
+        </style>
+    </div>
+
+
+    <div>
+        <script>
+
+            let copyButtons = document.querySelectorAll('.copyButton').forEach(function (copyButton) {
+                let parent = copyButton.parentElement.nextElementSibling;
+
+                let code = parent.querySelectorAll('code')[1].innerText;
+
+                code = code.replace(/\n{2}/g, '\n');
+
+                if (code) {
+                    copyButton.addEventListener('click', function () {
+                        if (navigator.clipboard) {
+
+                            navigator.clipboard.writeText(code);
+                        }
+                    })
+                }
+            });
+
+            document.querySelectorAll('.codetab') ?
+                document.querySelectorAll('.codetab').forEach(function (elem, idx) {
+                    var containerId = elem.getAttribute('id');
+                    var containerElem = elem;
+                    var codetabLinks = elem.querySelectorAll('.codetab__link');
+                    var codetabContents = elem.querySelectorAll('.codetab__content');
+                    var ids = [];
+
+
+                    codetabLinks && codetabLinks.length > 0 ?
+                        codetabLinks.forEach(function (link, index, self) {
+
+                            link.onclick = function (e) {
+
+                                for (var i = 0; i < self.length; i++) {
+                                    if (index === parseInt(i, 10)) {
+                                        if (!self[i].classList.contains('active')) {
+                                            self[i].classList.add('active');
+                                            codetabContents[i].classList.add('active');
+                                            codetabContents[i].style.display = 'block';
+                                        }
+                                    } else {
+                                        self[i].classList.remove('active');
+                                        codetabContents[i].classList.remove('active');
+                                        codetabContents[i].style.display = 'none';
+                                    }
+                                }
+
+                                let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
+
+                                code = code.replace(/\n{2}/g, '\n');
+
+                                if (code) {
+                                    let copyButton = containerElem.querySelectorAll('.copyButton')[0];
+
+
+                                    var newButton = copyButton.cloneNode(true);
+                                    copyButton.parentNode.replaceChild(newButton, copyButton);
+
+
+                                    newButton.addEventListener('click', function () {
+                                        if (navigator.clipboard) {
+                                            navigator.clipboard.writeText(code);
+                                        }
+                                    });
+
+                                    copyButton = newButton;
+                                }
+                            }
+                        }) : null;
+                }) : null;
+        </script>
+
+    </div>
+
+
+    <div>
+
+
+        <script src="/static/Fancyapps/dist/fancybox/fancybox.umd.js"></script>
+        <link href="/static/Fancyapps/dist/fancybox/fancybox.css" rel="stylesheet"/>
+        <script>
+            Fancybox.bind("[data-fancybox]", {
+
+                Carousel: {
+                    transition: "slide",
+                },
+                groupAll: true,
+                groupAttr: "data",
+                contentClick: "zoomToFit",
+                contentDblClick: "false",
+                wheel: "zoom",
+                Images: {
+                    initialSize: "fit",
+                    protected: true,
+
+
+                },
+                Toolbar: {
+                    display: {
+                        left: ["infobar"],
+
+                        middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
+
+                        right: ["download", "close"],
+                    },
+                },
+            });
+        </script>
+    </div>
+
+
+</footer>
+
+</html>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>
