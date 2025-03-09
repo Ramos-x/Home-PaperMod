@@ -27,7 +27,7 @@
 
 .logo a {
     /*font-size: 24px;*/
-    font-size: clamp(25px, 1.5vw, 28px);
+    font-size: clamp(25px, 1.5vw, 26px);
     font-weight: 700;
 }
 
@@ -67,7 +67,7 @@ body:not(.dark) #sun {
 
 #menu a {
     /*font-size: 17px;*/
-    font-size: clamp(17px, 1.2vw, 20px);;
+    font-size: clamp(17px, 1.2vw, 18px);;
 }
 
 #menu .active {

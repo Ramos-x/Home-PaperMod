@@ -213,12 +213,15 @@ body.dark .notice {
 }
 
 .copyButton:active {
+    color: #67c23a;
     filter: brightness(1.2) !important; /* 增加亮度 */
 }
 
-.copyButton:hover {
-    color: #67c23a;
-    transition: all .12s cubic-bezier(0, .5, .5, 1), margin-right 0s;
+@media not (hover: none) {
+    .copyButton:hover {
+        color: #67c23a;
+        transition: all .12s cubic-bezier(0, .5, .5, 1), margin-right 0s;
+    }
 }
 
 /* ========== 图片居中 ========== */
@@ -316,6 +319,7 @@ body.dark .notice {
     .codetab__links {
         background-color: #FFF;
         outline: #e5e7eb solid 1px;
+        background-color: #f6f8fa;
     }
 
     .codetab__links button {
