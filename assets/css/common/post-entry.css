@@ -47,7 +47,7 @@
     box-shadow: 0 0 2px 0px #6666;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) and (hover: hover) {
     .post-entry.loaded:hover,
     .post-entry.loaded .entry-cover:hover ~ .post-entry {
         box-shadow: 0 0 7px 1px #7777;
@@ -57,7 +57,7 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) and (hover: hover) {
     .post-entry.loaded:hover,
     .post-entry.loaded .entry-cover:hover ~ .post-entry {
         box-shadow: 0 0 7px 1px #7777;
@@ -76,7 +76,7 @@
 }
 
 .entry-header h2 {
-    font-size: 24px;
+    font-size: 23px;
     line-height: 1.3;
 }
 

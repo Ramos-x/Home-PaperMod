@@ -4,9 +4,10 @@
     max-width: calc(var(--nav-width) + var(--gap) * 2);
     margin-inline-start: auto;
     margin-inline-end: auto;
-    line-height: clamp(50px,4vw,60px);
+    line-height: clamp(40px, 4vw, 60px);
     /* line-height: var(--header-height); */
     justify-content: space-around;
+    margin-top: clamp(5px, 1vw, 10px);
 }
 
 .nav a {
@@ -25,7 +26,8 @@
 }
 
 .logo a {
-    font-size: 24px;
+    /*font-size: 24px;*/
+    font-size: clamp(25px, 1.5vw, 28px);
     font-weight: 700;
 }
 
@@ -64,7 +66,8 @@ body:not(.dark) #sun {
 }
 
 #menu a {
-    font-size: 17px;
+    /*font-size: 17px;*/
+    font-size: clamp(17px, 1.2vw, 20px);;
 }
 
 #menu .active {
