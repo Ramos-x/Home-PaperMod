@@ -5,6 +5,158 @@
 <html>
 <footer>
 
+    <script>
+        (function () {
+            // 智能内容检测器
+            function checkContentReady() {
+                // 主内容选择器（根据实际页面结构调整）
+                const mainContentSelector = '.list, #top, .archive-posts, .post';
+                const target = document.querySelector(mainContentSelector);
+
+                if (target) {
+                    initSequentialLoader();
+                } else {
+                    const contentObserver = new MutationObserver((mutations, observer) => {
+                        if (document.querySelector(mainContentSelector)) {
+                            initSequentialLoader();
+                            observer.disconnect();
+                        }
+                    });
+
+                    contentObserver.observe(document.documentElement, {
+                        childList: true,
+                        subtree: true
+                    });
+
+                    // 安全后备：DOMContentLoaded
+                    const backupInit = () => {
+                        contentObserver.disconnect();
+                        initSequentialLoader();
+                    };
+                    document.addEventListener('DOMContentLoaded', backupInit);
+                    setTimeout(backupInit, 3000); // 最终安全保障
+                }
+            }
+
+            // 原始业务逻辑封装
+            function initSequentialLoader() {
+                const createSequentialObserver = (selectors, delay) => {
+                    const elementsRegistry = [];
+
+                    selectors.forEach(selector => {
+                        const elements = Array.from(document.querySelectorAll(selector));
+                        elements.forEach(element => {
+                            elementsRegistry.push({element, loaded: false, isImmediate: false});
+                        });
+                    });
+
+                    // 立即加载元素标记
+                    ['.archive-year-header', '.archive-month-header'].forEach(selector => {
+                        document.querySelectorAll(selector).forEach(element => {
+                            const item = elementsRegistry.find(i => i.element === element);
+                            if (item) item.isImmediate = true;
+                        });
+                    });
+
+                    // 元素排序逻辑
+                    elementsRegistry.sort((a, b) => {
+                        const aTop = a.element.getBoundingClientRect().top + window.pageYOffset;
+                        const bTop = b.element.getBoundingClientRect().top + window.pageYOffset;
+                        return aTop - bTop;
+                    });
+
+                    // 观察器核心逻辑
+                    let isAnimating = false;
+                    let lastProcessedY = -Infinity;
+                    const observer = new IntersectionObserver(entries => {
+                        if (!isAnimating && entries.some(e => e.isIntersecting && !e.target.classList.contains('loaded'))) {
+                            isAnimating = true;
+                            processVisibleElements();
+                        }
+                    }, {rootMargin: '20px 0px', threshold: [0, 0.5, 1]});
+
+                    // 处理可见元素
+                    const processVisibleElements = () => {
+                        const viewportBottom = window.pageYOffset + window.innerHeight;
+                        const nextItem = elementsRegistry.find(item =>
+                            !item.loaded &&
+                            (item.element.getBoundingClientRect().top + window.pageYOffset) <= viewportBottom + 100
+                        );
+
+                        if (!nextItem) {
+                            isAnimating = false;
+                            return;
+                        }
+
+                        if (nextItem.isImmediate) {
+                            nextItem.loaded = true;
+                            nextItem.element.classList.add('loaded');
+                            lastProcessedY = nextItem.element.getBoundingClientRect().top + window.pageYOffset;
+                            return processVisibleElements();
+                        }
+
+                        nextItem.loaded = true;
+                        nextItem.element.classList.add('loaded');
+                        lastProcessedY = nextItem.element.getBoundingClientRect().top + window.pageYOffset;
+                        setTimeout(processVisibleElements, delay);
+                    };
+
+                    // 初始化观察
+                    elementsRegistry.forEach(item => observer.observe(item.element));
+
+                    // 滚动处理
+                    const scrollHandler = throttle(() => {
+                        if (!isAnimating) {
+                            const hasUnloaded = elementsRegistry.some(item =>
+                                !item.loaded &&
+                                (item.element.getBoundingClientRect().top + window.pageYOffset) <=
+                                window.pageYOffset + window.innerHeight + 100
+                            );
+                            if (hasUnloaded) {
+                                isAnimating = true;
+                                processVisibleElements();
+                            }
+                        }
+                    }, 100);
+
+                    window.addEventListener('scroll', scrollHandler);
+                    setTimeout(() => !isAnimating && processVisibleElements(), 50);
+                };
+
+                // 节流函数
+                const throttle = (fn, wait) => {
+                    let timeout;
+                    return (...args) => {
+                        if (!timeout) {
+                            timeout = setTimeout(() => {
+                                fn(...args);
+                                timeout = null;
+                            }, wait);
+                        }
+                    };
+                };
+
+                // 初始化调用
+                createSequentialObserver([
+                    '.list > .main > *',
+                    '#top > .main > *',
+                    '.archive-year-header',
+                    '.archive-month-header',
+                    '.archive-posts > *',
+                    '.post > *'
+                ], 150);
+            }
+
+            // 启动检测
+            if (document.readyState !== 'loading') {
+                checkContentReady();
+            } else {
+                document.addEventListener('readystatechange', () =>
+                    document.readyState === 'interactive' && checkContentReady()
+                );
+            }
+        })();
+    </script>
 
     <!-- 不蒜子 -->
     {{- if .Site.Params.busuanzi -}}
@@ -129,7 +281,7 @@
         <script src="https://cdn.jsdelivr.net/npm/fancybox/dist/js/jquery.fancybox.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/fancybox/dist/css/jquery.fancybox.min.css" rel="stylesheet"> -->
         <!-- <script src="/static/Jquery/dist/jquery.min.js" defer></script>-->
-        <script async onload="onFancyboxLoaded()" src="/static/Fancyapps/dist/fancybox/fancybox.umd.js"></script>
+        <script defer onload="onFancyboxLoaded()" src="/static/Fancyapps/dist/fancybox/fancybox.umd.js"></script>
         <link href="/static/Fancyapps/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"
               rel="stylesheet">
         <script>

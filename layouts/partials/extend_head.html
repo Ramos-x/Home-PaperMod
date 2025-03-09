@@ -10,15 +10,35 @@
 <!-- <link rel="stylesheet" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
 <!-- 预加载关键资源 -->
 <link href="https://cdn.jsdelivr.net" rel="preconnect">
-<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" rel="preload">
-<link as="style" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">
+<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css">
+<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css">
+<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.css">
+<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css">
+<!--<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkaimono-bold.css" rel="preload">-->
+<!--<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkaimono-light.css" rel="preload">-->
+<!--<link as="style" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkaimono-regular.css" rel="preload">-->
+<link as="style" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
 <!--<link as="style" href="/static/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" rel="preload">-->
 <!--<link as="style" href="/static/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="preload">-->
 
 <!-- 文章字体设置 Fonts -->
+
 <script src="/static/Fonts/webfont.js"></script>
 <script>
-    // 注册 Service Worker 并预加载 #menu 下的所有链接
+    WebFont.load({
+        custom: {
+            families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
+            urls: [
+                // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css',
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.css',
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css',
+                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+            ]
+        }
+    });
+
+    // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // console.log('Service Worker is supported.');
 
@@ -33,213 +53,42 @@
     }
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const createSequentialObserver = (selectors, delay) => {
-            const elementsRegistry = [];
+<!--<style>-->
+<!--    /* ========== transition-image ========== */-->
+<!--    #progress-bar {-->
+<!--        position: fixed;-->
+<!--        top: 0;-->
+<!--        left: 0;-->
+<!--        width: 0;-->
+<!--        height: 1px;-->
+<!--        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);-->
+<!--        z-index: 9000;-->
+<!--        transition: .45s cubic-bezier(0, .5, .5, 1) !important;-->
+<!--    }-->
+<!--</style>-->
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        // 监听post-header的loaded类变化-->
+<!--        const postHeader = document.querySelector('.post-header');-->
+<!--        if (postHeader) {-->
+<!--            const observer = new MutationObserver(function (mutations) {-->
+<!--                mutations.forEach(function (mutation) {-->
+<!--                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {-->
+<!--                        if (postHeader.classList.contains('loaded')) {-->
+<!--                            // 当post-header有loaded类时,为postcontent添加loaded类-->
+<!--                            const postContent = document.querySelector('.post-content');-->
+<!--                            if (postContent) {-->
+<!--                                postContent.classList.add('loaded');-->
+<!--                            }-->
+<!--                        }-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
 
-            selectors.forEach(selector => {
-                const elements = Array.from(document.querySelectorAll(selector));
-                elements.forEach(element => {
-                    elementsRegistry.push({element, loaded: false, isImmediate: false});
-                });
-            });
-
-            // 标记 .archive-year-header 和 .archive-month-header 为 "立即加载"
-            const immediateSelectors = ['.archive-year-header', '.archive-month-header'];
-            immediateSelectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(element => {
-                    const registryItem = elementsRegistry.find(item => item.element === element);
-                    if (registryItem) {
-                        registryItem.isImmediate = true;
-                    }
-                });
-            });
-
-            elementsRegistry.sort((a, b) => {
-                const aTop = a.element.getBoundingClientRect().top + window.pageYOffset;
-                const bTop = b.element.getBoundingClientRect().top + window.pageYOffset;
-                return aTop - bTop;
-            });
-
-            let isAnimating = false;
-            let lastProcessedY = -Infinity;
-
-            const observer = new IntersectionObserver((entries) => {
-                if (!isAnimating) {
-                    const hasVisibleUnloaded = entries.some(entry =>
-                        entry.isIntersecting && !entry.target.classList.contains('loaded')
-                    );
-                    if (hasVisibleUnloaded) {
-                        isAnimating = true;
-                        processVisibleElements();
-                    }
-                }
-            }, {
-                rootMargin: '20px 0px',
-                threshold: [0, 0.5, 1],
-            });
-
-            const processVisibleElements = () => {
-                const viewportTop = window.pageYOffset;
-                const viewportBottom = viewportTop + window.innerHeight;
-
-                const nextItem = elementsRegistry.find(item => {
-                    if (item.loaded) return false;
-                    const rect = item.element.getBoundingClientRect();
-                    const elementTop = rect.top + window.pageYOffset;
-                    return elementTop >= lastProcessedY && elementTop <= viewportBottom + 100;
-                });
-
-                if (!nextItem) {
-                    isAnimating = false;
-                    return;
-                }
-
-                const element = nextItem.element;
-
-                // 跳过节流逻辑，对 .archive-year-header 和 .archive-month-header 直接处理
-                if (nextItem.isImmediate) {
-                    nextItem.loaded = true;
-                    element.classList.add('loaded');
-                    lastProcessedY = element.getBoundingClientRect().top + window.pageYOffset;
-                    processVisibleElements(); // 继续处理下一个
-                    return;
-                }
-
-                lastProcessedY = element.getBoundingClientRect().top + window.pageYOffset;
-                nextItem.loaded = true;
-                element.classList.add('loaded');
-
-                setTimeout(processVisibleElements, delay);
-            };
-
-            elementsRegistry.forEach(item => {
-                observer.observe(item.element);
-            });
-
-            const scrollHandler = throttle(() => {
-                if (!isAnimating) {
-                    const viewportTop = window.pageYOffset;
-                    const viewportBottom = viewportTop + window.innerHeight;
-
-                    const hasUnloadedInView = elementsRegistry.some(item => {
-                        if (item.loaded) return false;
-                        const rect = item.element.getBoundingClientRect();
-                        const elementTop = rect.top + window.pageYOffset;
-                        return elementTop >= lastProcessedY && elementTop <= viewportBottom + 100;
-                    });
-
-                    if (hasUnloadedInView) {
-                        isAnimating = true;
-                        processVisibleElements();
-                    }
-                }
-            }, 100);
-
-            window.addEventListener('scroll', scrollHandler);
-
-            setTimeout(() => {
-                if (!isAnimating) {
-                    processVisibleElements();
-                }
-            }, 50);
-        };
-
-        const throttle = (fn, wait) => {
-            let timeout = null;
-            return function (...args) {
-                if (!timeout) {
-                    timeout = setTimeout(() => {
-                        fn.apply(this, args);
-                        timeout = null;
-                    }, wait);
-                }
-            };
-        };
-
-        createSequentialObserver(
-            [
-                '.list > .main > *',
-                '#top > .main > *',
-                '.archive-year-header',
-                '.archive-month-header',
-                '.archive-posts > *',
-                '.post > *',
-            ],
-            150
-        );
-    });
-</script>
-<style>
-    /* ========== transition-image ========== */
-    #progress-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo);
-        z-index: 9000;
-        transition: .45s cubic-bezier(0, .5, .5, 1) !important;
-    }
-
-    /* @media (prefers-color-scheme: light) {
-  #transition-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid.png');
-    background-size: 15vmin auto, cover;
-    z-index: 9000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  #transition-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/img/avatar_head.png') no-repeat center center, url('/static/img/grid_dark.png');
-    background-size: 20% auto, cover;
-    z-index: 9000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-  }
-} */
-</style>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // 监听post-header的loaded类变化
-        const postHeader = document.querySelector('.post-header');
-        if (postHeader) {
-            const observer = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (postHeader.classList.contains('loaded')) {
-                            // 当post-header有loaded类时,为postcontent添加loaded类
-                            const postContent = document.querySelector('.post-content');
-                            if (postContent) {
-                                postContent.classList.add('loaded');
-                            }
-                        }
-                    }
-                });
-            });
-
-            observer.observe(postHeader, {
-                attributes: true
-            });
-        }
-    });
-</script>
+<!--            observer.observe(postHeader, {-->
+<!--                attributes: true-->
+<!--            });-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 {{- /* Head custom content area end */ -}}
