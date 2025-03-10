@@ -4,8 +4,8 @@
     max-width: calc(var(--main-width) + var(--gap) * 4);
 
     margin: 1vw auto 0vw auto;
-    padding: 1vw min(3vw,var(--gap));
-    
+    padding: 1vw min(3vw, var(--gap));
+
     backdrop-filter: blur(0.8px);
     /* overflow: hidden; */
 }
@@ -18,17 +18,38 @@
     display: flex;
 }
 
+@media (prefers-color-scheme: dark) {
+    .pagination a {
+        border: 0.0625rem solid #3d444d;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .pagination a {
+        border: 0.0625rem solid #d1d9e0;
+    }
+}
+
 .pagination a {
-    color: var(--theme);
     font-size: 13px;
     line-height: 36px;
-    background: var(--primary);
+    /*color: #0969da;*/
+    /*border: 0.0625rem solid #d1d9e0;*/
     border-radius: calc(36px / 2);
     padding: 0 16px;
 }
 
+.pagination .next:hover {
+    color: unset;
+}
+
+.pagination .prev:hover {
+    color: unset;
+}
+
 .pagination .next {
     margin-inline-start: auto;
+
 }
 
 

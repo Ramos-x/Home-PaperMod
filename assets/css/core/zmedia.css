@@ -1,4 +1,8 @@
 @media screen and (max-width: 720px) {
+
+    .top-link {
+        color: transparent;
+    }
     /* theme-vars */
     :root {
         --gap: clamp(14px, 3.3vw, 24px);

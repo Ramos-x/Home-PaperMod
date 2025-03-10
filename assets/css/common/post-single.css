@@ -237,8 +237,8 @@
 }
 
 .post-content code {
-    margin: auto 4px;
-    padding: 4px 6px;
+    margin: auto 3px;
+    padding: 4px 0px;
     font-size: 0.78em;
     line-height: 1.5;
     /* background: var(--code-bg); */
