@@ -43,10 +43,10 @@
                         {{- end -}}
                     {{- end -}}
                 {{- end -}}, {{$src.Permalink }} {{printf "%dw" ($src.Width)}}" sizes="{{ $dataSizes }}" />
-                <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" />
+                <img src="{{ $Destination | safeURL }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $Text }}" title="{{ $Title }}" fetchpriority="auto" loading="lazy" />
             </picture>
             {{- else }}
-            <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" loading="lazy" style="max-width: 100%; height: auto;" />
+            <img src="{{ $Destination | safeURL }}" alt="{{ $Text }}" title="{{ $Title }}" fetchpriority="auto" loading="lazy" style="max-width: 100%; height: auto;" />
         {{- end }}
     {{ end }}
 
