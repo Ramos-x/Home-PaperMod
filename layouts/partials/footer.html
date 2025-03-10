@@ -40,11 +40,19 @@
 <script>
     let menu = document.getElementById('menu')
     if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
+        // 先隐藏滚动条，防止页面抖动
+        menu.style.overflowX = "hidden";
+
+        setTimeout(() => {
+            menu.scrollLeft = localStorage.getItem("menu-scroll-position") || 0;
+            menu.style.overflowX = ""; // 恢复滚动条
+        }, 10);
+
+        menu.addEventListener("scroll", () => {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
+        });
     }
+
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
