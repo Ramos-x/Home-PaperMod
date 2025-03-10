@@ -2,11 +2,12 @@
 
     .top-link {
         color: transparent;
+        background: transparent;
     }
     /* theme-vars */
     :root {
         --gap: clamp(14px, 3.3vw, 24px);
-        --content-gap: 10px;
+        --content-gap: 15px;
         --header-height: 50px;
     }
     /* profile-mode */
