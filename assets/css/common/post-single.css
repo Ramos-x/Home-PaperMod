@@ -398,6 +398,7 @@
     background: var(--border);
     transition: .35s cubic-bezier(0, .5, .5, 1);
     transform: scale(1.02);
+    color: inherit;
 }
 
 .paginav a {

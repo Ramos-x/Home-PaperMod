@@ -7,7 +7,8 @@
 .footer {
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
-    padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+    /*padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);*/
+    padding-bottom: calc((var(--footer-height) - var(--gap)) / 2 + 5px);
     text-align: center;
     line-height: 24px;
 }
@@ -26,27 +27,27 @@
     /* border-bottom: 1px solid var(--secondary); */
 }
 
-.footer a:hover {
-    border-bottom: 1px dashed;
-}
+/*.footer a:hover {*/
+/*    border-bottom: 1px dashed;*/
+/*}*/
 
 .top-link {
     opacity: 0;
     visibility: hidden;
     display: flex;
     position: fixed;
-    bottom: 1vw;
-    right: .5rem;
+    bottom: 0.5vw;
+    right: .2rem;
     z-index: 99;
     background: var(--tertiary);
     width: 2.5rem;
-    height: 5rem;
+    height: 4rem;
     padding: 0.3rem;
     border-radius: 65px;
     transition: 3s cubic-bezier(0.46, 0.03, 0.52, 0.96) !important;
     align-items: stretch;
     justify-content: center;
-    align-content: center;
+    flex-wrap: nowrap;
 }
 
 .top-link,
@@ -54,9 +55,12 @@
     filter: drop-shadow(0px 0px 0px var(--theme));
 }
 
-.footer a:hover,
-.top-link:hover {
+.footer a:hover{
     color: var(--primary);
+}
+
+.top-link:hover{
+
 }
 
 .top-link:focus,
