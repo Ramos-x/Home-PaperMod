@@ -93,72 +93,89 @@
     </div>
 </aside>
 <script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
+    document.addEventListener('DOMContentLoaded', () => {
         checkTocPosition();
 
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-         // Make the first header active
-         activeElement = elements[0];
-         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-     }, false);
+        // 获取所有带 id 的标题，存入数组
+        const headers = Array.from(document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]'));
+        let activeElement = headers[0] || null;
 
+        // 缓存 TOC 链接，Map 的 key 为标题 id（小写）
+        const tocLinks = new Map();
+        document.querySelectorAll('.inner ul li a[href^="#"]').forEach(link => {
+            const id = link.getAttribute('href').substring(1).toLowerCase();
+            tocLinks.set(id, link);
+        });
+
+        // 激活第一个标题对应的链接
+        if (activeElement) {
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            tocLinks.get(id)?.classList.add('active');
+        }
+
+        // 滚动事件，更新 active 标题
+        window.addEventListener('scroll', () => {
+            if (!headers.length) return;
+
+            let newActive = activeElement;
+            for (const header of headers) {
+                const offset = getOffsetTop(header) - window.pageYOffset;
+                if (offset > 0 && offset < window.innerHeight / 2) {
+                    newActive = header;
+                    break;
+                }
+            }
+
+            if (newActive !== activeElement) {
+                activeElement = newActive;
+                // 更新 TOC 链接的 active 类
+                headers.forEach(header => {
+                    const id = encodeURI(header.getAttribute('id')).toLowerCase();
+                    const link = tocLinks.get(id);
+                    if (link) {
+                        header === activeElement ? link.classList.add('active') : link.classList.remove('active');
+                    }
+                });
+            }
+        }, false);
+
+        // 窗口尺寸变化时检查 TOC 位置（使用防抖处理）
+        window.addEventListener('resize', debounce(checkTocPosition, 250), false);
+    });
+
+    // 加载完成后再检查一次 TOC 位置
+    window.addEventListener('load', checkTocPosition);
+
+    // 防抖函数，减少事件频繁触发时的处理次数
     function debounce(func, wait) {
         let timeout;
-        return function() {
+        return function(...args) {
             clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, arguments), wait);
-        }
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
     }
-    
-    window.addEventListener('resize', debounce(function(event) {
-        checkTocPosition();
-    }, 250), false);
 
-    window.onload = function() {
-        checkTocPosition();
-    };
-
-    window.addEventListener('scroll', () => {
-        if (elements)
-        // Check if there is an object in the top half of the screen or keep the last item active
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-             const id = encodeURI(element.getAttribute('id')).toLowerCase();
-             if (element === activeElement){
-                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-             } else {
-                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-             }
-         })
-     }, false);
-
+    // 从 CSS 变量获取宽度值（全局只执行一次）
     const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
     const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const tocContainer = document.getElementById("toc-container");
 
+    // 检查 TOC 位置，添加或移除 "wide" 类
     function checkTocPosition() {
-        if (document.body.scrollWidth - main - (toc * 3)  > 0) {
-            document.getElementById("toc-container").classList.add("wide");
+        if (!tocContainer) return;
+        if (document.body.scrollWidth - main - (toc * 3) - 15 > 0) {
+            tocContainer.classList.add("wide");
         } else {
-            document.getElementById("toc-container").classList.remove("wide");
+            tocContainer.classList.remove("wide");
         }
     }
 
+    // 获取元素相对于页面顶部的偏移量
     function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;   
+        if (!element.getClientRects().length) return 0;
+        const rect = element.getBoundingClientRect();
+        return rect.top + window.pageYOffset;
     }
+
 </script>
 {{- end }}
