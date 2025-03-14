@@ -293,6 +293,10 @@ body.dark .notice {
     transition: .85s cubic-bezier(0, .5, .5, 1);
 }
 
+.codetab>.codetab__content>.codetab>.codetab__links{
+    display: none;
+}
+
 .codetab__content .highlight, .codetab__content.active .highlight {
     margin-top: 0;
     border-radius: 0 0 var(--radius) var(--radius);

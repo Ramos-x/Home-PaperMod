@@ -45,78 +45,88 @@
     <div>
         <script>
             // 复制按钮初始化
-            let copyButtons = document.querySelectorAll('.copyButton').forEach(function (copyButton) {
-                let parent = copyButton.parentElement.nextElementSibling;
-                // console.log(parent);
-                let code = parent.querySelectorAll('code')[1].innerText;
-                // console.log(code);
-                code = code.replace(/\n{2}/g, '\n');
-                // console.log(code);
+            document.querySelectorAll('.copyButton').forEach(copyButton => {
+                let parent = copyButton.parentElement?.nextElementSibling;
+                if (!parent) return; // 避免 parent 为 null 时出错
+
+                let codeElements = parent.querySelectorAll('code');
+                if (codeElements.length < 2) return; // 避免访问不存在的索引
+
+                let code = codeElements[1].innerText.trim().replace(/\n{2}/g, '\n');
+
                 if (code) {
-                    copyButton.addEventListener('click', function () {
+                    copyButton.addEventListener('click', () => {
                         if (navigator.clipboard) {
-                            // 使用 Clipboard API
-                            navigator.clipboard.writeText(code);
+                            navigator.clipboard.writeText(code)
                         }
-                    })
+                    });
                 }
             });
-            // ========================== codetab ==========================
+
+            // ========================== codes ==========================
             document.querySelectorAll('.codetab') ?
                 document.querySelectorAll('.codetab').forEach(function (elem, idx) {
-                    var containerId = elem.getAttribute('id');
-                    var containerElem = elem;
-                    var codetabLinks = elem.querySelectorAll('.codetab__link');
-                    var codetabContents = elem.querySelectorAll('.codetab__content');
-                    var ids = [];
+                    const containerElem = elem;
+                    const codetabLinks = elem.querySelectorAll('.codetab__link');
 
-                    // console.log(containerId);
-                    // console.log(containerElem);
-                    // console.log(codetabLinks);
-                    // console.log(codetabContents);
+                    const codetabContents = elem.querySelectorAll('.codetab__content');
 
-                    codetabLinks && codetabLinks.length > 0 ?
-                        codetabLinks.forEach(function (link, index, self) {
 
-                            link.onclick = function (e) {
-                                // 标签页切换
-                                for (var i = 0; i < self.length; i++) {
-                                    if (index === parseInt(i, 10)) {
-                                        if (!self[i].classList.contains('active')) {
-                                            self[i].classList.add('active');
-                                            codetabContents[i].classList.add('active');
-                                            codetabContents[i].style.display = 'block';
+                    // 如果 codetabContents 为空，检查对应顺序的 codetabLinks 是否有 active 状态
+                    if (codetabContents.length === 0) {
+                        codetabLinks.forEach((link, index) => {
+                            if (!link.classList.contains('active')) {
+                                link.classList.add('active');
+                            }
+                        });
+                        return; // 退出函数，避免后续操作
+                    } else {
+                        codetabLinks && codetabLinks.length > 0 ?
+                            codetabLinks.forEach(function (link, index, self) {
+
+                                link.onclick = function (e) {
+
+                                    // 标签页切换
+                                    for (let i = 0; i < (self.length / 2); ++i) {
+
+
+                                        if (index === parseInt(i, 10)) {
+                                            if (!self[i].classList.contains('active')) {
+                                                self[i].classList.add('active');
+                                                codetabContents[i].classList.add('active');
+                                                codetabContents[i].style.display = 'block';
+                                            }
+                                        } else {
+                                            self[i].classList.remove('active');
+                                            codetabContents[i].classList.remove('active');
+                                            codetabContents[i].style.display = 'none';
                                         }
-                                    } else {
-                                        self[i].classList.remove('active');
-                                        codetabContents[i].classList.remove('active');
-                                        codetabContents[i].style.display = 'none';
+                                    }
+                                    // 复制按键切换
+                                    let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
+                                    // console.log(code);
+                                    code = code.replace(/\n{2}/g, '\n');
+                                    // console.log(code);
+                                    if (code) {
+                                        let copyButton = containerElem.querySelectorAll('.copyButton')[0];
+                                        // console.log(copyButton);
+
+                                        // 克隆copyButton并替换它自己来移除所有事件监听器
+                                        var newButton = copyButton.cloneNode(true);
+                                        copyButton.parentNode.replaceChild(newButton, copyButton);
+
+                                        // 在新的copyButton上添加事件监听器
+                                        newButton.addEventListener('click', function () {
+                                            if (navigator.clipboard) {
+                                                navigator.clipboard.writeText(code);
+                                            }
+                                        });
+                                        // 更新copyButton变量引用到新的按钮，以便继续使用它
+                                        copyButton = newButton;
                                     }
                                 }
-                                // 复制按键切换
-                                let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
-                                // console.log(code);
-                                code = code.replace(/\n{2}/g, '\n');
-                                // console.log(code);
-                                if (code) {
-                                    let copyButton = containerElem.querySelectorAll('.copyButton')[0];
-                                    // console.log(copyButton);
-
-                                    // 克隆copyButton并替换它自己来移除所有事件监听器
-                                    var newButton = copyButton.cloneNode(true);
-                                    copyButton.parentNode.replaceChild(newButton, copyButton);
-
-                                    // 在新的copyButton上添加事件监听器
-                                    newButton.addEventListener('click', function () {
-                                        if (navigator.clipboard) {
-                                            navigator.clipboard.writeText(code);
-                                        }
-                                    });
-                                    // 更新copyButton变量引用到新的按钮，以便继续使用它
-                                    copyButton = newButton;
-                                }
-                            }
-                        }) : null;
+                            }) : null;
+                    }
                 }) : null;
         </script>
 

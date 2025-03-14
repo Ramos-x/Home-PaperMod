@@ -203,7 +203,7 @@
 .post-content .highlight:not(table) {
     margin: auto auto 10px auto;
     /* background: var(--code-block-bg) !important; */
-    border-radius: var(--radius);
+    border-radius: 0 0 var(--radius) var(--radius);
     direction: ltr;
 }
 
