@@ -3,6 +3,14 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info*/
 
+.unloaded {
+    pointer-events: none;
+    transition: filter .3s cubic-bezier(0, .5, .5, 1), opacity .3s cubic-bezier(0, .5, .5, 1), transform 5s cubic-bezier(0, .6, .6, 1);
+    filter: blur(10px);
+    transform: translateY(60px) !important;
+    opacity: 0 !important;
+}
+
 p strong {
     color: #5a5;
     font-weight: 400;;

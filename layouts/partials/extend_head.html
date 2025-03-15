@@ -126,28 +126,32 @@
                 // 处理可见元素
                 const processVisibleElements = () => {
                     const viewportBottom = window.pageYOffset + window.innerHeight;
-                    const nextItem = elementsRegistry.find(item =>
-                        !item.loaded &&
-                        (item.element.getBoundingClientRect().top + window.pageYOffset) <= viewportBottom + 100
-                    );
+
+                    // 遍历 elementsRegistry，找到第一个未加载的可见元素
+                    const nextItem = elementsRegistry.find(item => {
+                        if (item.loaded) return false;
+                        const itemTop = item.element.getBoundingClientRect().top; // 只调用一次
+                        return (itemTop + window.pageYOffset) <= viewportBottom + 100;
+                    });
 
                     if (!nextItem) {
                         isAnimating = false;
                         return;
                     }
 
+                    nextItem.loaded = true;
+                    nextItem.element.classList.add('loaded');
+
+                    // 缓存 `top` 值，避免重复计算
+                    lastProcessedY = nextItem.element.getBoundingClientRect().top + window.pageYOffset;
+
                     if (nextItem.isImmediate) {
-                        nextItem.loaded = true;
-                        nextItem.element.classList.add('loaded');
-                        lastProcessedY = nextItem.element.getBoundingClientRect().top + window.pageYOffset;
                         return processVisibleElements();
                     }
 
-                    nextItem.loaded = true;
-                    nextItem.element.classList.add('loaded');
-                    lastProcessedY = nextItem.element.getBoundingClientRect().top + window.pageYOffset;
                     setTimeout(processVisibleElements, delay);
                 };
+
 
                 // 初始化观察
                 elementsRegistry.forEach(item => observer.observe(item.element));
