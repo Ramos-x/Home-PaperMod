@@ -26,14 +26,14 @@
     <ul id="searchResults" aria-label="search results"></ul>
 </div>
 
-{{- if not (.Param "hideTags") }}
-{{- $taxonomies := .Site.Taxonomies.tags }}
+{{- if not (.Param "hideCategories")}}
+{{- $taxonomies := .Site.Taxonomies.categories }}
 {{- if gt (len $taxonomies) 0 }}
-<h2 style="margin-top: 32px">{{- (.Param "tagsTitle") | default "标签" }}</h2>
+<h2 style="margin-top: 32px">{{- (.Param "categoriesTitle") | default "系列" }}</h2>
 <ul class="terms-tags">
     {{- range $name, $value := $taxonomies }}
     {{- $count := .Count }}
-    {{- with site.GetPage (printf "/tags/%s" $name) }}
+    {{- with site.GetPage (printf "/categories/%s" $name) }}
     <li>
         <a href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
     </li>
@@ -43,14 +43,15 @@
 {{- end }}
 {{- end }}
 
-{{- if not (.Param "hideCategories")}}
-{{- $taxonomies := .Site.Taxonomies.categories }}
+
+{{- if not (.Param "hideTags") }}
+{{- $taxonomies := .Site.Taxonomies.tags }}
 {{- if gt (len $taxonomies) 0 }}
-<h2 style="margin-top: 32px">{{- (.Param "categoriesTitle") | default "系列" }}</h2>
+<h2 style="margin-top: 32px">{{- (.Param "tagsTitle") | default "标签" }}</h2>
 <ul class="terms-tags">
     {{- range $name, $value := $taxonomies }}
     {{- $count := .Count }}
-    {{- with site.GetPage (printf "/categories/%s" $name) }}
+    {{- with site.GetPage (printf "/tags/%s" $name) }}
     <li>
         <a href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
     </li>
