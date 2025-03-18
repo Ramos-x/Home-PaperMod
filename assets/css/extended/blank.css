@@ -20,7 +20,7 @@ strong{
     color: #5a5;
     font-weight: 400;;
 }
-.tk-nick {
+.tk-nick, .tk-nick strong{
     color: unset;
 }
 
