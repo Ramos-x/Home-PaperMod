@@ -16,9 +16,12 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     opacity: 0 !important;
 }
 
-p strong,div strong{
+strong{
     color: #5a5;
     font-weight: 400;;
+}
+.tk-nick {
+    color: unset;
 }
 
 @media (prefers-color-scheme: dark) {
