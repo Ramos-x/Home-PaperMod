@@ -35,7 +35,7 @@
             new MutationObserver((_, observer) => {
                 const targetNode = document.querySelector('.tk-comments-no span');
                 if (targetNode && hitokotoText) {
-                    targetNode.textContent = `「 ${hitokotoText} 」`;
+                    targetNode.textContent = `「 ${hitokotoText}」`;
                     observer.disconnect();
                 }
             }).observe(document.body, {childList: true, subtree: true});
