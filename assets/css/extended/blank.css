@@ -154,7 +154,7 @@ body.dark .notice {
 .notice {
     padding: 18px;
     line-height: 24px;
-    margin-bottom: 24px;
+    margin: 12px auto;
     border-radius: 18px;
     color: var(--root-color);
     background: var(--root-background)
