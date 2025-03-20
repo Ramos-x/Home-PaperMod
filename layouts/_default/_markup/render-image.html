@@ -5,7 +5,7 @@
 
 {{ if $isExternal }}
 <div class="post-img-view">
-    <a data-fancybox="gallery" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
+    <a data-fancybox="image" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
         <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
     </a>
 </div>
@@ -22,7 +22,7 @@
     {{- $responsiveImages := (.Page.Params.responsiveImages | default site.Params.responsiveImages) | default true }}
 
     <div class="post-img-view">
-        <a data-fancybox="gallery" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
+        <a data-fancybox="image" data-caption="{{ $Text }}" id="{{ $Text }}" href="{{ .Destination | safeURL }}">
 
     {{ with $src := .Page.Resources.GetMatch .Destination }}
         {{- if $responsiveImages -}}
