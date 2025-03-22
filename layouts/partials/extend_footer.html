@@ -125,11 +125,17 @@
 <!--        <script defer onload="onFancyboxLoaded()" src="/static/Fancyapps/dist/fancybox/fancybox.umd.js"></script>-->
 <!--        <link href="/static/Fancyapps/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"-->
 <!--              rel="stylesheet">-->
-        <link href="/static/Fancyapps/dist/fancybox/fancybox.min.css" rel="stylesheet">
 <!--        <link-->
 <!--                rel="stylesheet"-->
 <!--                href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.css"-->
 <!--        />-->
+<!--        <link href="/static/Fancyapps/dist/fancybox/fancybox.min.css" rel="preload stylesheet" as="style">-->
+        <link
+                href="/static/Fancyapps/dist/fancybox/fancybox.min.css"
+                rel="preload"
+                as="style"
+                onload="this.onload=null;this.rel='stylesheet'"
+        />
         <script type="module">
             import { Fancybox } from 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/+esm';
 
