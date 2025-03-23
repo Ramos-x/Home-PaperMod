@@ -57,7 +57,7 @@ strong{
     html {
         min-height: 100vh;
         background-color: #040404;
-        background-image: url("/static/img/grid_dark.webp") !important;
+        background-image: url("/assets/img/grid_dark.webp") !important;
     }
 
     .post-content img {
@@ -79,13 +79,13 @@ strong{
     html {
         min-height: 100vh;
         background-color: #fafafa;
-        background-image: url("/static/img/grid.webp") !important;
+        background-image: url("/assets/img/grid.webp") !important;
     }
 }
 
 @media (prefers-color-scheme: no-preference) {
     .dark.list {
-        background-image: url("/static/img/grid.webp");
+        background-image: url("/assets/img/grid.webp");
     }
 }
 

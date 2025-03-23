@@ -1,7 +1,7 @@
 <div id="tcomment"></div>
-<link as="style" href="/static/Twikoo/twikoo.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
+<link as="style" href="/assets/Twikoo/twikoo.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
 <noscript>
-    <link href="/static/Twikoo/twikoo.min.css" rel="stylesheet">
+    <link href="/assets/Twikoo/twikoo.min.css" rel="stylesheet">
 </noscript>
 <script>
     (function () {
@@ -18,7 +18,7 @@
 
         // 并行加载脚本和一言数据
         Promise.all([
-            loadScript('/static/Twikoo/twikoo.nocss.min.js'),
+            loadScript('/assets/Twikoo/twikoo.nocss.min.js'),
             fetch('https://v1.hitokoto.cn')
                 .then(r => r.json())
                 .then(d => d.hitokoto)
