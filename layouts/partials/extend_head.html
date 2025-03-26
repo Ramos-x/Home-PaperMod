@@ -1,15 +1,13 @@
 <!-- /* ========== umami  ========== */ -->
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
-<!-- 文章字体设置 Fonts -->
-
-<!-- 注释掉现有的 <link> 标签 -->
-<!-- <link rel="stylesheet" href="/assets/Fonts/lxgw-wenkai-webfont@1.7.0/style.css" /> -->
-<!-- <link rel="stylesheet" href="/assets/Fonts/lxgw-wenkai-lite-webfont@1.7.0/style.css" /> -->
-<!-- <link rel="stylesheet" href="/assets/Fonts/lxgw-wenkai-screen-webfont@1.7.0/style.css" /> -->
-<!-- <link rel="stylesheet" href="/assets/Fonts/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" /> -->
 <!-- 预加载关键资源 -->
 <link href="https://cdn.jsdelivr.net" rel="preconnect">
+<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"/>
+<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css"/>
+<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css"/>
+<link rel="preload stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css"/>
 
 
 <!-- 文章字体设置 Fonts -->
@@ -17,7 +15,7 @@
     function loadFont() {
         WebFont.load({
             custom: {
-                families: ['LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei'],
+                families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono' ],
                 urls: [
                     // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
                     'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
@@ -87,7 +85,7 @@
                 selectors.forEach(selector => {
                     const elements = Array.from(document.querySelectorAll(selector));
                     elements.forEach(element => {
-                        elementsRegistry.push({ element, loaded: false, isImmediate: false });
+                        elementsRegistry.push({element, loaded: false, isImmediate: false});
                     });
                 });
 
@@ -114,7 +112,7 @@
                         isAnimating = true;
                         processVisibleElements();
                     }
-                }, { rootMargin: '20px 0px', threshold: [0, 0.5, 1] });
+                }, {rootMargin: '20px 0px', threshold: [0, 0.5, 1]});
 
                 // 处理可见元素
                 const processVisibleElements = () => {

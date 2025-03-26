@@ -411,10 +411,10 @@ body.dark .notice {
 }
 
 /* ========== 正文字体：落霞孤鹜 + 动效 ========== */
-body {
-    font-family: 'LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei', sans-serif;
-    transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
-}
+/*body {*/
+/*    font-family: 'LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei', sans-serif;*/
+/*    transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;*/
+/*}*/
 
 /* ========== 代码字体：JetBrains Mono ========== */
 code {

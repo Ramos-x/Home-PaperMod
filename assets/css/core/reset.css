@@ -29,6 +29,8 @@ body {
     line-height: 1.6;
     word-break: break-word;
     /* background: var(--theme); */
+    font-family: 'LXGW WenKai', 'Microsoft YaHei', sans-serif, 'JetBrains Mono';
+    transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;
 }
 
 article,
