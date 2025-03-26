@@ -1,21 +1,21 @@
 <!-- /* ========== umami  ========== */ -->
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
-<!-- 预加载关键资源 -->
+<!-- 预加载关键资源 
 <link href="https://cdn.jsdelivr.net" rel="preconnect">
-<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+<link rel="preload stylesheet"
       href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"/>
-<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+<link rel="preload stylesheet"
       href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css"/>
-<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+<link rel="preload stylesheet"
       href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css"/>
-<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+<link rel="preload stylesheet"
       href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css"/>
-
+-->
 
 <!-- 文章字体设置 Fonts -->
+<script src="/assets/Fonts/webfont.js"></script>
 <script>
-    function loadFont() {
         WebFont.load({
             custom: {
                 families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono'],
@@ -28,9 +28,8 @@
                 ]
             }
         });
-    }
 </script>
-<script src="/assets/Fonts/webfont.js" onload="loadFont()"></script>
+
 <script>
 
     // 注册 Service Worker
