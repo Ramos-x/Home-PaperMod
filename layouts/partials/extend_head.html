@@ -3,10 +3,13 @@
 
 <!-- 预加载关键资源 -->
 <link href="https://cdn.jsdelivr.net" rel="preconnect">
-<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"/>
-<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css"/>
-<link rel="preload stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css"/>
-<link rel="preload stylesheet"
+<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+      href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"/>
+<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css"/>
+<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css"/>
+<link media="none" onload="if(media!='all')media='all'" rel="preload stylesheet"
       href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css"/>
 
 
@@ -15,7 +18,7 @@
     function loadFont() {
         WebFont.load({
             custom: {
-                families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono' ],
+                families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono'],
                 urls: [
                     // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
                     'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
