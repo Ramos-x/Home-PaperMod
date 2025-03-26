@@ -39,7 +39,7 @@
     margin-bottom: min(4vw,var(--gap));
     padding: min(10vw,var(--gap));
     background: var(--entry);
-    border-radius: var(--radius);
+    border-radius: var(--radius_l);
     border: 1px solid var(--border);
     filter: brightness(1) contrast(1);
     transform: scale(1) translateY(60px);
