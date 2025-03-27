@@ -2,7 +2,9 @@
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
 <!-- 预加载关键资源 -->
-<link href="https://cdn.jsdelivr.net" rel="preconnect">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!--<link rel="preload stylesheet"-->
 <!--      href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css"/>-->
 <!--<link rel="preload stylesheet"-->
@@ -11,12 +13,25 @@
 <!--      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css"/>-->
 <!--<link rel="preload stylesheet"-->
 <!--      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css"/>-->
-<link href="/assets/img/grid.webp" rel="preload">
-<!--<link href="/assets/img/grid_dark.webp" rel="preload">-->
 <!-- 文章字体设置 Fonts -->
 <!-- <script src="/assets/Fonts/webfont.js"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js">
+    // 文章字体设置 Fonts
+    WebFont.load({
+        google: {
+            families: ['Noto Sans SC', 'Noto Serif SC']
+        },
+        custom: {
+            families: [ 'LXGW WenKai',  'JetBrains Mono'],
+            urls: [
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css',
+                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
+                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+            ]
+        }
+    });
+</script>
 
 <script>
     (function () {
