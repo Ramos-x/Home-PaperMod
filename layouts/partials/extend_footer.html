@@ -27,20 +27,22 @@
     <!-- post-entry 点击消失 -->
     <div>
         <script type="module">
-            document.querySelectorAll('.post-entry,.logo a,#menu a').forEach(function (entry) {
-                entry.addEventListener('click', function () {
-                    var entries = document.querySelectorAll('.main');
-                    entries.forEach(function (entry) {
-                        entry.classList.add('unloaded');
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelectorAll('.post-entry,.logo a,#menu a').forEach(function (entry) {
+                    entry.addEventListener('click', function () {
+                        var entries = document.querySelectorAll('.main');
+                        entries.forEach(function (entry) {
+                            entry.classList.add('unloaded');
+                        });
                     });
                 });
-            });
-            window.addEventListener('pageshow', function () {
-                var entries = document.querySelectorAll('.main');
-                entries.forEach(function (entry) {
-                    entry.classList.remove('unloaded');
+                window.addEventListener('pageshow', function () {
+                    var entries = document.querySelectorAll('.main');
+                    entries.forEach(function (entry) {
+                        entry.classList.remove('unloaded');
+                    });
                 });
-            });
+            }
         </script>
     </div>
 

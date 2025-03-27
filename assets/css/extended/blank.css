@@ -11,14 +11,6 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     margin-bottom: 0 !important;
 }
 
-.unloaded {
-    pointer-events: none;
-    transition: filter .3s cubic-bezier(0, .5, .5, 1), opacity .3s cubic-bezier(0, .5, .5, 1), transform 5s cubic-bezier(0, .6, .6, 1);
-    filter: blur(10px);
-    transform: translateY(60px) !important;
-    opacity: 0 !important;
-}
-
 strong {
     color: #5a5;
     font-weight: 400;;
@@ -259,58 +251,71 @@ body.dark .notice {
 }
 
 /* ========== post从模糊到清晰并向上位移 ========== */
-.archive-posts > * {
-    -webkit-filter: blur(5px) opacity(0);
-    filter: brightness(1) contrast(1) blur(4px) opacity(0);
-    transform: translateY(60px);
-    transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1), background .85s cubic-bezier(0, .6, .6, 1);
+
+@media (prefers-reduced-motion: no-preference) {
+    .archive-posts > * {
+        -webkit-filter: blur(5px) opacity(0);
+        filter: brightness(1) contrast(1) blur(4px) opacity(0);
+        transform: translateY(60px);
+        transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1), background .85s cubic-bezier(0, .6, .6, 1);
+    }
+
+    .archive-posts > *.loaded {
+        -webkit-filter: blur(0) opacity(1);
+        filter: brightness(1) contrast(1) blur(0) opacity(1);
+        transform: translateY(0);
+    }
+
+    .post > *:not(.twikoo) {
+        -webkit-filter: blur(5px) opacity(0);
+        filter: brightness(1) contrast(1) blur(4px) opacity(0);
+        transform: translateY(60px);
+        transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
+    }
+
+    .post > *.loaded {
+        -webkit-filter: blur(0) opacity(1);
+        filter: brightness(1) contrast(1) blur(0) opacity(1);
+        transform: translateY(0);
+    }
+
+    .main > * {
+        -webkit-filter: blur(5px) opacity(0);
+        filter: brightness(1) contrast(1) blur(4px) opacity(0);
+        transform: translateY(60px);
+        transition: transform 1s cubic-bezier(0, 1.1, .6, 1), filter .85s cubic-bezier(0, 1.1, .6, 1);
+    }
+
+    .main > *.loaded {
+        -webkit-filter: blur(0) opacity(1);
+        filter: brightness(1) contrast(1) blur(0) opacity(1);
+        transform: translateY(0);
+    }
+
+    /* .post-content>* {
+      -webkit-filter: blur(5px) opacity(0);
+      filter: brightness(1) contrast(1) blur(5px) opacity(0);
+      transform: translateY(60px);
+      transition: .85s cubic-bezier(0, .5, .5, 1);
+    }
+
+    .post-content>*.loaded {
+      -webkit-filter: blur(0) opacity(1);
+      filter: brightness(1) contrast(1) blur(0) opacity(1);
+      transform: translateY(0);
+    } */
+    .unloaded {
+        pointer-events: none;
+        transition: filter .3s cubic-bezier(0, .5, .5, 1), opacity .3s cubic-bezier(0, .5, .5, 1), transform 5s cubic-bezier(0, .6, .6, 1);
+        filter: blur(10px);
+        transform: translateY(60px) !important;
+        opacity: 0 !important;
+    }
 }
 
-.archive-posts > *.loaded {
-    -webkit-filter: blur(0) opacity(1);
-    filter: brightness(1) contrast(1) blur(0) opacity(1);
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+
 }
-
-.post > *:not(.twikoo) {
-    -webkit-filter: blur(5px) opacity(0);
-    filter: brightness(1) contrast(1) blur(4px) opacity(0);
-    transform: translateY(60px);
-    transition: transform .85s cubic-bezier(0, .6, .6, 1), filter .85s cubic-bezier(0, .5, 1, 1);
-}
-
-.post > *.loaded {
-    -webkit-filter: blur(0) opacity(1);
-    filter: brightness(1) contrast(1) blur(0) opacity(1);
-    transform: translateY(0);
-}
-
-.main > * {
-    -webkit-filter: blur(5px) opacity(0);
-    filter: brightness(1) contrast(1) blur(4px) opacity(0);
-    transform: translateY(60px);
-    transition: transform 1s cubic-bezier(0, 1.1, .6, 1), filter .85s cubic-bezier(0, 1.1, .6, 1);
-}
-
-.main > *.loaded {
-    -webkit-filter: blur(0) opacity(1);
-    filter: brightness(1) contrast(1) blur(0) opacity(1);
-    transform: translateY(0);
-}
-
-/* .post-content>* {
-  -webkit-filter: blur(5px) opacity(0);
-  filter: brightness(1) contrast(1) blur(5px) opacity(0);
-  transform: translateY(60px);
-  transition: .85s cubic-bezier(0, .5, .5, 1);
-}
-
-.post-content>*.loaded {
-  -webkit-filter: blur(0) opacity(1);
-  filter: brightness(1) contrast(1) blur(0) opacity(1);
-  transform: translateY(0);
-} */
-
 
 /* ========== 代码框 ========== */
 .codetab {
@@ -410,11 +415,6 @@ body.dark .notice {
     text-wrap: nowrap;
 }
 
-/* ========== 正文字体：落霞孤鹜 + 动效 ========== */
-/*body {*/
-/*    font-family: 'LXGW WenKai', 'JetBrains Mono', 'Microsoft YaHei', sans-serif;*/
-/*    transition: all .85s cubic-bezier(0, .5, .5, 1), margin-right 0s;*/
-/*}*/
 
 /* ========== 代码字体：JetBrains Mono ========== */
 code {
@@ -566,69 +566,4 @@ article[autonumbering] .toc li a:before {
 
 .toc li a:hover {
     color: #6cee2b;
-}
-
-
-/* ========= Hello 动效关键帧 ============ */
-
-@-webkit-keyframes _wave-animation_hello {
-
-    0%,
-    60%,
-    to {
-        -webkit-transform: rotate(0);
-        transform: rotate(0)
-    }
-
-    10%,
-    30% {
-        -webkit-transform: rotate(14deg);
-        transform: rotate(14deg)
-    }
-
-    20% {
-        -webkit-transform: rotate(-8deg);
-        transform: rotate(-8deg)
-    }
-
-    40% {
-        -webkit-transform: rotate(-4deg);
-        transform: rotate(-4deg)
-    }
-
-    50% {
-        -webkit-transform: rotate(10deg);
-        transform: rotate(10deg)
-    }
-}
-
-@keyframes _wave-animation_hello {
-
-    0%,
-    60%,
-    to {
-        -webkit-transform: rotate(0);
-        transform: rotate(0)
-    }
-
-    10%,
-    30% {
-        -webkit-transform: rotate(14deg);
-        transform: rotate(14deg)
-    }
-
-    20% {
-        -webkit-transform: rotate(-8deg);
-        transform: rotate(-8deg)
-    }
-
-    40% {
-        -webkit-transform: rotate(-4deg);
-        transform: rotate(-4deg)
-    }
-
-    50% {
-        -webkit-transform: rotate(10deg);
-        transform: rotate(10deg)
-    }
 }
