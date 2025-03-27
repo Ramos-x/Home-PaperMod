@@ -58,13 +58,13 @@
                         subtree: true
                     });
 
-                    // 安全后备：DOMContentLoaded
-                    const backupInit = () => {
-                        contentObserver.disconnect();
-                        initSequentialLoader();
-                    };
-                    document.addEventListener('DOMContentLoaded', backupInit);
-                    setTimeout(backupInit, 3000); // 最终安全保障
+                    // // 安全后备：DOMContentLoaded
+                    // const backupInit = () => {
+                    //     contentObserver.disconnect();
+                    //     initSequentialLoader();
+                    // };
+                    // document.addEventListener('DOMContentLoaded', backupInit);
+                    // setTimeout(backupInit, 3000); // 最终安全保障
                 }
             }
 
@@ -202,12 +202,25 @@
             }
 
             // 启动检测
-            if (document.readyState !== 'loading') {
+            if (performance.getEntriesByName('first-contentful-paint').length > 0) {
                 checkContentReady();
+            } else if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((entries) => {
+                    if (entries.getEntriesByName('first-contentful-paint').length > 0) {
+                        checkContentReady();
+                        observer.disconnect();
+                    }
+                });
+                observer.observe({type: 'paint', buffered: true});
             } else {
-                document.addEventListener('readystatechange', () =>
-                    document.readyState === 'interactive' && checkContentReady()
-                );
+                // 降级到原逻辑（当 FCP 不可用时）
+                if (document.readyState !== 'loading') {
+                    checkContentReady();
+                } else {
+                    document.addEventListener('readystatechange', () =>
+                        document.readyState === 'interactive' && checkContentReady()
+                    );
+                }
             }
         })();
     }
