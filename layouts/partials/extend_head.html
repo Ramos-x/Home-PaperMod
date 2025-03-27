@@ -58,13 +58,13 @@
                         subtree: true
                     });
 
-                    // // 安全后备：DOMContentLoaded
-                    // const backupInit = () => {
-                    //     contentObserver.disconnect();
-                    //     initSequentialLoader();
-                    // };
-                    // document.addEventListener('DOMContentLoaded', backupInit);
-                    // setTimeout(backupInit, 3000); // 最终安全保障
+                    // 安全后备：DOMContentLoaded
+                    const backupInit = () => {
+                        contentObserver.disconnect();
+                        initSequentialLoader();
+                    };
+                    document.addEventListener('DOMContentLoaded', backupInit);
+                    setTimeout(backupInit, 3000); // 最终安全保障
                 }
             }
 
