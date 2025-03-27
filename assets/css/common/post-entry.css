@@ -34,17 +34,34 @@
     -webkit-line-clamp: unset;
 }
 
-.post-entry {
-    position: relative;
-    margin-bottom: min(4vw,var(--gap));
-    padding: min(10vw,var(--gap));
-    background: var(--entry);
-    border-radius: var(--radius_l);
-    border: 1px solid var(--border);
-    filter: brightness(1) contrast(1);
-    transform: scale(1) translateY(60px);
-    transition: all 1.6s cubic-bezier(0,1.1,.6,1) !important;
-    box-shadow: 0 0 2px 0px #6666;
+@media (prefers-reduced-motion: no-preference) {
+    .post-entry {
+        position: relative;
+        margin-bottom: min(4vw, var(--gap));
+        padding: min(10vw, var(--gap));
+        background: var(--entry);
+        border-radius: var(--radius_l);
+        border: 1px solid var(--border);
+        filter: brightness(1) contrast(1);
+        transform: scale(1) translateY(60px);
+        transition: all 1.6s cubic-bezier(0, 1.1, .6, 1) !important;
+        box-shadow: 0 0 2px 0px #6666;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-entry {
+        position: relative;
+        margin-bottom: min(4vw, var(--gap));
+        padding: min(10vw, var(--gap));
+        background: var(--entry);
+        border-radius: var(--radius_l);
+        border: 1px solid var(--border);
+        filter: brightness(1) contrast(1);
+        transform: scale(1);
+        transition: all 1.6s cubic-bezier(0, 1.1, .6, 1) !important;
+        box-shadow: 0 0 2px 0px #6666;
+    }
 }
 
 @media (prefers-color-scheme: light) and (hover: hover) {
@@ -52,8 +69,8 @@
     .post-entry.loaded .entry-cover:hover ~ .post-entry {
         box-shadow: 0 0 7px 1px #7777;
         transform: scale(1.02) !important;
-        filter: brightness(1.05) contrast(1.05) blur(0)opacity(1);
-        transition: .95s cubic-bezier(0, 0.5, 0.4, 1)!important;
+        filter: brightness(1.05) contrast(1.05) blur(0) opacity(1);
+        transition: .95s cubic-bezier(0, 0.5, 0.4, 1) !important;
     }
 }
 
@@ -61,14 +78,14 @@
     .post-entry.loaded:hover,
     .post-entry.loaded .entry-cover:hover ~ .post-entry {
         box-shadow: 0 0 7px 1px #7777;
-        transform: scale(1.02)!important;
-        filter: brightness(1.1) contrast(1.1) blur(0)opacity(1);
-        transition: .95s cubic-bezier(0, 0.5, 0.4, 1)!important;
+        transform: scale(1.02) !important;
+        filter: brightness(1.1) contrast(1.1) blur(0) opacity(1);
+        transition: .95s cubic-bezier(0, 0.5, 0.4, 1) !important;
     }
 }
 
 .post-entry.loaded:active {
-    transform: scale(0.98)!important;
+    transform: scale(0.98) !important;
 }
 
 .tag-entry .entry-cover {
@@ -119,21 +136,21 @@
     font-size: 14px;
     margin-bottom: var(--gap);
     text-align: center;
-    transition: .95s cubic-bezier(0,.5,.4,1) !important;
+    transition: .95s cubic-bezier(0, .5, .4, 1) !important;
     position: relative;
 }
 
 .entry-cover:hover {
     transform: scale(1.02);
     filter: brightness(1.05) contrast(1.05);
-    transition: .95s cubic-bezier(0, 0.5, 0.4, 1)!important;
+    transition: .95s cubic-bezier(0, 0.5, 0.4, 1) !important;
 }
 
 .entry-cover img {
     border-radius: 22px;
     width: 100%;
     height: auto;
-    transition: .95s cubic-bezier(0,.5,.4,1) !important;
+    transition: .95s cubic-bezier(0, .5, .4, 1) !important;
 }
 
 .entry-cover:hover img {
