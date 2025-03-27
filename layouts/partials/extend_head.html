@@ -15,38 +15,8 @@
 
 <!-- 文章字体设置 Fonts -->
 <!-- <script src="/assets/Fonts/webfont.js"></script>-->
-<script type="module">
-    import webfontloader from 'https://cdn.jsdelivr.net/npm/webfontloader/+esm'
-    
-    webfontloader.load({
-        custom: {
-            families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono'],
-            urls: [
-                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
-                // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
-                // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css',
-                // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
-                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
-            ]
-        }
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/webfontloader/+esm"></script>
 
-<script>
-
-    // 注册 Service Worker
-    if ('serviceWorker' in navigator) {
-        // console.log('Service Worker is supported.');
-        navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-            // console.log('Service Worker registered with scope:', registration.scope);
-            // console.log(registration);
-        }).catch(function (error) {
-            // console.log('Service Worker registration failed:', error);
-        });
-    } else {
-        // console.log('Service Worker is not supported.');
-    }
-</script>
 <script>
     (function () {
         // 智能内容检测器

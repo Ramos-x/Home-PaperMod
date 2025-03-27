@@ -1,6 +1,38 @@
 <html>
 <footer>
 
+    <script>
+        // 注册 Service Worker
+        if ('serviceWorker' in navigator) {
+            // console.log('Service Worker is supported.');
+            navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                // console.log('Service Worker registered with scope:', registration.scope);
+                // console.log(registration);
+            }).catch(function (error) {
+                // console.log('Service Worker registration failed:', error);
+            });
+        } else {
+            // console.log('Service Worker is not supported.');
+        }
+    </script>
+
+
+    <script>
+        // 文章字体设置 Fonts
+        WebFont.load({
+            custom: {
+                families: ['LXGW WenKai', 'Microsoft YaHei', 'JetBrains Mono'],
+                urls: [
+                    // 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css',
+                    'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
+                    'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css',
+                    'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
+                    'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+                ]
+            }
+        });
+    </script>
+
     <!-- 不蒜子 -->
     {{- if .Site.Params.busuanzi -}}
     <!-- <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -10,7 +42,7 @@
 
     <!-- post-entry 点击消失 -->
     <div>
-        <script>
+        <script type="module">
             document.querySelectorAll('.post-entry,.logo a,#menu a').forEach(function (entry) {
                 entry.addEventListener('click', function () {
                     var entries = document.querySelectorAll('.main');
@@ -30,7 +62,7 @@
 
     <!-- 复制按钮 -->
     <div>
-        <script>
+        <script type="module">
             // 复制按钮初始化
             document.querySelectorAll('.copyButton').forEach(copyButton => {
                 let parent = copyButton.parentElement?.nextElementSibling;
@@ -115,21 +147,10 @@
                     }
                 }) : null;
         </script>
-
     </div>
 
     <!-- 图片点击放大 Fancybox -->
     <div>
-<!--        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>-->
-<!--        <script src="/assets/Jquery/dist/jquery.min.js" defer></script>-->
-<!--        <script defer onload="onFancyboxLoaded()" src="/assets/Fancyapps/dist/fancybox/fancybox.umd.js"></script>-->
-<!--        <link href="/assets/Fancyapps/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"-->
-<!--              rel="stylesheet">-->
-<!--        <link-->
-<!--                rel="stylesheet"-->
-<!--                href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.css"-->
-<!--        />-->
-<!--        <link href="/assets/Fancyapps/dist/fancybox/fancybox.min.css" rel="preload stylesheet" as="style">-->
         <link
                 href="/assets/Fancyapps/dist/fancybox/fancybox.min.css"
                 rel="preload"
@@ -137,34 +158,30 @@
                 onload="this.onload=null;this.rel='stylesheet'"
         />
         <script type="module">
-            import { Fancybox } from 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/+esm';
+            import {Fancybox} from 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/+esm';
 
-            document.addEventListener("DOMContentLoaded", function () {
-                Fancybox.bind("[data-fancybox]", {
-                    Carousel: {
-                        transition: "slide",
+            Fancybox.bind("[data-fancybox]", {
+                Carousel: {
+                    transition: "slide",
+                },
+                groupAll: true,
+                groupAttr: "data",
+                contentClick: "zoomToFit",
+                contentDblClick: false,
+                wheel: "zoom",
+                Images: {
+                    initialSize: "fit",
+                    protected: true,
+                },
+                Toolbar: {
+                    display: {
+                        left: ["infobar"],
+                        middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
+                        right: ["download", "close"],
                     },
-                    groupAll: true,
-                    groupAttr: "data",
-                    contentClick: "zoomToFit",
-                    contentDblClick: false,
-                    wheel: "zoom",
-                    Images: {
-                        initialSize: "fit",
-                        protected: true,
-                    },
-                    Toolbar: {
-                        display: {
-                            left: ["infobar"],
-                            middle: ["rotateCCW", "rotateCW", "flipX", "flipY"],
-                            right: ["download", "close"],
-                        },
-                    },
-                });
+                },
             });
         </script>
-
-
     </div>
 
 
