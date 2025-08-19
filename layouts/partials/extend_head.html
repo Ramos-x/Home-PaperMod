@@ -2,7 +2,8 @@
 <!-- <script defer src="https://cloud.umami.is/script.js" data-website-id="68d10b96-557c-4632-846f-9865e613151c"></script> -->
 
 <!-- 预加载关键资源 -->
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 <!--<link rel="preconnect" href="https://fonts.googleapis.com">-->
 <!--<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
 <!--<link rel="preload stylesheet"-->
@@ -17,22 +18,44 @@
 <!-- <script src="/assets/Fonts/webfont.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js"></script>
 <script>
-    // 文章字体设置 Fonts
-    WebFont.load({
-        // google: {
-        //     families: ['Noto Sans SC', 'Noto Serif SC']
-        // },
-        custom: {
-            families: ['LXGW WenKai', 'JetBrains Mono'],
-            urls: [
-                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
-                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css',
-                'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
-                'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
-            ]
+    // 文章字体设置 Fonts（带失败回退）
+    (function() {
+        const fontCSSUrls = [
+            'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css',
+            'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css',
+            'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css',
+            'https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css'
+        ];
+        const families = ['LXGW WenKai', 'JetBrains Mono'];
+
+        function injectStylesheets(urls) {
+            urls.forEach(url => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = url;
+                link.crossOrigin = 'anonymous';
+                document.head.appendChild(link);
+            });
         }
-    });
+
+        if (window.WebFont && typeof window.WebFont.load === 'function') {
+            window.WebFont.load({
+                custom: {
+                    families: families,
+                    urls: fontCSSUrls
+                }
+            });
+        } else {
+            injectStylesheets(fontCSSUrls);
+        }
+    })();
 </script>
+<noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-light.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+</noscript>
 
 
 <!--<style>-->

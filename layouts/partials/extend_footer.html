@@ -1,6 +1,3 @@
-<html>
-<footer>
-
     <script type="module">
         // 注册 Service Worker
         if ('serviceWorker' in navigator) {
@@ -261,69 +258,76 @@
             });
 
             // ========================== codes ==========================
-            document.querySelectorAll('.codetab') ?
-                document.querySelectorAll('.codetab').forEach(function (elem, idx) {
-                    const containerElem = elem;
-                    const codetabLinks = elem.querySelectorAll('.codetab__link');
+            const codetabNodes = document.querySelectorAll('.codetab');
+            codetabNodes.forEach(function (elem, idx) {
+                const containerElem = elem;
+                const codetabLinks = elem.querySelectorAll('.codetab__link');
+                const codetabContents = elem.querySelectorAll('.codetab__content');
 
-                    const codetabContents = elem.querySelectorAll('.codetab__content');
+                // 如果 codetabContents 为空，检查对应顺序的 codetabLinks 是否有 active 状态
+                if (codetabContents.length === 0) {
+                    codetabLinks.forEach((link) => {
+                        if (!link.classList.contains('active')) {
+                            link.classList.add('active');
+                        }
+                    });
+                    return;
+                }
 
+                if (!codetabLinks || codetabLinks.length === 0) {
+                    return;
+                }
 
-                    // 如果 codetabContents 为空，检查对应顺序的 codetabLinks 是否有 active 状态
-                    if (codetabContents.length === 0) {
-                        codetabLinks.forEach((link, index) => {
-                            if (!link.classList.contains('active')) {
-                                link.classList.add('active');
-                            }
-                        });
-                    } else {
-                        codetabLinks && codetabLinks.length > 0 ?
-                            codetabLinks.forEach(function (link, index, self) {
-
-                                link.onclick = function (e) {
-
-                                    // 标签页切换
-                                    for (let i = 0; i < (self.length / 2); ++i) {
-
-
-                                        if (index === parseInt(i, 10)) {
-                                            if (!self[i].classList.contains('active')) {
-                                                self[i].classList.add('active');
-                                                codetabContents[i].classList.add('active');
-                                                codetabContents[i].style.display = 'block';
-                                            }
-                                        } else {
-                                            self[i].classList.remove('active');
-                                            codetabContents[i].classList.remove('active');
-                                            codetabContents[i].style.display = 'none';
-                                        }
-                                    }
-                                    // 复制按键切换
-                                    let code = containerElem.querySelectorAll('.codetab__content.active code')[1].innerText;
-                                    // console.log(code);
-                                    code = code.replace(/\n{2}/g, '\n');
-                                    // console.log(code);
-                                    if (code) {
-                                        let copyButton = containerElem.querySelectorAll('.copyButton')[0];
-                                        // console.log(copyButton);
-
-                                        // 克隆copyButton并替换它自己来移除所有事件监听器
-                                        var newButton = copyButton.cloneNode(true);
-                                        copyButton.parentNode.replaceChild(newButton, copyButton);
-
-                                        // 在新的copyButton上添加事件监听器
-                                        newButton.addEventListener('click', function () {
-                                            if (navigator.clipboard) {
-                                                navigator.clipboard.writeText(code);
-                                            }
-                                        });
-                                        // 更新copyButton变量引用到新的按钮，以便继续使用它
-                                        copyButton = newButton;
-                                    }
+                codetabLinks.forEach(function (link, index, self) {
+                    link.onclick = function (e) {
+                        // 标签页切换
+                        for (let i = 0; i < self.length; ++i) {
+                            if (index === parseInt(i, 10)) {
+                                if (!self[i].classList.contains('active')) {
+                                    self[i].classList.add('active');
                                 }
-                            }) : null;
+                                if (codetabContents[i]) {
+                                    codetabContents[i].classList.add('active');
+                                    codetabContents[i].style.display = 'block';
+                                }
+                            } else {
+                                self[i].classList.remove('active');
+                                if (codetabContents[i]) {
+                                    codetabContents[i].classList.remove('active');
+                                    codetabContents[i].style.display = 'none';
+                                }
+                            }
+                        }
+                        // 复制按键切换
+                        const codeNodes = containerElem.querySelectorAll('.codetab__content.active code');
+                        let codeText = '';
+                        if (codeNodes.length > 1) {
+                            codeText = codeNodes[1].innerText;
+                        } else if (codeNodes.length === 1) {
+                            codeText = codeNodes[0].innerText;
+                        }
+                        codeText = codeText ? codeText.replace(/\n{2}/g, '\n') : '';
+
+                        if (codeText) {
+                            let copyButton = containerElem.querySelectorAll('.copyButton')[0];
+                            if (copyButton) {
+                                // 克隆copyButton并替换它自己来移除所有事件监听器
+                                var newButton = copyButton.cloneNode(true);
+                                copyButton.parentNode.replaceChild(newButton, copyButton);
+
+                                // 在新的copyButton上添加事件监听器
+                                newButton.addEventListener('click', function () {
+                                    if (navigator.clipboard) {
+                                        navigator.clipboard.writeText(codeText);
+                                    }
+                                });
+                                // 更新copyButton变量引用到新的按钮，以便继续使用它
+                                copyButton = newButton;
+                            }
+                        }
                     }
-                }) : null;
+                });
+            });
         </script>
     </div>
 
@@ -369,8 +373,3 @@
         }
     </script>
 </div>
-
-
-</footer>
-
-</html>

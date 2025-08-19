@@ -24,6 +24,7 @@
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span> -->
+</footer>
 {{- end }}
 
 {{- if (not site.Params.disableScrollToTop) }}
@@ -44,7 +45,7 @@
         menu.style.overflowX = "hidden";
 
         setTimeout(() => {
-            menu.scrollLeft = localStorage.getItem("menu-scroll-position") || 0;
+            menu.scrollLeft = parseInt(localStorage.getItem("menu-scroll-position") || "0", 10);
             menu.style.overflowX = ""; // 恢复滚动条
         }, 10);
 
@@ -58,13 +59,17 @@
         anchor.addEventListener("click", function (e) {
             e.preventDefault();
             var id = this.getAttribute("href").substr(1);
+            const target = document.querySelector(`[id='${decodeURIComponent(id)}']`);
+            if (!target) {
+                return;
+            }
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                target.scrollIntoView({
                     behavior: "smooth"
                 });
             } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
+                target.scrollIntoView({
+                    behavior: "auto"
                 });
             }
             if (id === "top") {
@@ -156,4 +161,3 @@
     });
 </script>
 {{- end }}
-</footer>
